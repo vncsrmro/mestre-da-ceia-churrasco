@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Telas 1, 2 e 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      width: 1920px;
+      height: 1080px;
+      background: #061811;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 80px 42px;
+    }
+
+    .bg-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 50% 40%, rgba(16, 75, 52, 0.95) 0%, rgba(7, 34, 23, 0.98) 60%, rgba(3, 16, 11, 1) 100%);
+      z-index: 0;
+    }
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(48px);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .bokeh-gold-1 { width: 340px; height: 340px; top: -40px; left: 180px; background: #D97706; opacity: 0.22; }
+    .bokeh-red-1 { width: 420px; height: 420px; bottom: -80px; right: 120px; background: #991B1B; opacity: 0.28; }
+    .bokeh-green-1 { width: 500px; height: 500px; top: 30%; left: 45%; background: #059669; opacity: 0.15; }
+
+    .star {
+      position: absolute;
+      color: #FDE047;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .holly {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-badge {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    .brand-text p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FBBF24;
+      margin-top: 4px;
+    }
+    .proto-badge {
+      text-align: right;
+    }
+    .proto-badge h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .proto-badge p {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #F59E0B;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Main Showcase Content */
+    .content-area {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 840px;
+    }
+
+    /* Left Decorative Column */
+    .left-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 90px;
+    }
+    .swatch-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .swatch-circle-row {
+      display: flex;
+      gap: 8px;
+    }
+    .swatch-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .swatch-pill {
+      width: 82px;
+      height: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .typography-badge {
+      display: flex;
+      gap: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-top: 6px;
+    }
+    .mini-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    /* Center Phones Area */
+    .phones-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+    }
+
+    .phone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .screen-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(217, 119, 6, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE047;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .phone-device {
+      width: 375px;
+      height: 760px;
+      border-radius: 50px;
+      background: #09090B;
+      border: 10px solid #1E293B;
+      box-shadow: 
+        0 30px 80px -15px rgba(0, 0, 0, 0.85),
+        0 0 0 2px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 2px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+    }
+
+    .screen-viewport {
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #0F172A;
+      position: relative;
+    }
+
+    .phone-header-festive-red {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 60%, #B91C1C 100%);
+      color: #FFFFFF;
+      padding: 44px 18px 18px;
+      text-align: center;
+      position: relative;
+    }
+    .phone-header-festive-green {
+      background: linear-gradient(135deg, #064E3B 0%, #065F46 60%, #047857 100%);
+      color: #FFFFFF;
+      padding: 44px 18px 18px;
+      text-align: center;
+      position: relative;
+    }
+    .phone-header-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .phone-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* SCREEN 1 */
+    .event-type-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid #E2E8F0;
+      cursor: pointer;
+    }
+    .event-type-btn.active {
+      background: #064E3B;
+      color: #FFFFFF;
+      border-color: #047857;
+      box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+    }
+    .event-type-btn.inactive {
+      background: #FFFBEB;
+      color: #78350F;
+      border-color: #FDE68A;
+    }
+    .stepper-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .stepper-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1E293B;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stepper-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stepper-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+    }
+    .btn-action-main {
+      width: 100%;
+      padding: 15px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      border: none;
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.4);
+      cursor: pointer;
+      margin-top: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* SCREEN 2 */
+    .checklist-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .shopping-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .shopping-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .shopping-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .shopping-icon {
+      font-size: 26px;
+    }
+    .shopping-text h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .shopping-text p {
+      font-size: 11px;
+      color: #64748B;
+    }
+    .shopping-text strong {
+      font-size: 13px;
+      color: #0F172A;
+      display: block;
+      margin-top: 1px;
+    }
+    .checkbox-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #CBD5E1;
+    }
+
+    /* SCREEN 3 */
+    .total-banner {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%);
+      color: #FFFFFF;
+      padding: 12px;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .total-banner p {
+      font-size: 12px;
+      color: #FECACA;
+      font-weight: 600;
+    }
+    .total-banner h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+    .rateio-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .rateio-card .sub-label {
+      font-size: 12px;
+      color: #64748B;
+      font-weight: 700;
+    }
+    .rateio-card .big-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: #065F46;
+      line-height: 1.1;
+      margin: 4px 0;
+    }
+    .rateio-card .per-adult {
+      font-size: 12px;
+      color: #475569;
+      font-weight: 600;
+    }
+    .pix-input-mock {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 14px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .btn-copy-pix {
+      width: 100%;
+      padding: 11px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .btn-share-whatsapp {
+      width: 100%;
+      padding: 15px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #15803D 0%, #166534 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      box-shadow: 0 6px 18px rgba(22, 101, 52, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-top: auto;
+    }
+
+    /* Right Decorative Column */
+    .right-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 90px;
+    }
+    .icon-art {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .app-icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+      border: 2px solid #F59E0B;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-top: 20px;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      padding-top: 14px;
+      font-size: 13px;
+      color: #A7F3D0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-canvas"></div>
+  <div class="bokeh bokeh-gold-1"></div>
+  <div class="bokeh bokeh-red-1"></div>
+  <div class="bokeh bokeh-green-1"></div>
+
+  <!-- Festive Star Sparkles -->
+  <svg class="star" style="top: 80px; left: 320px; width: 24px; height: 24px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="top: 160px; right: 260px; width: 28px; height: 28px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="brand-block">
+      <div class="logo-badge">
+        <svg viewBox="0 0 100 100" width="64" height="64">
+          <line x1="25" y1="75" x2="75" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <line x1="25" y1="25" x2="75" y2="75" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <path d="M30,34 Q50,5 75,32 Q70,40 30,34 Z" fill="#DC2626"/>
+          <ellipse cx="50" cy="36" rx="26" ry="6" fill="#FFFFFF"/>
+          <circle cx="78" cy="34" r="7" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Mestre da Ceia & Churrasco</h1>
+        <p>Seu Fim de Ano sem Aperto! • Core MVP</p>
+      </div>
+    </div>
+    <div class="proto-badge">
+      <h2>PROTÓTIPO</h2>
+      <p>WEB APP • FIM DE ANO</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content-area">
+
+    <!-- Left Palette Swatches -->
+    <div class="left-decor">
+      <div class="swatch-group">
+        <div class="swatch-circle-row">
+          <div class="swatch-circle" style="background: #991B1B;"></div>
+          <div class="swatch-circle" style="background: #D97706;"></div>
+          <div class="swatch-circle" style="background: #EA580C;"></div>
+        </div>
+        <div class="swatch-pill" style="background: linear-gradient(135deg, #E2BA6F, #C28B38);"></div>
+        <div class="swatch-pill" style="background: #0F4A34;"></div>
+        <div class="swatch-pill" style="background: #DD6B20;"></div>
+      </div>
+      <div class="typography-badge">
+        <span>A</span>
+        <span>T</span>
+      </div>
+      <div class="mini-icon-box">🍖</div>
+      <div class="mini-icon-box">🥂</div>
+    </div>
+
+    <!-- Center 3 Phones (Telas 1, 2, 3) -->
+    <div class="phones-wrapper">
+
+      <!-- TELA 1 -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 1 • Planejador de Festa</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <div class="phone-header-festive-red">
+              <h2 class="phone-header-title">Criar Novo Evento</h2>
+            </div>
+            <div class="phone-body">
+              <button class="event-type-btn active">Ceia de Natal 🎄</button>
+              <button class="event-type-btn inactive">Churrasco de Réveillon 🎆</button>
+              <button class="event-type-btn inactive">Chácara / Vários Dias 🏡</button>
+
+              <div class="stepper-row" style="margin-top:6px;">
+                <span class="stepper-label">👨 Homens (8)</span>
+                <div class="stepper-controls">
+                  <button class="stepper-btn">−</button>
+                  <button class="stepper-btn">+</button>
+                </div>
+              </div>
+
+              <div class="stepper-row">
+                <span class="stepper-label">👩 Mulheres (6)</span>
+                <div class="stepper-controls">
+                  <button class="stepper-btn">−</button>
+                  <button class="stepper-btn">+</button>
+                </div>
+              </div>
+
+              <div class="stepper-row">
+                <span class="stepper-label">👧 Crianças (4)</span>
+                <div class="stepper-controls">
+                  <button class="stepper-btn">−</button>
+                  <button class="stepper-btn">+</button>
+                </div>
+              </div>
+
+              <button class="btn-action-main">
+                CALCULAR AGORA 🚀
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 2 -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 2 • Lista de Compras</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <div class="phone-header-festive-green">
+              <h2 class="phone-header-title">Sua Lista de Compras</h2>
+            </div>
+            <div class="phone-body">
+              <div class="checklist-card">
+                <div class="shopping-row">
+                  <div class="shopping-info">
+                    <span class="shopping-icon">🥩</span>
+                    <div class="shopping-text">
+                      <h4>Carnes</h4>
+                      <p>(Picanha, Linguiça, Frango)</p>
+                      <strong>12,4 kg</strong>
+                    </div>
+                  </div>
+                  <div class="checkbox-box"></div>
+                </div>
+
+                <div class="shopping-row">
+                  <div class="shopping-info">
+                    <span class="shopping-icon">🥗</span>
+                    <div class="shopping-text">
+                      <h4>Acompanhamentos</h4>
+                      <p>& Ceia (Farofa, Salpicão)</p>
+                      <strong>9,5 kg</strong>
+                    </div>
+                  </div>
+                  <div class="checkbox-box"></div>
+                </div>
+
+                <div class="shopping-row">
+                  <div class="shopping-info">
+                    <span class="shopping-icon">🍺</span>
+                    <div class="shopping-text">
+                      <h4>Bebidas</h4>
+                      <p>(Cerveja, Refri, Água)</p>
+                      <strong>48 Litros</strong>
+                    </div>
+                  </div>
+                  <div class="checkbox-box"></div>
+                </div>
+
+                <div class="shopping-row">
+                  <div class="shopping-info">
+                    <span class="shopping-icon">🔥</span>
+                    <div class="shopping-text">
+                      <h4>Outros</h4>
+                      <p>(Carvão, Gelo, Pratos)</p>
+                      <strong>4 sacos</strong>
+                    </div>
+                  </div>
+                  <div class="checkbox-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 3 -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 3 • Rateio & Pix da Família</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <div class="phone-header-festive-red">
+              <h2 class="phone-header-title">Rateio & Pix da Família</h2>
+            </div>
+            <div class="phone-body">
+              <div class="total-banner">
+                <p>Total Estimado:</p>
+                <h3>R$ 720,00</h3>
+              </div>
+
+              <div class="rateio-card">
+                <span class="sub-label">Fica</span>
+                <p class="big-val">R$ 51,40</p>
+                <p class="per-adult">por adulto (14 pessoas)</p>
+
+                <div class="pix-input-mock">
+                  chave-pix@organizador.com.br
+                </div>
+
+                <button class="btn-copy-pix">
+                  📋 Copiar chave PIX
+                </button>
+              </div>
+
+              <button class="btn-share-whatsapp">
+                <span>💬</span> COMPARTILHAR NO WHATSAPP
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Decorative Column -->
+    <div class="right-decor">
+      <div class="icon-art">🥩</div>
+      <div class="icon-art">🍗</div>
+      <div class="icon-art">🍷</div>
+      <div class="app-icon-badge">🎅</div>
+    </div>
+
+  </main>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="color:#FBBF24;">✨</span>
+      <span>Mestre da Ceia & Churrasco • Setup, Lista de Compras e Rateio com Pix</span>
+    </div>
+    <div style="display:flex; gap:12px;">
+      <span style="background:rgba(255,255,255,0.08); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700;">Alta Resolução</span>
+      <span style="background:rgba(245,158,11,0.2); color:#FDE047; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:800;">Telas 1 a 3</span>
+    </div>
+  </footer>
+
+</body>
+</html>

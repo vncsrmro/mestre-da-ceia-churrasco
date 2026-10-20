@@ -1,0 +1,16 @@
+{
+  "name": "mestre-da-ceia-churrasco",
+  "version": "1.0.0",
+  "description": "Landing Page e Web App do Mestre da Ceia & Churrasco",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static build ready'",
+    "render": "node render_all.js"
+  },
+  "keywords": ["natal", "ceia", "churrasco", "reveillon", "landing-page"],
+  "author": "Vinicius Romeiro",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^23.6.0"
+  }
+}

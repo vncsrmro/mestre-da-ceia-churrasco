@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Telas 4, 5 e 6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      width: 1920px;
+      height: 1080px;
+      background: #061811;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 80px 42px;
+    }
+
+    /* Ambient Festive Background */
+    .bg-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 50% 40%, rgba(16, 75, 52, 0.95) 0%, rgba(7, 34, 23, 0.98) 60%, rgba(3, 16, 11, 1) 100%);
+      z-index: 0;
+    }
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(48px);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .bokeh-gold-1 { width: 340px; height: 340px; top: -40px; left: 180px; background: #D97706; opacity: 0.22; }
+    .bokeh-red-1 { width: 420px; height: 420px; bottom: -80px; right: 120px; background: #991B1B; opacity: 0.28; }
+    .bokeh-green-1 { width: 500px; height: 500px; top: 30%; left: 45%; background: #059669; opacity: 0.15; }
+    .bokeh-gold-2 { width: 280px; height: 280px; top: 18%; right: 28%; background: #F59E0B; opacity: 0.20; }
+    .bokeh-red-2 { width: 300px; height: 300px; bottom: 10%; left: 10%; background: #DC2626; opacity: 0.18; }
+
+    /* Stars / Sparkles */
+    .star {
+      position: absolute;
+      color: #FDE047;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    /* Garland & Berries */
+    .holly {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-badge {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    .brand-text p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FBBF24;
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
+    .proto-badge {
+      text-align: right;
+    }
+    .proto-badge h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .proto-badge p {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #F59E0B;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Main Showcase Content */
+    .content-area {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 840px;
+    }
+
+    /* Left Decorative Column (Design System Palette) */
+    .left-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 90px;
+    }
+    .swatch-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .swatch-circle-row {
+      display: flex;
+      gap: 8px;
+    }
+    .swatch-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .swatch-pill {
+      width: 82px;
+      height: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .typography-badge {
+      display: flex;
+      gap: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-top: 6px;
+    }
+    .mini-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    /* Center Phones Area */
+    .phones-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+    }
+
+    /* Phone Device Mockup */
+    .phone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .screen-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(217, 119, 6, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE047;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .phone-device {
+      width: 375px;
+      height: 760px;
+      border-radius: 50px;
+      background: #09090B;
+      border: 10px solid #1E293B;
+      box-shadow: 
+        0 30px 80px -15px rgba(0, 0, 0, 0.85),
+        0 0 0 2px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 2px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+    }
+
+    /* Phone Screen Internal Viewports */
+    .screen-viewport {
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #0F172A;
+      position: relative;
+    }
+
+    /* Common Phone Screen Styles */
+    .phone-header {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 60%, #B91C1C 100%);
+      color: #FFFFFF;
+      padding: 44px 18px 16px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(127, 29, 29, 0.35);
+    }
+    .phone-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #D97706, #FBBF24, #D97706);
+    }
+    .phone-header .badge-festive {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(254, 240, 138, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      color: #FEF08A;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .phone-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .phone-header p {
+      font-size: 12px;
+      color: rgba(254, 226, 226, 0.9);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+    .phone-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: hidden;
+    }
+
+    /* Card System */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .card-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748B;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* SCREEN 4 SPECIFICS */
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+    .menu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .menu-item .icon {
+      font-size: 18px;
+    }
+    .pix-box {
+      background: linear-gradient(135deg, #062B1D 0%, #0F4A34 100%);
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(6, 43, 29, 0.35);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .pix-box .pix-label {
+      font-size: 11px;
+      color: #A7F3D0;
+      font-weight: 600;
+    }
+    .pix-box .pix-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34px;
+      font-weight: 900;
+      color: #FBBF24;
+      line-height: 1.1;
+      margin: 4px 0 10px;
+      text-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+    }
+    .pix-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      box-shadow: 0 4px 12px rgba(180, 83, 9, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .confirmados-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .confirmado-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      padding: 4px 0;
+    }
+    .confirmado-row .name {
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-pago {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #DCFCE7;
+      color: #15803D;
+    }
+    .status-pendente {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #FEF3C7;
+      color: #B45309;
+    }
+    .btn-secondary {
+      width: 100%;
+      padding: 11px;
+      border-radius: 14px;
+      background: #059669;
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      border: none;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    /* SCREEN 5 SPECIFICS */
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .f-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .f-pill.active {
+      background: #064E3B;
+      color: #FFFFFF;
+    }
+    .f-pill.inactive {
+      background: #E2E8F0;
+      color: #475569;
+    }
+    .recipe-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .recipe-badges {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge-cost {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: #DCFCE7;
+      color: #15803D;
+    }
+    .badge-time {
+      font-size: 10px;
+      font-weight: 800;
+      color: #D97706;
+    }
+    .recipe-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.25;
+    }
+    .recipe-desc {
+      font-size: 11px;
+      color: #64748B;
+      line-height: 1.35;
+    }
+    .recipe-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 1px dashed #E2E8F0;
+      font-size: 11px;
+    }
+    .portion-tag {
+      font-weight: 700;
+      color: #065F46;
+      background: #F0FDF4;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .recipe-link {
+      font-weight: 800;
+      color: #B91C1C;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* SCREEN 6 SPECIFICS */
+    .progress-bar-wrap {
+      margin-top: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      height: 7px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(90deg, #F59E0B, #FDE047);
+      border-radius: 10px;
+    }
+    .time-tabs {
+      display: flex;
+      background: #E2E8F0;
+      padding: 3px;
+      border-radius: 12px;
+      gap: 4px;
+    }
+    .time-tab {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+    }
+    .time-tab.active {
+      background: #FFFFFF;
+      color: #0F172A;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .time-tab.inactive {
+      background: transparent;
+      color: #64748B;
+    }
+    .checklist-container {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .check-item.done {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+    .custom-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+      font-size: 11px;
+    }
+    .check-item.done .custom-check {
+      background: #16A34A;
+      color: #FFFFFF;
+    }
+    .check-item:not(.done) .custom-check {
+      border: 2px solid #CBD5E1;
+      background: #FFFFFF;
+    }
+    .check-content .time-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .check-item.done .check-content .time-title {
+      color: #475569;
+      text-decoration: line-through;
+    }
+    .check-content .time-desc {
+      font-size: 11px;
+      color: #64748B;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+    .zen-host-badge {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      border: 1px solid #F59E0B;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: #78350F;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    /* Right Decorative Column */
+    .right-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 90px;
+    }
+    .icon-art {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .app-icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+      border: 2px solid #F59E0B;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-top: 20px;
+    }
+
+    /* Bottom Footer Note */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      padding-top: 14px;
+      font-size: 13px;
+      color: #A7F3D0;
+    }
+    .footer-pill-group {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-pill {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient festive background & lights -->
+  <div class="bg-canvas"></div>
+  <div class="bokeh bokeh-gold-1"></div>
+  <div class="bokeh bokeh-red-1"></div>
+  <div class="bokeh bokeh-green-1"></div>
+  <div class="bokeh bokeh-gold-2"></div>
+  <div class="bokeh bokeh-red-2"></div>
+
+  <!-- Festive Star Sparkles -->
+  <svg class="star" style="top: 80px; left: 320px; width: 24px; height: 24px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="top: 160px; right: 260px; width: 28px; height: 28px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="bottom: 90px; left: 240px; width: 20px; height: 20px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="bottom: 120px; right: 380px; width: 22px; height: 22px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+
+  <!-- Holly Berries in Top-Left and Corners -->
+  <div class="holly" style="top: 20px; left: 30px;">
+    <svg width="60" height="60" viewBox="0 0 100 100">
+      <path d="M30,50 Q10,25 35,20 Q45,5 60,25 Q80,20 70,45 Q90,65 65,65 Q55,85 40,65 Q15,75 30,50 Z" fill="#0D5C3A" opacity="0.85"/>
+      <circle cx="48" cy="45" r="9" fill="#DC2626"/>
+      <circle cx="45" cy="42" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="62" cy="50" r="9" fill="#B91C1C"/>
+      <circle cx="59" cy="47" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="53" cy="60" r="9" fill="#EF4444"/>
+      <circle cx="50" cy="57" r="3" fill="#FFFFFF" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="holly" style="top: 20px; right: 40px; transform: scaleX(-1);">
+    <svg width="60" height="60" viewBox="0 0 100 100">
+      <path d="M30,50 Q10,25 35,20 Q45,5 60,25 Q80,20 70,45 Q90,65 65,65 Q55,85 40,65 Q15,75 30,50 Z" fill="#0D5C3A" opacity="0.85"/>
+      <circle cx="48" cy="45" r="9" fill="#DC2626"/>
+      <circle cx="45" cy="42" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="62" cy="50" r="9" fill="#B91C1C"/>
+      <circle cx="59" cy="47" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="53" cy="60" r="9" fill="#EF4444"/>
+      <circle cx="50" cy="57" r="3" fill="#FFFFFF" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="brand-block">
+      <div class="logo-badge">
+        <svg viewBox="0 0 100 100" width="64" height="64">
+          <!-- Crossed knife and fork -->
+          <line x1="25" y1="75" x2="75" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <line x1="25" y1="25" x2="75" y2="75" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <!-- Santa Hat -->
+          <path d="M30,34 Q50,5 75,32 Q70,40 30,34 Z" fill="#DC2626"/>
+          <ellipse cx="50" cy="36" rx="26" ry="6" fill="#FFFFFF"/>
+          <circle cx="78" cy="34" r="7" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Mestre da Ceia & Churrasco</h1>
+        <p>Seu Fim de Ano sem Aperto! • Expansão do Web App</p>
+      </div>
+    </div>
+    <div class="proto-badge">
+      <h2>PROTÓTIPO</h2>
+      <p>TELAS 4, 5 & 6 • FRONT-END & BUMP</p>
+    </div>
+  </header>
+
+  <!-- Main Showcase Content -->
+  <main class="content-area">
+
+    <!-- Left Branding System Swatches -->
+    <div class="left-decor">
+      <div class="swatch-group">
+        <div class="swatch-circle-row">
+          <div class="swatch-circle" style="background: #991B1B;"></div>
+          <div class="swatch-circle" style="background: #D97706;"></div>
+          <div class="swatch-circle" style="background: #EA580C;"></div>
+        </div>
+        <div class="swatch-pill" style="background: linear-gradient(135deg, #E2BA6F, #C28B38);"></div>
+        <div class="swatch-pill" style="background: #0F4A34;"></div>
+        <div class="swatch-pill" style="background: #DD6B20;"></div>
+      </div>
+      <div class="typography-badge">
+        <span>A</span>
+        <span>T</span>
+      </div>
+      <div class="mini-icon-box">🍖</div>
+      <div class="mini-icon-box">🥂</div>
+    </div>
+
+    <!-- Center 3 Smartphone Mockups -->
+    <div class="phones-wrapper">
+
+      <!-- ================= TELA 4 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 4 • Link Público da Família</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <!-- Header -->
+            <div class="phone-header">
+              <span class="badge-festive">⏳ FALTAM 11 DIAS</span>
+              <h2>Churrasco da Família</h2>
+              <p>Confirmado • 14 Adultos e 4 Crianças</p>
+            </div>
+            <!-- Body -->
+            <div class="phone-body">
+              <!-- Cardápio Incluso -->
+              <div class="card">
+                <div class="card-title">
+                  <span>Cardápio Confirmado</span>
+                  <span style="color:#059669; font-weight:800;">100% Incluso</span>
+                </div>
+                <div class="menu-item"><span class="icon">🥩</span> 12,4 kg Carnes Nobres</div>
+                <div class="menu-item"><span class="icon">🥗</span> 9,5 kg Ceia & Guarnições</div>
+                <div class="menu-item"><span class="icon">🍺</span> 48 Litros Bebidas Geladas</div>
+              </div>
+
+              <!-- Box Pix -->
+              <div class="pix-box">
+                <p class="pix-label">Cota por Adulto (Crianças Não Pagam)</p>
+                <p class="pix-val">R$ 51,40</p>
+                <button class="pix-btn">
+                  <span>📋</span> COPIAR PIX E CONFIRMAR
+                </button>
+              </div>
+
+              <!-- Lista de Confirmados ao Vivo -->
+              <div class="card" style="flex:1;">
+                <div class="card-title">
+                  <span>Confirmados (10/14)</span>
+                  <span style="color:#059669; font-weight:800;">71% Quitado</span>
+                </div>
+                <div class="confirmados-list">
+                  <div class="confirmado-row">
+                    <span class="name">✅ Tio Roberto & Bia</span>
+                    <span class="status-pago">Pago</span>
+                  </div>
+                  <div class="confirmado-row">
+                    <span class="name">✅ Casal Marcos & Ju</span>
+                    <span class="status-pago">Pago</span>
+                  </div>
+                  <div class="confirmado-row">
+                    <span class="name">✅ Tia Cristina</span>
+                    <span class="status-pago">Pago</span>
+                  </div>
+                  <div class="confirmado-row">
+                    <span class="name">⏳ Primo Lucas</span>
+                    <span class="status-pendente">Aguardando</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Botão Convidado -->
+              <button class="btn-secondary">
+                <span>🙋‍♂️</span> VOU LEVAR SOBREMESA
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TELA 5 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 5 • Receitas Auto-Escaláveis</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <!-- Header -->
+            <div class="phone-header">
+              <span class="badge-festive">🧑‍🍳 MÓDULO FRONT-END</span>
+              <h2>Receitas Econômicas</h2>
+              <p>Porções ajustadas para 18 pessoas</p>
+            </div>
+            <!-- Body -->
+            <div class="phone-body">
+              <!-- Filters -->
+              <div class="filter-pills">
+                <span class="f-pill active">Todas (20)</span>
+                <span class="f-pill inactive">Ceia Clássica</span>
+                <span class="f-pill inactive">Churrasco</span>
+              </div>
+
+              <!-- Recipe 1 -->
+              <div class="recipe-card">
+                <div class="recipe-badges">
+                  <span class="badge-cost">R$ 4,10 / pessoa</span>
+                  <span class="badge-time">⏱️ 25 min preparo</span>
+                </div>
+                <h3 class="recipe-title">Pernil Desfiado na Manteiga Dourada</h3>
+                <p class="recipe-desc">Substitui o Peru caro com metade do custo e zero ressecamento.</p>
+                <div class="recipe-meta">
+                  <span class="portion-tag">Para 18 pessoas: 4,2 kg</span>
+                  <span class="recipe-link">Ver Preparo →</span>
+                </div>
+              </div>
+
+              <!-- Recipe 2 -->
+              <div class="recipe-card">
+                <div class="recipe-badges">
+                  <span class="badge-cost">R$ 3,40 / pessoa</span>
+                  <span class="badge-time">⏱️ 15 min preparo</span>
+                </div>
+                <h3 class="recipe-title">Farofa Crocante Natalina de Bacon</h3>
+                <p class="recipe-desc">Pode ser feita 2 dias antes sem perder a crocância. Rendimento triplo.</p>
+                <div class="recipe-meta">
+                  <span class="portion-tag">Para 18 pessoas: 1,8 kg</span>
+                  <span class="recipe-link">Ver Preparo →</span>
+                </div>
+              </div>
+
+              <!-- Recipe 3 -->
+              <div class="recipe-card">
+                <div class="recipe-badges">
+                  <span class="badge-cost">R$ 3,80 / pessoa</span>
+                  <span class="badge-time">⏱️ 20 min</span>
+                </div>
+                <h3 class="recipe-title">Salpicão Defumado de Festa</h3>
+                <p class="recipe-desc">Frango desfiado com maçã verde e maionese cremosa leve.</p>
+                <div class="recipe-meta">
+                  <span class="portion-tag">Para 18 pessoas: 3,5 kg</span>
+                  <span class="recipe-link">Ver Preparo →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TELA 6 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 6 • Cronograma Anti-Caos (Bump 2)</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <!-- Header with progress -->
+            <div class="phone-header">
+              <span class="badge-festive">⚡ ORDER BUMP 2</span>
+              <h2>Checklist Anti-Caos</h2>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill"></div>
+              </div>
+              <p style="margin-top:6px; font-weight:700; color:#FEF08A;">65% Concluído • Você no controle!</p>
+            </div>
+            <!-- Body -->
+            <div class="phone-body">
+              <!-- Time Tabs -->
+              <div class="time-tabs">
+                <button class="time-tab inactive">48h Antes</button>
+                <button class="time-tab active">Véspera (24/31)</button>
+                <button class="time-tab inactive">2h Antes</button>
+              </div>
+
+              <!-- Checklist -->
+              <div class="checklist-container">
+                <div class="check-item done">
+                  <div class="custom-check">✓</div>
+                  <div class="check-content">
+                    <p class="time-title">09:00 • Temperar Pernil e Cortes</p>
+                    <p class="time-desc">Deixar marinando na prateleira baixa da geladeira.</p>
+                  </div>
+                </div>
+
+                <div class="check-item done">
+                  <div class="custom-check">✓</div>
+                  <div class="check-content">
+                    <p class="time-title">11:30 • Montar Sobremesas e Salpicão</p>
+                    <p class="time-desc">Manter coberto com película aderente e gelar.</p>
+                  </div>
+                </div>
+
+                <div class="check-item">
+                  <div class="custom-check"></div>
+                  <div class="check-content">
+                    <p class="time-title">16:00 • Gelar Cooler com Sal Grosso</p>
+                    <p class="time-desc">2 sacos de gelo + 500g sal grosso + álcool.</p>
+                  </div>
+                </div>
+
+                <div class="check-item">
+                  <div class="custom-check"></div>
+                  <div class="check-content">
+                    <p class="time-title">18:30 • Acender Carvão e Tomar Banho</p>
+                    <p class="time-desc">Você livre antes do primeiro convidado chegar!</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Zen Host Card -->
+              <div class="zen-host-badge">
+                <span style="font-size:22px;">🥂</span>
+                <div>
+                  <strong>Meta do Anfitrião Zen:</strong>
+                  <p style="font-size:10px; font-weight:600; color:#92400E; margin-top:1px;">Estar de banho tomado e com o primeiro drink na mão quando a campainha tocar!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Decorative Column -->
+    <div class="right-decor">
+      <div class="icon-art">🥩</div>
+      <div class="icon-art">🍗</div>
+      <div class="icon-art">🍷</div>
+      <div class="app-icon-badge">🎅</div>
+    </div>
+
+  </main>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="color:#FBBF24;">✨</span>
+      <span>Ecossistema Completo de Fim de Ano • Alta Conversão no Checkout e Viralidade no WhatsApp</span>
+    </div>
+    <div class="footer-pill-group">
+      <span class="footer-pill" style="background:#7F1D1D; color:#FECACA;">🎁 Viral Orgânico</span>
+      <span class="footer-pill" style="background:#B45309; color:#FEF3C7;">⚡ Order Bump Ativo</span>
+      <span class="footer-pill" style="background:#064E3B; color:#A7F3D0;">📱 Mobile Ready</span>
+    </div>
+  </footer>
+
+</body>
+</html>

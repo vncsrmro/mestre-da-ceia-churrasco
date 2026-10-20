@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco — Seu Fim de Ano sem Aperto!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #05140D;
+      color: #F8FAFC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FDE047 0%, #F59E0B 50%, #D97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%);
+      box-shadow: 0 10px 30px -5px rgba(217, 119, 6, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gold-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 15px 35px -5px rgba(217, 119, 6, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    .emerald-glow {
+      box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.25);
+    }
+    .card-luxury {
+      background: linear-gradient(180deg, rgba(20, 56, 40, 0.7) 0%, rgba(8, 28, 20, 0.9) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      backdrop-filter: blur(12px);
+    }
+    /* Pulse glow */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.04); }
+    }
+    .glow-bg {
+      animation: pulseGlow 6s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- TOP BAR URGÊNCIA -->
+  <aside aria-label="Aviso de urgência" class="bg-gradient-to-r from-red-900 via-red-800 to-amber-900 text-white text-xs md:text-sm py-2.5 px-4 text-center font-bold tracking-wide border-b border-amber-500/30 sticky top-0 z-50 shadow-md">
+    <span>⚠️ FALTAM POUCOS DIAS PARA O FIM DO ANO:</span> 
+    <span class="text-amber-300 ml-1">Não faça mercado no escuro nem pague a conta da família sozinho!</span>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-12 pb-20 px-4 md:px-8 max-w-6xl mx-auto overflow-hidden text-center">
+    <!-- Ambient glow behind hero -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-700/20 rounded-full blur-[120px] pointer-events-none glow-bg"></div>
+    <div class="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-amber-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs md:text-sm font-extrabold uppercase tracking-wider mb-6 shadow-lg">
+      <span>🎅</span> O SEU FIM DE ANO SEM APERTO, SEM BRIGA E SEM PREJUÍZO
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-tight md:leading-none max-w-4xl mx-auto">
+      Chega de Pagar a Ceia Sozinho ou Ficar <span class="gold-gradient-text">Preso no Fogão</span> Enquanto a Família Bebe na Sala!
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="mt-6 text-base sm:text-lg md:text-xl text-emerald-100/80 max-w-2xl mx-auto font-medium leading-relaxed">
+      O 1º Web App Inteligente que calcula a quantidade <strong>exata</strong> de carnes, acompanhamentos e bebidas, divide a conta via Pix com 1 clique no WhatsApp e garante que <strong>ninguém dê calote</strong>.
+    </p>
+
+    <!-- Master Showcase Image -->
+    <div class="mt-10 relative max-w-5xl mx-auto rounded-3xl p-2 bg-gradient-to-b from-amber-500/30 via-emerald-800/20 to-transparent shadow-2xl emerald-glow">
+      <img src="images/board-telas-4-5-6.png" alt="Mestre da Ceia e Churrasco - Telas do Aplicativo" class="w-full rounded-2xl shadow-2xl border border-white/10 object-cover">
+      <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-zinc-950/90 border border-amber-400/50 px-6 py-2 rounded-full text-xs md:text-sm font-bold text-amber-300 shadow-xl whitespace-nowrap flex items-center gap-2">
+        <span>✨</span> Funciona direto no celular • Não precisa baixar aplicativo na loja
+      </div>
+    </div>
+
+    <!-- CTA Hero -->
+    <div class="mt-14 max-w-md mx-auto space-y-3">
+      <a href="#checkout" class="gold-btn block w-full py-4 px-6 rounded-2xl text-zinc-950 font-black text-base md:text-lg uppercase tracking-wider text-center shadow-xl">
+        QUERO MEU ACESSO POR APENAS R$ 19,90 🚀
+      </a>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-zinc-400 font-semibold">
+        <span class="flex items-center gap-1">🔒 Compra Segura</span>
+        <span>•</span>
+        <span class="flex items-center gap-1">⚡ Acesso Imediato</span>
+        <span>•</span>
+        <span class="flex items-center gap-1">🛡️ 7 Dias de Garantia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGITAÇÃO DA DOR: O PESADELO DO ANFITRIÃO -->
+  <section class="py-16 px-4 md:px-8 bg-zinc-950/60 border-y border-white/5 relative">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-red-400 font-extrabold text-xs uppercase tracking-widest">VOCÊ RECONHECE ESSE CENÁRIO?</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold mt-2 text-white">Os 4 Vilões que Arruínam o Natal e o Réveillon de Quem Organiza a Festa</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Dor 1 -->
+        <div class="card-luxury p-6 rounded-2xl border-l-4 border-l-red-600">
+          <div class="text-3xl mb-3">💸</div>
+          <h3 class="text-lg font-bold text-white">1. O "Calote Involuntário" do Grupo da Família</h3>
+          <p class="text-sm text-zinc-300 mt-2 leading-relaxed">
+            Você passa o cartão no supermercado, manda o valor total no grupo do WhatsApp e... silêncio. Um parente diz que <em>"só comeu uma asinha"</em>, o outro diz que <em>"não bebeu cerveja"</em> e no fim das contas você tira R$ 250 do próprio bolso para cobrir o rombo.
+          </p>
+        </div>
+
+        <!-- Dor 2 -->
+        <div class="card-luxury p-6 rounded-2xl border-l-4 border-l-amber-600">
+          <div class="text-3xl mb-3">🛒</div>
+          <h3 class="text-lg font-bold text-white">2. O Desperdício Silencioso no Supermercado</h3>
+          <p class="text-sm text-zinc-300 mt-2 leading-relaxed">
+            Com medo de faltar carne ou comida, você compra tudo "no olho". O resultado? Quilos de comida estragando na geladeira por 4 dias seguidos e centenas de reais jogados no lixo logo na primeira semana de janeiro.
+          </p>
+        </div>
+
+        <!-- Dor 3 -->
+        <div class="card-luxury p-6 rounded-2xl border-l-4 border-l-red-500">
+          <div class="text-3xl mb-3">🧊</div>
+          <h3 class="text-lg font-bold text-white">3. O Desespero do Gelo e Cerveja Quente às 23h45</h3>
+          <p class="text-sm text-zinc-300 mt-2 leading-relaxed">
+            Ou o oposto: na hora do brinde da virada, o gelo acaba, a cerveja esquenta e você tem que sair correndo de posto em posto de gasolina implorando por um saco de gelo a preço de ouro.
+          </p>
+        </div>
+
+        <!-- Dor 4 -->
+        <div class="card-luxury p-6 rounded-2xl border-l-4 border-l-emerald-600">
+          <div class="text-3xl mb-3">🥵</div>
+          <h3 class="text-lg font-bold text-white">4. A Síndrome do "Anfitrião Escravo da Cozinha"</h3>
+          <p class="text-sm text-zinc-300 mt-2 leading-relaxed">
+            Enquanto todo mundo já está rindo, tomando espumante e petiscando na sala, você está suando na beira do fogão, cortando cebola com a roupa da festa e chega na hora da meia-noite exausto e estressado.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 p-6 rounded-2xl bg-gradient-to-r from-red-950/80 to-amber-950/80 border border-amber-500/30 text-center max-w-3xl mx-auto">
+        <p class="text-sm md:text-base text-amber-200 font-bold">
+          💡 A culpa não é da sua família. A culpa é de tentar organizar um evento de 15, 20 ou 30 pessoas com calculadora de padaria e anotações em guardanapo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APRESENTAÇÃO DA SOLUÇÃO: O MÉTODO MESTRE DA CEIA -->
+  <section class="py-20 px-4 md:px-8 max-w-6xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-amber-400 font-extrabold text-xs uppercase tracking-widest">A SOLUÇÃO DEFINITIVA</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2 text-white">
+        Conheça o Ecossistema do <span class="gold-gradient-text">Mestre da Ceia & Churrasco</span>
+      </h2>
+      <p class="mt-4 text-emerald-200/80 text-sm md:text-base">
+        O único sistema projetado especificamente para o fim de ano brasileiro: une a Ceia de Natal, o Churrasco de Réveillon e a gestão de despesas em um só lugar.
+      </p>
+    </div>
+
+    <!-- Feature 1: Setup & Calculadora -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
+      <div class="space-y-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400 text-amber-300 flex items-center justify-center font-black text-xl">
+          01
+        </div>
+        <h3 class="text-2xl md:text-3xl font-extrabold text-white">Calculadora Inteligente de Carnes, Bebidas e Acompanhamentos</h3>
+        <p class="text-sm md:text-base text-zinc-300 leading-relaxed">
+          Basta colocar o número de homens, mulheres e crianças. Nosso algoritmo calibrado para o fim de ano calcula exatamente os quilos de picanha, linguiça, cortes nobres, salpicão, farofa, arroz, litros de cerveja, refrigerante, gelo e carvão. <strong>Zero desperdício, zero falta.</strong>
+        </p>
+        <ul class="text-xs md:text-sm text-emerald-300 font-bold space-y-2">
+          <li class="flex items-center gap-2">✅ Diferenciação real de consumo entre homens, mulheres e crianças</li>
+          <li class="flex items-center gap-2">✅ Modos específicos: Ceia Clássica, Churrasco de Réveillon ou Chácara</li>
+          <li class="flex items-center gap-2">✅ Lista de supermercado pronta e organizada por setor de compras</li>
+        </ul>
+      </div>
+      <div class="flex justify-center">
+        <img src="images/tela-01-planejador-setup.png" alt="Tela Setup" class="max-w-[280px] md:max-w-[320px] rounded-3xl shadow-2xl border border-white/10">
+      </div>
+    </div>
+
+    <!-- Feature 2: Rateio & Link Público do WhatsApp -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
+      <div class="flex justify-center order-2 md:order-1">
+        <img src="images/tela-04-link-convidado.png" alt="Tela Link Convidado" class="max-w-[280px] md:max-w-[320px] rounded-3xl shadow-2xl border border-white/10">
+      </div>
+      <div class="space-y-4 order-1 md:order-2">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400 text-emerald-300 flex items-center justify-center font-black text-xl">
+          02
+        </div>
+        <h3 class="text-2xl md:text-3xl font-extrabold text-white">Rateio Transparente com Link Público no WhatsApp</h3>
+        <p class="text-sm md:text-base text-zinc-300 leading-relaxed">
+          O organizador clica em "Compartilhar no WhatsApp" e os parentes recebem um link moderno e elegante. Ao abrir, eles veem o cardápio garantido, a cota exata por adulto (crianças isentas) e um botão de 1 clique para copiar o seu Pix.
+        </p>
+        <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-xs text-emerald-200">
+          <strong class="text-amber-300 block mb-1">🔥 O Truque Psicológico Anti-Calote:</strong>
+          A página mostra ao vivo a lista de quem já confirmou e pagou (ex: <em>Tio Roberto ✅ Pago | Primo Lucas ⏳ Aguardando</em>). Isso cria uma pressão social positiva sutil e ninguém tem coragem de dar calote!
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: 20 Receitas Auto-Escaláveis -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="space-y-4">
+        <div class="w-12 h-12 rounded-xl bg-red-500/20 border border-red-400 text-red-300 flex items-center justify-center font-black text-xl">
+          03
+        </div>
+        <h3 class="text-2xl md:text-3xl font-extrabold text-white">20 Receitas Econômicas de Luxo que Multiplicam Sozinhas</h3>
+        <p class="text-sm md:text-base text-zinc-300 leading-relaxed">
+          Chega de fazer conta de cabeça na cozinha! Se você configurou 18 convidados, todas as 20 receitas do app <strong>já vêm com os ingredientes multiplicados exatamente para 18 pessoas</strong>.
+        </p>
+        <ul class="text-xs md:text-sm text-emerald-300 font-bold space-y-2">
+          <li class="flex items-center gap-2">🥩 Pernil na Manteiga Dourada (substitui o Peru caro custando R$ 4,10/pessoa)</li>
+          <li class="flex items-center gap-2">🥗 Farofa Crocante de Bacon (pode ser feita 2 dias antes sem murchar)</li>
+          <li class="flex items-center gap-2">💡 Dicas de substituição inteligente no supermercado que economizam até 45%</li>
+        </ul>
+      </div>
+      <div class="flex justify-center">
+        <img src="images/tela-05-receitas-economicas.png" alt="Tela Receitas" class="max-w-[280px] md:max-w-[320px] rounded-3xl shadow-2xl border border-white/10">
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULOS DE ORDER BUMP: O ARSENAL EXTRA -->
+  <section class="py-16 px-4 md:px-8 bg-zinc-950/80 border-t border-amber-500/20">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-amber-400 font-extrabold text-xs uppercase tracking-widest">POTENCIALIZE SUA CEIA NO CHECKOUT</span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-white mt-1">Os 2 Aceleradores que Garantem uma Festa Inesquecível</h2>
+        <p class="text-zinc-400 text-xs md:text-sm mt-2">Você poderá adicionar estes módulos opcionais com 1 clique na tela de pagamento:</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Bump 1: Drinks -->
+        <div class="card-luxury p-6 rounded-3xl border border-amber-400/30 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">ORDER BUMP 1</span>
+              <span class="text-emerald-400 font-black text-lg">+ R$ 9,90</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-white">🍹 Calculadora de Drinks em Jarra & Cooler</h3>
+            <p class="text-xs md:text-sm text-zinc-300 mt-2 leading-relaxed">
+              15 receitas profissionais de Clericot, Gin Tropical de Maracujá, Caipirinhas de Festa e Sodas Italianas sem álcool. Com o seletor exclusivo de volume: alterne entre Jarra de 3 Litros, Cooler de 5 Litros ou taças individuais e some as frutas à sua lista com 1 toque.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-4">
+            <img src="images/tela-07-calculadora-drinks.png" alt="Drinks" class="w-16 rounded-xl border border-white/20 shadow">
+            <span class="text-xs text-amber-200 font-bold">Rende até 25 taças com custo de apenas R$ 1,80 a R$ 3,80 por convidado!</span>
+          </div>
+        </div>
+
+        <!-- Bump 2: Anti-Caos -->
+        <div class="card-luxury p-6 rounded-3xl border border-amber-400/30 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="bg-red-500/20 text-red-300 border border-red-400/40 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">ORDER BUMP 2</span>
+              <span class="text-emerald-400 font-black text-lg">+ R$ 12,90</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-white">⏱️ Cronograma Horário Anti-Caos na Cozinha</h3>
+            <p class="text-xs md:text-sm text-zinc-300 mt-2 leading-relaxed">
+              O checklist cronológico com barra de progresso. O que fazer 48h antes (descongelar e marinar), o que adiantar na manhã da véspera (farofa, salpicão e sobremesas) e o plano de 2h antes para gelar o cooler em 15 minutos com sal grosso e carvão sem labareda.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-4">
+            <img src="images/tela-06-cronograma-anti-caos.png" alt="Cronograma" class="w-16 rounded-xl border border-white/20 shadow">
+            <span class="text-xs text-amber-200 font-bold">Meta Zen: você de banho tomado, cheiroso e com taça na mão na chegada da família!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFERTA IRRESISTÍVEL / STACK DE VALOR -->
+  <section id="checkout" class="py-20 px-4 md:px-8 max-w-4xl mx-auto">
+    <div class="card-luxury p-6 md:p-12 rounded-3xl border-2 border-amber-400/60 shadow-2xl relative overflow-hidden">
+      <!-- Glow effect -->
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="text-center mb-8">
+        <span class="bg-red-600 text-white font-extrabold text-[11px] uppercase tracking-widest px-3 py-1 rounded-full shadow">CONDIÇÃO ESPECIAL DE LANÇAMENTO</span>
+        <h2 class="text-3xl md:text-5xl font-black mt-3 text-white">Tudo o Que Você Vai Levar Hoje:</h2>
+      </div>
+
+      <!-- Deliverables List -->
+      <div class="space-y-4 text-sm md:text-base">
+        <div class="flex items-center justify-between p-3.5 bg-white/5 rounded-2xl border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🥩</span>
+            <div>
+              <strong class="text-white block font-bold">Web App Calculadora Inteligente Mestre da Ceia</strong>
+              <span class="text-xs text-zinc-400">Algoritmo dinâmico para Carnes, Ceia e Bebidas</span>
+            </div>
+          </div>
+          <span class="text-xs line-through text-zinc-500 font-semibold">R$ 67,00</span>
+        </div>
+
+        <div class="flex items-center justify-between p-3.5 bg-white/5 rounded-2xl border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">💸</span>
+            <div>
+              <strong class="text-white block font-bold">Gerador de Rateio com Link Público no WhatsApp</strong>
+              <span class="text-xs text-zinc-400">Página dos parentes com botão Pix e lista ao vivo</span>
+            </div>
+          </div>
+          <span class="text-xs line-through text-zinc-500 font-semibold">R$ 47,00</span>
+        </div>
+
+        <div class="flex items-center justify-between p-3.5 bg-white/5 rounded-2xl border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🧑‍🍳</span>
+            <div>
+              <strong class="text-white block font-bold">20 Receitas de Luxo Econômicas Auto-Escaláveis</strong>
+              <span class="text-xs text-zinc-400">Pesos e medidas multiplicados sozinhos para o grupo</span>
+            </div>
+          </div>
+          <span class="text-xs line-through text-zinc-500 font-semibold">R$ 37,00</span>
+        </div>
+
+        <div class="flex items-center justify-between p-3.5 bg-white/5 rounded-2xl border border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🛒</span>
+            <div>
+              <strong class="text-white block font-bold">Lista de Supermercado Blindada por Setor</strong>
+              <span class="text-xs text-zinc-400">Açougue, feira, bebidas e descartáveis sem esquecimentos</span>
+            </div>
+          </div>
+          <span class="text-xs line-through text-zinc-500 font-semibold">R$ 27,00</span>
+        </div>
+
+        <div class="flex items-center justify-between p-3.5 bg-emerald-950/60 rounded-2xl border border-emerald-500/40">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🎁</span>
+            <div>
+              <strong class="text-emerald-300 block font-bold">BÔNUS EXCLUSIVO: Acesso Vitalício + Atualizações</strong>
+              <span class="text-xs text-emerald-200/80">Válido também para Carnaval, aniversários e churrascos do ano todo</span>
+            </div>
+          </div>
+          <span class="text-xs font-extrabold text-emerald-400 uppercase">GRÁTIS</span>
+        </div>
+      </div>
+
+      <!-- Pricing Box -->
+      <div class="mt-10 pt-8 border-t border-amber-500/30 text-center">
+        <p class="text-xs uppercase tracking-widest text-zinc-400 font-bold">VALOR TOTAL DE TUDO: <span class="line-through text-red-400">R$ 178,00</span></p>
+        <p class="text-sm font-semibold text-emerald-300 mt-2">Hoje nesta página por apenas:</p>
+        <div class="my-2">
+          <span class="text-zinc-400 text-lg align-top font-bold">R$</span>
+          <span class="text-5xl md:text-6xl font-black text-amber-400">19</span>
+          <span class="text-2xl font-bold text-amber-400">,90</span>
+          <span class="text-xs text-zinc-400 block mt-1">Pagamento Único • Sem mensalidades</span>
+        </div>
+        <p class="text-xs text-zinc-400 font-medium max-w-sm mx-auto">
+          (Menos do que o preço de 1 kg de linguiça no supermercado para economizar centenas de reais e evitar brigas de família).
+        </p>
+
+        <!-- CTA Button -->
+        <a href="https://pay.kiwify.com.br/EXEMPLO" class="gold-btn mt-6 block w-full py-4 px-8 rounded-2xl text-zinc-950 font-black text-lg md:text-xl uppercase tracking-wider text-center shadow-2xl">
+          QUERO GARANTIR MEU ACESSO AGORA POR R$ 19,90 🚀
+        </a>
+
+        <!-- Payment icons -->
+        <div class="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 font-semibold">
+          <span>⚡ Aprovado na Hora</span>
+          <span>•</span>
+          <span>🔑 Pix com Acesso Instantâneo</span>
+          <span>•</span>
+          <span>💳 Cartão de Crédito em até 2x</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GARANTIA BLINDADA 7 DIAS -->
+  <section class="py-12 px-4 md:px-8 max-w-3xl mx-auto">
+    <div class="p-8 rounded-3xl bg-zinc-900/90 border border-emerald-500/40 flex flex-col md:flex-row items-center gap-6 shadow-xl">
+      <div class="w-24 h-24 flex-shrink-0 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-4xl shadow-lg border-2 border-amber-300">
+        🛡️
+      </div>
+      <div class="space-y-2 text-center md:text-left">
+        <h3 class="text-xl md:text-2xl font-black text-white">Garantia Incondicional de 7 Dias: Risco Zero!</h3>
+        <p class="text-xs md:text-sm text-zinc-300 leading-relaxed">
+          Use o Web App, calcule sua festa, gere o link do Pix e teste as receitas. Se você não economizar pelo menos R$ 100 no supermercado ou achar que o app não facilitou sua vida, mande um simples e-mail e <strong>devolvemos 100% do seu dinheiro</strong>. Sem letras miúdas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS / PROVA SOCIAL -->
+  <section class="py-16 px-4 md:px-8 max-w-5xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-emerald-400 font-extrabold text-xs uppercase tracking-widest">QUEM USOU NUNCA MAIS ORGANIZA FESTA SEM ELE</span>
+      <h2 class="text-2xl md:text-4xl font-extrabold text-white mt-1">Veja a Reação de Quem Já Salvou a Festa de Fim de Ano</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card-luxury p-5 rounded-2xl">
+        <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+        <p class="text-xs text-zinc-200 leading-relaxed italic">
+          "Ano passado tomei um calote de quase 300 reais dos meus cunhados no churrasco de Réveillon. Esse ano mandei o link do app no grupo e em menos de 2 horas 11 pessoas já tinham pago o Pix certinho. Surreal!"
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center">MC</div>
+          <div><h4 class="text-xs font-bold text-white">Marcelo C.</h4><p class="text-[10px] text-zinc-400">Curitiba/PR • Churrasco de 16 pessoas</p></div>
+        </div>
+      </div>
+
+      <div class="card-luxury p-5 rounded-2xl">
+        <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+        <p class="text-xs text-zinc-200 leading-relaxed italic">
+          "A receita do Pernil Desfiado salvou a nossa ceia! Ia gastar quase 200 reais num Peru que ninguém aguenta comer. Fiz o pernil com o cálculo do app e foi o maior sucesso. Economizei uma nota no mercado."
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-red-700 text-white font-bold text-xs flex items-center justify-center">FA</div>
+          <div><h4 class="text-xs font-bold text-white">Fernanda A.</h4><p class="text-[10px] text-zinc-400">Belo Horizonte/MG • Ceia de 22 pessoas</p></div>
+        </div>
+      </div>
+
+      <div class="card-luxury p-5 rounded-2xl">
+        <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+        <p class="text-xs text-zinc-200 leading-relaxed italic">
+          "O checklist do horário foi a melhor coisa. Pela primeira vez na vida eu estava de banho tomado, perfume passado e bebendo cerveja quando meu irmão tocou a campainha. Não fiquei preso no fogão!"
+        </p>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-amber-700 text-white font-bold text-xs flex items-center justify-center">RS</div>
+          <div><h4 class="text-xs font-bold text-white">Rodrigo S.</h4><p class="text-[10px] text-zinc-400">Campinas/SP • Réveillon em Chácara</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / PERGUNTAS FREQUENTES -->
+  <section class="py-16 px-4 md:px-8 max-w-4xl mx-auto border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-amber-400 font-extrabold text-xs uppercase tracking-widest">TIRE SUAS DÚVIDAS</span>
+      <h2 class="text-2xl md:text-4xl font-extrabold text-white mt-1">Perguntas Frequentes</h2>
+    </div>
+
+    <div class="space-y-4">
+      <details class="card-luxury p-5 rounded-2xl group cursor-pointer">
+        <summary class="font-bold text-sm md:text-base text-white flex justify-between items-center list-none">
+          <span>Preciso baixar algum aplicativo na Apple Store ou Play Store?</span>
+          <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-3 text-xs md:text-sm text-zinc-300 leading-relaxed">
+          Não! O Mestre da Ceia & Churrasco é um Web App moderno. Ele abre instantaneamente pelo navegador do seu celular ou computador. Você também pode salvá-lo na tela inicial do celular com 1 clique como se fosse um app nativo, sem ocupar memória.
+        </p>
+      </details>
+
+      <details class="card-luxury p-5 rounded-2xl group cursor-pointer">
+        <summary class="font-bold text-sm md:text-base text-white flex justify-between items-center list-none">
+          <span>Os meus parentes precisam comprar o app para ver o link do Pix?</span>
+          <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-3 text-xs md:text-sm text-zinc-300 leading-relaxed">
+          De jeito nenhum! Apenas o organizador compra o acesso. O link que você gera para enviar no WhatsApp abre uma página pública e gratuita para os seus convidados com o cardápio, valor por adulto e a sua chave Pix.
+        </p>
+      </details>
+
+      <details class="card-luxury p-5 rounded-2xl group cursor-pointer">
+        <summary class="font-bold text-sm md:text-base text-white flex justify-between items-center list-none">
+          <span>Como recebo o meu acesso após o pagamento?</span>
+          <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-3 text-xs md:text-sm text-zinc-300 leading-relaxed">
+          O envio é 100% automático e imediato. Assim que o pagamento via Pix ou Cartão for aprovado, você recebe o link direto e seus dados de acesso no e-mail e também pelo WhatsApp cadastrado.
+        </p>
+      </details>
+
+      <details class="card-luxury p-5 rounded-2xl group cursor-pointer">
+        <summary class="font-bold text-sm md:text-base text-white flex justify-between items-center list-none">
+          <span>O app serve apenas para Ceia de Natal ou serve para Churrasco de Réveillon também?</span>
+          <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-3 text-xs md:text-sm text-zinc-300 leading-relaxed">
+          Serve para os dois e muito mais! Ele possui 3 modos completos: <strong>Ceia de Natal</strong>, <strong>Churrasco de Réveillon</strong> e <strong>Chácara / Vários Dias</strong>. Além disso, você tem acesso vitalício para usar em aniversários e festas durante o ano todo.
+        </p>
+      </details>
+
+      <details class="card-luxury p-5 rounded-2xl group cursor-pointer">
+        <summary class="font-bold text-sm md:text-base text-white flex justify-between items-center list-none">
+          <span>E se eu não gostar?</span>
+          <span class="text-amber-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-3 text-xs md:text-sm text-zinc-300 leading-relaxed">
+          Você tem 7 dias de garantia incondicional. Basta enviar um e-mail para o suporte e devolveremos cada centavo do seu dinheiro.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA BANNER -->
+  <section class="py-16 px-4 md:px-8 text-center bg-gradient-to-t from-emerald-950 via-zinc-950 to-zinc-950">
+    <div class="max-w-2xl mx-auto space-y-6">
+      <h2 class="text-3xl md:text-4xl font-black text-white">Não Deixe Para Organizar Sua Festa na Véspera!</h2>
+      <p class="text-zinc-300 text-sm md:text-base">
+        Garanta agora o seu Fim de Ano sem Aperto, economize no mercado e tenha uma ceia inesquecível pelo valor de um cafezinho.
+      </p>
+      <div class="pt-2">
+        <a href="#checkout" class="gold-btn inline-block py-4 px-10 rounded-2xl text-zinc-950 font-black text-base md:text-lg uppercase tracking-wider shadow-2xl">
+          QUERO MEU ACESSO IMEDIATO POR R$ 19,90 🚀
+        </a>
+      </div>
+      <p class="text-xs text-zinc-500 font-semibold">🔒 Ambiente Seguro e Criptografado de 256 bits</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-4 border-t border-white/5 text-center text-xs text-zinc-500 space-y-2">
+    <p>Mestre da Ceia & Churrasco © 2026 • Todos os direitos reservados.</p>
+    <p class="text-[11px] text-zinc-600">Este site não faz parte do Facebook, Instagram ou da Meta Inc. Nem possui qualquer vínculo com as marcas mencionadas.</p>
+  </footer>
+
+</body>
+</html>

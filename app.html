@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Web App Completo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 50% 20%, #104A34 0%, #072418 60%, #030F0A 100%);
+      min-height: 100vh;
+      color: #FFFFFF;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+    .phone-mockup {
+      width: 375px;
+      height: 780px;
+      border-radius: 48px;
+      background: #09090B;
+      border: 9px solid #1E293B;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 22px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 50;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+    }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+    .red-gradient {
+      background: linear-gradient(135deg, #991B1B 0%, #7F1D1D 100%);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+    @keyframes spinWheel {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1440deg); }
+    }
+    .spinning {
+      animation: spinWheel 1.2s cubic-bezier(0.15, 0.9, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-6 right-6 z-50 bg-amber-500 text-zinc-950 font-bold px-5 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2">
+    <span>✅</span>
+    <span id="toast-msg">Chave PIX copiada!</span>
+  </div>
+
+  <!-- Header & Navigation Bar -->
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-center pb-6 border-b border-amber-500/30 gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 border-2 border-amber-400 flex items-center justify-center text-3xl shadow-lg">
+          🎅
+        </div>
+        <div>
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-extrabold">Web App • Fim de Ano sem Aperto</span>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">MESTRE DA CEIA & CHURRASCO</h1>
+          <p class="text-xs text-emerald-200/80">MVP Interativo com todas as 9 telas funcionais</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="setViewMode('phone')" id="btn-mode-phone" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-zinc-950 shadow">
+          📱 Simulador Mobile
+        </button>
+        <button onclick="setViewMode('grid')" id="btn-mode-grid" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 hover:bg-white/20 text-white">
+          📐 Visão Grid (Todas as 9)
+        </button>
+      </div>
+    </div>
+
+    <!-- Screen Navigator Tabs (for Phone Mode) -->
+    <div id="screen-tabs" class="flex gap-2 overflow-x-auto py-4">
+      <button onclick="showScreen(1)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-amber-500 text-zinc-950" data-screen="1">1. Setup Festa</button>
+      <button onclick="showScreen(2)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="2">2. Lista de Compras</button>
+      <button onclick="showScreen(3)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="3">3. Rateio & Pix</button>
+      <button onclick="showScreen(4)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="4">4. Link Convidado (WhatsApp)</button>
+      <button onclick="showScreen(5)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="5">5. 20 Receitas Auto-Escaláveis</button>
+      <button onclick="showScreen(6)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="6">6. Cronograma Anti-Caos</button>
+      <button onclick="showScreen(7)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="7">7. Calculadora Drinks</button>
+      <button onclick="showScreen(8)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="8">8. Amigo Secreto (TV)</button>
+      <button onclick="showScreen(9)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80" data-screen="9">9. Hub c/ Cadeados</button>
+    </div>
+  </div>
+
+  <!-- CONTAINER 1: SIMULATOR PHONE MODE -->
+  <div id="phone-container-view" class="max-w-md mx-auto flex flex-col items-center">
+    <div class="phone-mockup">
+      <div class="dynamic-island"></div>
+
+      <!-- SCREEN 1: SETUP -->
+      <div id="screen-view-1" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <h2 class="text-lg font-extrabold">Criar Novo Evento</h2>
+          <p class="text-xs text-red-200">Defina o tipo e a quantidade de convidados</p>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-3 overflow-y-auto">
+          <div class="space-y-2">
+            <button class="w-full py-2.5 px-3 rounded-xl bg-emerald-900 text-white font-bold text-xs border border-emerald-700 flex justify-center items-center gap-2">
+              Ceia de Natal 🎄
+            </button>
+            <button class="w-full py-2.5 px-3 rounded-xl bg-amber-50 text-amber-900 font-bold text-xs border border-amber-200 flex justify-center items-center gap-2">
+              Churrasco de Réveillon 🎆
+            </button>
+            <button class="w-full py-2.5 px-3 rounded-xl bg-amber-50 text-amber-900 font-bold text-xs border border-amber-200 flex justify-center items-center gap-2">
+              Chácara / Vários Dias 🏡
+            </button>
+          </div>
+
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-zinc-200 shadow-sm">
+              <span class="font-bold text-xs">👨 Homens (<span id="val-men">8</span>)</span>
+              <div class="flex items-center gap-3">
+                <button onclick="updatePerson('men', -1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">−</button>
+                <button onclick="updatePerson('men', 1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-zinc-200 shadow-sm">
+              <span class="font-bold text-xs">👩 Mulheres (<span id="val-women">6</span>)</span>
+              <div class="flex items-center gap-3">
+                <button onclick="updatePerson('women', -1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">−</button>
+                <button onclick="updatePerson('women', 1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-zinc-200 shadow-sm">
+              <span class="font-bold text-xs">👧 Crianças (<span id="val-kids">4</span>)</span>
+              <div class="flex items-center gap-3">
+                <button onclick="updatePerson('kids', -1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">−</button>
+                <button onclick="updatePerson('kids', 1)" class="w-7 h-7 rounded bg-zinc-100 border text-sm font-bold flex items-center justify-center">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-center">
+            <p class="text-[11px] text-amber-900">Total: <strong id="total-people-summary">18 convidados</strong> (14 pagantes)</p>
+          </div>
+
+          <button onclick="showScreen(2)" class="w-full py-3.5 rounded-xl emerald-gradient text-white font-extrabold text-xs shadow-lg uppercase tracking-wider">
+            CALCULAR AGORA 🚀
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: LISTA DE COMPRAS -->
+      <div id="screen-view-2" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="bg-emerald-900 text-white pt-10 pb-4 px-4 text-center shadow">
+          <h2 class="text-lg font-extrabold">Sua Lista de Compras</h2>
+          <p class="text-xs text-emerald-200">Quantidades calibradas para o seu grupo</p>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-3 overflow-y-auto">
+          <div class="bg-white p-3.5 rounded-2xl border border-zinc-200 shadow-sm space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-zinc-100">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">🥩</span>
+                <div>
+                  <h4 class="font-bold text-xs">Carnes Nobres & Cortes</h4>
+                  <p class="text-[10px] text-zinc-500">Picanha, Linguiça, Frango</p>
+                  <strong class="text-xs text-emerald-700" id="calc-meat">12,4 kg</strong>
+                </div>
+              </div>
+              <input type="checkbox" checked class="w-4 h-4 accent-emerald-600 rounded">
+            </div>
+
+            <div class="flex items-center justify-between pb-2 border-b border-zinc-100">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">🥗</span>
+                <div>
+                  <h4 class="font-bold text-xs">Acompanhamentos & Ceia</h4>
+                  <p class="text-[10px] text-zinc-500">Farofa, Salpicão, Arroz</p>
+                  <strong class="text-xs text-emerald-700" id="calc-sides">9,5 kg</strong>
+                </div>
+              </div>
+              <input type="checkbox" checked class="w-4 h-4 accent-emerald-600 rounded">
+            </div>
+
+            <div class="flex items-center justify-between pb-2 border-b border-zinc-100">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">🍺</span>
+                <div>
+                  <h4 class="font-bold text-xs">Bebidas Geladas</h4>
+                  <p class="text-[10px] text-zinc-500">Cerveja, Refri, Água mineral</p>
+                  <strong class="text-xs text-emerald-700" id="calc-drinks">48 Litros</strong>
+                </div>
+              </div>
+              <input type="checkbox" class="w-4 h-4 accent-emerald-600 rounded">
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">🔥</span>
+                <div>
+                  <h4 class="font-bold text-xs">Itens Diversos</h4>
+                  <p class="text-[10px] text-zinc-500">Carvão, Gelo, Pratos e Guardanapos</p>
+                  <strong class="text-xs text-emerald-700" id="calc-misc">4 sacos</strong>
+                </div>
+              </div>
+              <input type="checkbox" class="w-4 h-4 accent-emerald-600 rounded">
+            </div>
+          </div>
+
+          <button onclick="showScreen(3)" class="w-full py-3.5 rounded-xl gold-gradient text-white font-extrabold text-xs shadow-lg uppercase tracking-wider">
+            GERAR RATEIO & PIX 💸
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: RATEIO & PIX -->
+      <div id="screen-view-3" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <h2 class="text-lg font-extrabold">Rateio & Pix da Família</h2>
+          <p class="text-xs text-red-200">Chega de briga no fim do ano!</p>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-3 overflow-y-auto">
+          <div class="bg-red-950 text-white p-3 rounded-xl text-center">
+            <p class="text-[10px] text-red-300">Total Estimado do Evento:</p>
+            <h3 class="text-2xl font-black text-white" id="calc-total-money">R$ 720,00</h3>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm text-center">
+            <p class="text-xs text-zinc-500 font-semibold">Valor por Adulto</p>
+            <p class="text-3xl font-black text-emerald-700 my-1" id="calc-per-adult">R$ 51,40</p>
+            <p class="text-[11px] text-zinc-400" id="calc-adults-count">14 pessoas pagantes (Crianças isentas)</p>
+
+            <div class="mt-4 p-2 bg-zinc-100 border border-zinc-200 rounded-lg text-xs font-mono text-zinc-700">
+              pix.mestre@familia2026.com.br
+            </div>
+
+            <button onclick="copyPix()" class="mt-2 w-full py-2.5 rounded-lg gold-gradient text-white font-bold text-xs shadow">
+              📋 Copiar Chave PIX
+            </button>
+          </div>
+
+          <button onclick="showScreen(4)" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-lg flex items-center justify-center gap-2">
+            <span>💬</span> COMPARTILHAR NO WHATSAPP
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: LINK DO CONVIDADO (WHATSAPP) -->
+      <div id="screen-view-4" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <span class="bg-amber-400/20 border border-amber-300/40 text-amber-200 text-[10px] px-2.5 py-0.5 rounded-full font-bold">FALTAM 11 DIAS ⏳</span>
+          <h2 class="text-lg font-extrabold mt-1">Churrasco da Família</h2>
+          <p class="text-xs text-red-100">14 Adultos e 4 Crianças Confirmadas</p>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5 overflow-y-auto">
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm text-xs">
+            <p class="font-extrabold text-[10px] text-zinc-400 uppercase tracking-wider mb-1">Cardápio Incluso</p>
+            <div class="font-semibold text-zinc-800">🥩 12,4 kg Carnes Nobres</div>
+            <div class="font-semibold text-zinc-800">🥗 9,5 kg Ceia & Guarnições</div>
+            <div class="font-semibold text-zinc-800">🍺 48 L Bebidas Geladas</div>
+          </div>
+
+          <div class="bg-emerald-950 text-white p-3.5 rounded-xl text-center shadow border border-emerald-800">
+            <p class="text-[11px] text-emerald-300">Cota por Adulto (Crianças Não Pagam)</p>
+            <p class="text-2xl font-black text-amber-400 my-1">R$ 51,40</p>
+            <button onclick="copyPix()" class="w-full py-2 rounded-lg gold-gradient text-white font-bold text-xs shadow">
+              📋 COPIAR PIX E CONFIRMAR
+            </button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 text-xs">
+            <p class="font-bold text-[11px] text-zinc-500 mb-2">QUEM JÁ CONFIRMOU (10/14):</p>
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between"><span>✅ Tio Roberto & Bia</span><span class="text-emerald-600 font-bold">Pago</span></div>
+              <div class="flex justify-between"><span>✅ Casal Marcos & Ju</span><span class="text-emerald-600 font-bold">Pago</span></div>
+              <div class="flex justify-between"><span>✅ Tia Cristina</span><span class="text-emerald-600 font-bold">Pago</span></div>
+              <div class="flex justify-between"><span>⏳ Primo Lucas</span><span class="text-amber-600 font-bold">Pendente</span></div>
+            </div>
+          </div>
+
+          <button onclick="showToast('O anfitrião foi avisado que você levará sobremesa! 🥧')" class="w-full py-2.5 bg-emerald-700 text-white rounded-xl font-bold text-xs shadow">
+            🙋‍♂️ VOU LEVAR SOBREMESA
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: RECEITAS ESCALÁVEIS -->
+      <div id="screen-view-5" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <span class="bg-amber-400/20 text-amber-200 text-[10px] px-2 py-0.5 rounded-full font-bold">🧑‍🍳 MÓDULO FRONT-END</span>
+          <h2 class="text-lg font-extrabold mt-1">Receitas Econômicas</h2>
+          <p class="text-xs text-amber-200">Ajustadas automaticamente para 18 pessoas</p>
+        </div>
+        <div class="p-4 flex-1 space-y-3 overflow-y-auto">
+          <div class="flex gap-1.5">
+            <span class="px-2.5 py-1 bg-emerald-900 text-white rounded-lg text-[10px] font-bold">Todas (20)</span>
+            <span class="px-2.5 py-1 bg-zinc-200 text-zinc-700 rounded-lg text-[10px] font-semibold">Ceia Clássica</span>
+            <span class="px-2.5 py-1 bg-zinc-200 text-zinc-700 rounded-lg text-[10px] font-semibold">Churrasco</span>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1">
+            <div class="flex justify-between items-start">
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">R$ 4,10 / pessoa</span>
+              <span class="text-[10px] text-amber-600 font-bold">⏱️ 25 min</span>
+            </div>
+            <h4 class="font-bold text-xs">Pernil Desfiado na Manteiga Dourada</h4>
+            <p class="text-[11px] text-zinc-500">Substitui o Peru caro com metade do custo e sem ressecar.</p>
+            <div class="pt-2 border-t border-zinc-100 flex justify-between items-center text-[11px]">
+              <span class="font-bold text-emerald-800">Para 18 pessoas: 4,2 kg</span>
+              <button onclick="showToast('Abrindo receita completa do Pernil Desfiado!')" class="text-red-700 font-bold">Ver Preparo →</button>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1">
+            <div class="flex justify-between items-start">
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">R$ 3,40 / pessoa</span>
+              <span class="text-[10px] text-amber-600 font-bold">⏱️ 15 min</span>
+            </div>
+            <h4 class="font-bold text-xs">Farofa Natalina Crocante de Bacon</h4>
+            <p class="text-[11px] text-zinc-500">Pode ser feita 2 dias antes sem perder a crocância.</p>
+            <div class="pt-2 border-t border-zinc-100 flex justify-between items-center text-[11px]">
+              <span class="font-bold text-emerald-800">Para 18 pessoas: 1,8 kg</span>
+              <button onclick="showToast('Abrindo receita da Farofa Crocante!')" class="text-red-700 font-bold">Ver Preparo →</button>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1">
+            <div class="flex justify-between items-start">
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">R$ 3,80 / pessoa</span>
+              <span class="text-[10px] text-amber-600 font-bold">⏱️ 20 min</span>
+            </div>
+            <h4 class="font-bold text-xs">Salpicão Defumado de Festa</h4>
+            <p class="text-[11px] text-zinc-500">Frango desfiado com maçã verde e maionese suave.</p>
+            <div class="pt-2 border-t border-zinc-100 flex justify-between items-center text-[11px]">
+              <span class="font-bold text-emerald-800">Para 18 pessoas: 3,5 kg</span>
+              <button onclick="showToast('Abrindo receita do Salpicão!')" class="text-red-700 font-bold">Ver Preparo →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 6: CHECKLIST ANTI-CAOS -->
+      <div id="screen-view-6" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <span class="bg-amber-400/20 text-amber-200 text-[10px] px-2 py-0.5 rounded-full font-bold">⚡ ORDER BUMP 2</span>
+          <h2 class="text-lg font-extrabold mt-1">Checklist Anti-Caos</h2>
+          <div class="mt-2 bg-red-950 rounded-full h-2 w-full overflow-hidden">
+            <div id="progress-anti-caos" class="bg-amber-400 h-2 transition-all duration-300" style="width: 65%;"></div>
+          </div>
+          <p id="progress-text" class="text-[10px] text-amber-200 mt-1">65% Concluído • Sob Controle!</p>
+        </div>
+        <div class="p-4 flex-1 space-y-2.5 overflow-y-auto">
+          <div class="flex gap-1 bg-zinc-200 p-1 rounded-lg text-xs font-bold">
+            <button class="flex-1 py-1 text-zinc-600">48h Antes</button>
+            <button class="flex-1 py-1 bg-white rounded shadow-sm text-zinc-900">Véspera</button>
+            <button class="flex-1 py-1 text-zinc-600">2h Antes</button>
+          </div>
+
+          <div class="space-y-2">
+            <label class="flex items-start gap-2 bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-xs cursor-pointer">
+              <input type="checkbox" checked onchange="toggleCheckItem(this)" class="mt-0.5 accent-emerald-700">
+              <div>
+                <p class="font-bold text-zinc-800">09:00 • Temperar Cortes e Pernil</p>
+                <p class="text-[10px] text-zinc-500">Deixar marinando na prateleira baixa.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-2 bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-xs cursor-pointer">
+              <input type="checkbox" checked onchange="toggleCheckItem(this)" class="mt-0.5 accent-emerald-700">
+              <div>
+                <p class="font-bold text-zinc-800">11:30 • Montar Sobremesas & Salpicão</p>
+                <p class="text-[10px] text-zinc-500">Cobrir com película e gelar.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-2 bg-white border border-zinc-200 p-2.5 rounded-xl text-xs cursor-pointer shadow-sm">
+              <input type="checkbox" onchange="toggleCheckItem(this)" class="mt-0.5 accent-emerald-700">
+              <div>
+                <p class="font-bold text-zinc-800">16:00 • Gelar Cooler com Sal Grosso</p>
+                <p class="text-[10px] text-zinc-500">2 sacos de gelo + 500g sal grosso + álcool.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-2 bg-white border border-zinc-200 p-2.5 rounded-xl text-xs cursor-pointer shadow-sm">
+              <input type="checkbox" onchange="toggleCheckItem(this)" class="mt-0.5 accent-emerald-700">
+              <div>
+                <p class="font-bold text-zinc-800">18:30 • Acender Carvão & Tomar Banho</p>
+                <p class="text-[10px] text-zinc-500">Você livre antes do 1º convidado tocar a campainha!</p>
+              </div>
+            </label>
+          </div>
+
+          <div class="bg-amber-100 border border-amber-300 p-2.5 rounded-xl text-xs text-amber-950 flex items-center gap-2">
+            <span class="text-xl">🥂</span>
+            <p class="text-[10px] font-bold">Meta Zen: Estar pronto com uma taça na mão quando chegarem!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 7: GUIA DE DRINKS -->
+      <div id="screen-view-7" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 text-center shadow">
+          <span class="bg-amber-400/20 text-amber-200 text-[10px] px-2 py-0.5 rounded-full font-bold">⚡ ORDER BUMP 1</span>
+          <h2 class="text-lg font-extrabold mt-1">Drinks de Fim de Ano</h2>
+          <p class="text-xs text-amber-200">Modo Jarra & Cooler para Galera</p>
+        </div>
+        <div class="p-4 flex-1 space-y-3 overflow-y-auto">
+          <div class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-zinc-200 text-xs">
+            <span class="font-bold text-zinc-700">Tamanho da Receita:</span>
+            <select onchange="changeDrinkVolume(this.value)" class="bg-amber-100 text-amber-900 font-extrabold text-xs px-2 py-1 rounded-lg border-none outline-none">
+              <option value="3">Jarra de 3 Litros</option>
+              <option value="5">Suqueira 5 Litros</option>
+              <option value="1">1 Taça Individual</option>
+            </select>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="text-[10px] font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">🎄 Favorito da Ceia</span>
+              <span class="text-[10px] text-zinc-500 font-bold" id="drink-clericot-yield">Rende 15 taças</span>
+            </div>
+            <h4 class="font-bold text-xs">Clericot Tropical de Espumante</h4>
+            <ul class="text-[11px] text-zinc-600 space-y-0.5" id="drink-clericot-ingredients">
+              <li>• 2 Garrafas de Espumante Brut ou Moscatel</li>
+              <li>• 300g Morango + 2 Pêssegos + Uvas Verdes</li>
+              <li>• 150ml Licor de Laranja (ou Suco de Laranja)</li>
+            </ul>
+            <button onclick="showToast('Ingredientes somados na sua lista de compras! 🛒')" class="w-full py-1.5 bg-emerald-800 text-white rounded-lg font-bold text-[11px] mt-1">
+              + Somar Frutas na Lista
+            </button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1">
+            <div class="flex justify-between items-center">
+              <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">🍹 Sem Álcool (Kids)</span>
+              <span class="text-[10px] text-emerald-700 font-bold">R$ 1,80 / taça</span>
+            </div>
+            <h4 class="font-bold text-xs">Soda Italiana de Frutas Vermelhas</h4>
+            <p class="text-[11px] text-zinc-500">Visual chique na taça para motoristas e família.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 8: AMIGO SECRETO (TV) -->
+      <div id="screen-view-8" class="screen-view h-full flex flex-col text-white hidden" style="background: linear-gradient(180deg, #071E15 0%, #030F0A 100%);">
+        <div class="p-4 pt-10 text-center border-b border-emerald-900">
+          <span class="text-[9px] font-bold uppercase tracking-widest text-amber-400 bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-400/30">MODO TV / SALA DE ESTAR 📺</span>
+          <h2 class="text-base font-black mt-1">Amigo Secreto Roubado 🎁</h2>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between items-center text-center">
+          <div id="roulette-wheel" class="w-44 h-44 rounded-full border-4 border-amber-400 flex flex-col items-center justify-center p-4 shadow-2xl transition-all" style="background: radial-gradient(circle, #991B1B 0%, #450A0A 100%);">
+            <span class="text-3xl" id="action-icon">🔥</span>
+            <p class="text-[10px] font-extrabold uppercase mt-1 text-amber-300">Sorteio da Vez:</p>
+            <p id="action-text" class="text-xs font-black mt-1 leading-tight text-white">ROUBE QUALQUER PRESENTE JÁ ABERTO NA SALA!</p>
+          </div>
+
+          <div class="bg-emerald-950/80 border border-emerald-800 p-3 rounded-xl w-full text-left">
+            <p class="text-[10px] text-amber-300 font-bold uppercase">Jogos Inclusos na Noite:</p>
+            <p class="text-xs font-semibold mt-1">🎯 Quiz Retrospectiva da Família</p>
+            <p class="text-xs font-semibold">🔎 Caça ao Tesouro das Crianças</p>
+            <p class="text-xs font-semibold">🥂 Bingo da Virada de Ano</p>
+          </div>
+
+          <button onclick="spinRoulette()" class="w-full py-3.5 rounded-xl gold-gradient font-black text-xs shadow-lg uppercase tracking-wider">
+            🎲 GIRAR ROLETA PARA O PRÓXIMO
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 9: HUB COM CADEADOS -->
+      <div id="screen-view-9" class="screen-view h-full flex flex-col bg-zinc-50 text-zinc-900 hidden">
+        <div class="red-gradient text-white pt-10 pb-4 px-4 shadow">
+          <h2 class="text-lg font-extrabold">Olá, Organizador! 👋</h2>
+          <p class="text-xs text-amber-200">Painel Mestre • Natal & Réveillon</p>
+        </div>
+        <div class="p-4 flex-1 space-y-2.5 overflow-y-auto">
+          <!-- Unlocked Modules -->
+          <div onclick="showScreen(2)" class="bg-white p-3 rounded-xl border-l-4 border-emerald-600 shadow-sm flex justify-between items-center cursor-pointer">
+            <div>
+              <p class="text-xs font-bold">🥩 Calculadora & Lista Exata</p>
+              <p class="text-[10px] text-emerald-700 font-semibold">✅ Acesso Liberado</p>
+            </div>
+            <span class="text-xs font-bold text-zinc-400">Abrir →</span>
+          </div>
+
+          <div onclick="showScreen(3)" class="bg-white p-3 rounded-xl border-l-4 border-emerald-600 shadow-sm flex justify-between items-center cursor-pointer">
+            <div>
+              <p class="text-xs font-bold">💸 Gerador de Rateio & Pix</p>
+              <p class="text-[10px] text-emerald-700 font-semibold">✅ Acesso Liberado</p>
+            </div>
+            <span class="text-xs font-bold text-zinc-400">Abrir →</span>
+          </div>
+
+          <!-- Locked Upsells (Conversion Engine) -->
+          <div class="pt-1">
+            <p class="text-[10px] font-bold uppercase text-zinc-400 mb-1.5">EXTRAS OPCIONAIS (1 CLIQUE):</p>
+
+            <div class="bg-amber-50/90 p-3 rounded-xl border border-amber-300 flex justify-between items-center mb-2">
+              <div>
+                <p class="text-xs font-bold text-zinc-900">🔒 Calculadora de Drinks</p>
+                <p class="text-[10px] text-amber-900">15 Receitas de Jarra & Cooler</p>
+              </div>
+              <button onclick="unlockModule('Drinks em Jarra', '9,90')" class="px-2.5 py-1.5 gold-gradient text-white rounded-lg text-[10px] font-black shadow">
+                + R$ 9,90
+              </button>
+            </div>
+
+            <div class="bg-amber-50/90 p-3 rounded-xl border border-amber-300 flex justify-between items-center mb-2">
+              <div>
+                <p class="text-xs font-bold text-zinc-900">🔒 Cronograma Anti-Caos</p>
+                <p class="text-[10px] text-amber-900">Não fique preso na cozinha</p>
+              </div>
+              <button onclick="unlockModule('Cronograma Anti-Caos', '12,90')" class="px-2.5 py-1.5 gold-gradient text-white rounded-lg text-[10px] font-black shadow">
+                + R$ 12,90
+              </button>
+            </div>
+
+            <div class="bg-red-950 text-white p-3 rounded-xl flex justify-between items-center">
+              <div>
+                <p class="text-xs font-bold text-amber-300">🔒 Kit Jogos de Natal & TV</p>
+                <p class="text-[10px] text-red-200">Amigo Secreto Roubado + Quiz</p>
+              </div>
+              <button onclick="unlockModule('Jogos TV Completo', '14,90')" class="px-2.5 py-1.5 bg-amber-400 text-zinc-950 rounded-lg text-[10px] font-black shadow">
+                LIBERAR
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTAINER 2: COMPLETE 9-SCREEN GRID VIEW -->
+  <div id="grid-container-view" class="max-w-7xl mx-auto hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+      <!-- Cards linking to screens -->
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 1 • Setup Festa</p>
+        <button onclick="quickOpen(1)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Criar Novo Evento 🎄</h3>
+          <p class="text-xs text-white/70 mt-1">Configuração de homens, mulheres e crianças com cálculo dinâmico.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 2 • Lista Inteligente</p>
+        <button onclick="quickOpen(2)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Sua Lista de Compras 🥩</h3>
+          <p class="text-xs text-white/70 mt-1">Segmentação por Carnes, Acompanhamentos, Bebidas e Carvão/Gelo.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 3 • Rateio & Pix</p>
+        <button onclick="quickOpen(3)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Rateio & Pix da Família 💸</h3>
+          <p class="text-xs text-white/70 mt-1">Divisão justa por adulto, chave Pix com 1 clique e disparo para WhatsApp.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 4 • Link Convidado</p>
+        <button onclick="quickOpen(4)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Página Pública da Família 📱</h3>
+          <p class="text-xs text-white/70 mt-1">Transparência de cardápio, status de pagamento ao vivo e viralidade.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 5 • Receitas Escaláveis</p>
+        <button onclick="quickOpen(5)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">20 Receitas Econômicas 🧑‍🍳</h3>
+          <p class="text-xs text-white/70 mt-1">Pesos e medidas multiplicados automaticamente para o grupo.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 6 • Anti-Caos na Cozinha</p>
+        <button onclick="quickOpen(6)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Checklist Horário Anti-Caos ⏱️</h3>
+          <p class="text-xs text-white/70 mt-1">Order Bump 2: Barra de progresso para o anfitrião estar livre no evento.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 7 • Guia de Drinks</p>
+        <button onclick="quickOpen(7)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Drinks em Jarra & Cooler 🍹</h3>
+          <p class="text-xs text-white/70 mt-1">Order Bump 1: Coquetéis e mocktails que rendem muito e gastam pouco.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 8 • Jogos na TV</p>
+        <button onclick="quickOpen(8)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Amigo Secreto Roubado 🎁</h3>
+          <p class="text-xs text-white/70 mt-1">Upsell: Roleta animada e jogos para espelhar na TV da sala.</p>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase text-amber-400 mb-2">Tela 9 • Hub Vitrine Cadeados</p>
+        <button onclick="quickOpen(9)" class="p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-left block w-full max-w-sm">
+          <h3 class="font-bold text-sm text-white">Vitrine In-App c/ Cadeados 🔒</h3>
+          <p class="text-xs text-white/70 mt-1">Recuperação de Order Bumps e conversão interna contínua.</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let men = 8;
+    let women = 6;
+    let kids = 4;
+
+    const rouletteActions = [
+      { icon: "🔥", text: "ROUBE QUALQUER PRESENTE JÁ ABERTO NA SALA!" },
+      { icon: "🔄", text: "TROQUE DE PRESENTE COM A PESSOA À SUA ESQUERDA!" },
+      { icon: "🛡️", text: "SEU PRESENTE ESTÁ BLINDADO ATÉ O FIM DO JOGO!" },
+      { icon: "🎤", text: "CONTE UMA HISTÓRIA ENGRAÇADA DESTE ANO OU PASSE A VEZ!" },
+      { icon: "🎁", text: "ABRA UM NOVO PRESENTE OU FORCE DUAS PESSOAS A TROCAREM!" },
+      { icon: "🥂", text: "FAÇA UM BRINDE À FAMÍLIA E ESCOLHA QUEM VAI JOGAR AGORA!" }
+    ];
+
+    function updatePerson(type, delta) {
+      if (type === 'men') men = Math.max(1, men + delta);
+      if (type === 'women') women = Math.max(0, women + delta);
+      if (type === 'kids') kids = Math.max(0, kids + delta);
+
+      document.getElementById('val-men').innerText = men;
+      document.getElementById('val-women').innerText = women;
+      document.getElementById('val-kids').innerText = kids;
+
+      const adults = men + women;
+      const total = adults + kids;
+      document.getElementById('total-people-summary').innerText = `${total} convidados (${adults} pagantes)`;
+
+      // Dynamic calculation
+      const meatKg = ((men * 0.5) + (women * 0.35) + (kids * 0.2)).toFixed(1);
+      const sidesKg = ((men * 0.4) + (women * 0.3) + (kids * 0.2)).toFixed(1);
+      const drinksL = Math.round((men * 2.5) + (women * 1.8) + (kids * 1.0));
+      const miscBags = Math.max(2, Math.round(total / 5));
+
+      const totalCost = (adults * 51.40).toFixed(2);
+      const perAdult = (51.40).toFixed(2);
+
+      document.getElementById('calc-meat').innerText = `${meatKg} kg`;
+      document.getElementById('calc-sides').innerText = `${sidesKg} kg`;
+      document.getElementById('calc-drinks').innerText = `${drinksL} Litros`;
+      document.getElementById('calc-misc').innerText = `${miscBags} sacos`;
+
+      document.getElementById('calc-total-money').innerText = `R$ ${totalCost.replace('.', ',')}`;
+      document.getElementById('calc-per-adult').innerText = `R$ ${perAdult.replace('.', ',')}`;
+      document.getElementById('calc-adults-count').innerText = `${adults} pessoas pagantes (Crianças isentas)`;
+    }
+
+    function showScreen(num) {
+      document.querySelectorAll('.screen-view').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById(`screen-view-${num}`);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-screen') == num) {
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-amber-500 text-zinc-950";
+        } else {
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white/10 text-white/80";
+        }
+      });
+    }
+
+    function quickOpen(num) {
+      setViewMode('phone');
+      showScreen(num);
+    }
+
+    function setViewMode(mode) {
+      if (mode === 'phone') {
+        document.getElementById('phone-container-view').classList.remove('hidden');
+        document.getElementById('grid-container-view').classList.add('hidden');
+        document.getElementById('screen-tabs').classList.remove('hidden');
+        document.getElementById('btn-mode-phone').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-zinc-950 shadow";
+        document.getElementById('btn-mode-grid').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 hover:bg-white/20 text-white";
+      } else {
+        document.getElementById('phone-container-view').classList.add('hidden');
+        document.getElementById('grid-container-view').classList.remove('hidden');
+        document.getElementById('screen-tabs').classList.add('hidden');
+        document.getElementById('btn-mode-grid').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-zinc-950 shadow";
+        document.getElementById('btn-mode-phone').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 hover:bg-white/20 text-white";
+      }
+    }
+
+    function copyPix() {
+      navigator.clipboard?.writeText('pix.mestre@familia2026.com.br');
+      showToast('Chave PIX copiada com sucesso!');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    function spinRoulette() {
+      const wheel = document.getElementById('roulette-wheel');
+      wheel.classList.add('spinning');
+      setTimeout(() => {
+        wheel.classList.remove('spinning');
+        const rand = rouletteActions[Math.floor(Math.random() * rouletteActions.length)];
+        document.getElementById('action-icon').innerText = rand.icon;
+        document.getElementById('action-text').innerText = rand.text;
+      }, 1000);
+    }
+
+    function changeDrinkVolume(vol) {
+      if (vol === "5") {
+        document.getElementById('drink-clericot-yield').innerText = "Rende 25 taças";
+        document.getElementById('drink-clericot-ingredients').innerHTML = `
+          <li>• 4 Garrafas de Espumante Brut ou Moscatel</li>
+          <li>• 500g Morango + 4 Pêssegos + Uvas Verdes</li>
+          <li>• 250ml Licor de Laranja (ou Suco)</li>
+        `;
+      } else if (vol === "1") {
+        document.getElementById('drink-clericot-yield').innerText = "Rende 1 taça";
+        document.getElementById('drink-clericot-ingredients').innerHTML = `
+          <li>• 150ml Espumante Brut bem gelado</li>
+          <li>• 2 Morangos laminados + Uvas Verdes</li>
+          <li>• 20ml Licor de Laranja e gelo</li>
+        `;
+      } else {
+        document.getElementById('drink-clericot-yield').innerText = "Rende 15 taças";
+        document.getElementById('drink-clericot-ingredients').innerHTML = `
+          <li>• 2 Garrafas de Espumante Brut ou Moscatel</li>
+          <li>• 300g Morango + 2 Pêssegos + Uvas Verdes</li>
+          <li>• 150ml Licor de Laranja (ou Suco)</li>
+        `;
+      }
+    }
+
+    function toggleCheckItem(input) {
+      const checkedCount = document.querySelectorAll('#screen-view-6 input[type="checkbox"]:checked').length;
+      const pct = Math.round((checkedCount / 4) * 100);
+      document.getElementById('progress-anti-caos').style.width = `${pct}%`;
+      document.getElementById('progress-text').innerText = `${pct}% Concluído • Sob Controle!`;
+    }
+
+    function unlockModule(name, price) {
+      showToast(`Desbloqueando ${name} (+ R$ ${price}) no Checkout! 🔓`);
+    }
+  </script>
+</body>
+</html>

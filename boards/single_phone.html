@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=640, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Tela Individual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 640px;
+      height: 980px;
+      background: radial-gradient(circle at 50% 30%, #104A34 0%, #072418 60%, #030F0A 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .bokeh-gold { width: 260px; height: 260px; top: 10px; right: 20px; background: #D97706; opacity: 0.25; }
+    .bokeh-red { width: 280px; height: 280px; bottom: 10px; left: 20px; background: #991B1B; opacity: 0.25; }
+
+    .tag-header {
+      position: relative;
+      z-index: 10;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 20px;
+      background: rgba(217, 119, 6, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE047;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .phone-device {
+      width: 380px;
+      height: 780px;
+      border-radius: 50px;
+      background: #09090B;
+      border: 10px solid #1E293B;
+      box-shadow: 
+        0 30px 80px -15px rgba(0, 0, 0, 0.9),
+        0 0 0 2px rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+    }
+    .screen-viewport {
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #0F172A;
+      position: relative;
+    }
+    .phone-header {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 60%, #B91C1C 100%);
+      color: #FFFFFF;
+      padding: 44px 18px 16px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(127, 29, 29, 0.35);
+    }
+    .phone-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #D97706, #FBBF24, #D97706);
+    }
+    .badge-festive {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(254, 240, 138, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      color: #FEF08A;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .phone-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: hidden;
+    }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .card-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748B;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="bokeh bokeh-gold"></div>
+  <div class="bokeh bokeh-red"></div>
+
+  <div id="screen-tag" class="tag-header">Tela Individual</div>
+
+  <div class="phone-device">
+    <div class="dynamic-island"><div class="camera-lens"></div></div>
+    <div id="phone-screen-container" class="screen-viewport">
+      <!-- Injected by script -->
+    </div>
+  </div>
+
+  <script>
+    // Templates for each screen
+    const screens = {
+      1: {
+        tag: "Tela 1 • Planejador de Festa (Setup)",
+        html: `
+          <div style="background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%); color:#FFF; padding:44px 18px 18px; text-align:center;">
+            <h2 style="font-family:'Outfit'; font-size:20px; font-weight:800;">Criar Novo Evento</h2>
+          </div>
+          <div class="phone-body">
+            <button style="width:100%; padding:13px; border-radius:14px; background:#064E3B; color:#FFF; font-weight:800; font-size:13px; border:1px solid #047857;">Ceia de Natal 🎄</button>
+            <button style="width:100%; padding:13px; border-radius:14px; background:#FFFBEB; color:#78350F; font-weight:800; font-size:13px; border:1px solid #FDE68A;">Churrasco de Réveillon 🎆</button>
+            <button style="width:100%; padding:13px; border-radius:14px; background:#FFFBEB; color:#78350F; font-weight:800; font-size:13px; border:1px solid #FDE68A;">Chácara / Vários Dias 🏡</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#FFF; border:1px solid #E2E8F0; padding:12px 16px; border-radius:14px; font-weight:700; font-size:13px; margin-top:6px;">
+              <span>👨 Homens (8)</span>
+              <div style="display:flex; gap:10px;"><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">−</span><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">+</span></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#FFF; border:1px solid #E2E8F0; padding:12px 16px; border-radius:14px; font-weight:700; font-size:13px;">
+              <span>👩 Mulheres (6)</span>
+              <div style="display:flex; gap:10px;"><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">−</span><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">+</span></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#FFF; border:1px solid #E2E8F0; padding:12px 16px; border-radius:14px; font-weight:700; font-size:13px;">
+              <span>👧 Crianças (4)</span>
+              <div style="display:flex; gap:10px;"><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">−</span><span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:4px 10px; border-radius:6px;">+</span></div>
+            </div>
+            <button style="width:100%; padding:15px; border-radius:18px; background:linear-gradient(135deg, #059669, #047857); color:#FFF; font-weight:900; font-size:14px; border:none; margin-top:auto; box-shadow:0 6px 18px rgba(5,150,105,0.4);">CALCULAR AGORA 🚀</button>
+          </div>
+        `
+      },
+      2: {
+        tag: "Tela 2 • Lista de Compras Inteligente",
+        html: `
+          <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); color:#FFF; padding:44px 18px 18px; text-align:center;">
+            <h2 style="font-family:'Outfit'; font-size:20px; font-weight:800;">Sua Lista de Compras</h2>
+          </div>
+          <div class="phone-body">
+            <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:18px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F1F5F9; padding-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <span style="font-size:26px;">🥩</span>
+                  <div><strong style="font-size:14px;">Carnes</strong><p style="font-size:11px; color:#64748B;">Picanha, Linguiça, Frango</p><span style="font-size:13px; font-weight:800; color:#0F172A;">12,4 kg</span></div>
+                </div>
+                <div style="width:20px; height:20px; border:2px solid #CBD5E1; border-radius:6px;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F1F5F9; padding-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <span style="font-size:26px;">🥗</span>
+                  <div><strong style="font-size:14px;">Acompanhamentos</strong><p style="font-size:11px; color:#64748B;">Farofa, Salpicão, Arroz</p><span style="font-size:13px; font-weight:800; color:#0F172A;">9,5 kg</span></div>
+                </div>
+                <div style="width:20px; height:20px; border:2px solid #CBD5E1; border-radius:6px;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F1F5F9; padding-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <span style="font-size:26px;">🍺</span>
+                  <div><strong style="font-size:14px;">Bebidas</strong><p style="font-size:11px; color:#64748B;">Cerveja, Refri, Água</p><span style="font-size:13px; font-weight:800; color:#0F172A;">48 Litros</span></div>
+                </div>
+                <div style="width:20px; height:20px; border:2px solid #CBD5E1; border-radius:6px;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <span style="font-size:26px;">🔥</span>
+                  <div><strong style="font-size:14px;">Outros</strong><p style="font-size:11px; color:#64748B;">Carvão, Gelo, Pratos</p><span style="font-size:13px; font-weight:800; color:#0F172A;">4 sacos</span></div>
+                </div>
+                <div style="width:20px; height:20px; border:2px solid #CBD5E1; border-radius:6px;"></div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      3: {
+        tag: "Tela 3 • Rateio & Pix da Família",
+        html: `
+          <div style="background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%); color:#FFF; padding:44px 18px 18px; text-align:center;">
+            <h2 style="font-family:'Outfit'; font-size:20px; font-weight:800;">Rateio & Pix da Família</h2>
+          </div>
+          <div class="phone-body">
+            <div style="background:#7F1D1D; color:#FFF; padding:12px; border-radius:16px; text-align:center;">
+              <p style="font-size:11px; color:#FECACA;">Total Estimado:</p>
+              <h3 style="font-family:'Outfit'; font-size:24px; font-weight:900;">R$ 720,00</h3>
+            </div>
+            <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:20px; padding:20px 16px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+              <span style="font-size:12px; color:#64748B; font-weight:700;">Fica</span>
+              <p style="font-family:'Outfit'; font-size:38px; font-weight:900; color:#065F46; line-height:1.1; margin:4px 0;">R$ 51,40</p>
+              <p style="font-size:12px; color:#475569; font-weight:600;">por adulto (14 pessoas)</p>
+              <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:12px; padding:10px; font-size:12px; color:#64748B; margin-top:14px; font-weight:600;">pix.mestre@familia.com</div>
+              <button style="width:100%; padding:11px; border-radius:12px; background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-weight:800; font-size:13px; border:none; margin-top:10px; cursor:pointer;">📋 Copiar chave PIX</button>
+            </div>
+            <button style="width:100%; padding:15px; border-radius:18px; background:linear-gradient(135deg, #15803D, #166534); color:#FFF; font-weight:900; font-size:14px; border:none; margin-top:auto; box-shadow:0 6px 18px rgba(22,101,52,0.4);">💬 COMPARTILHAR NO WHATSAPP</button>
+          </div>
+        `
+      },
+      4: {
+        tag: "Tela 4 • Link Público da Família (WhatsApp)",
+        html: `
+          <div class="phone-header">
+            <span class="badge-festive">⏳ FALTAM 11 DIAS</span>
+            <h2 style="font-family:'Outfit'; font-size:19px; font-weight:800;">Churrasco da Família</h2>
+            <p style="font-size:12px; color:#FEE2E2;">Confirmado • 14 Adultos e 4 Crianças</p>
+          </div>
+          <div class="phone-body">
+            <div class="card">
+              <div class="card-title"><span>Cardápio Confirmado</span><span style="color:#059669; font-weight:800;">Incluso</span></div>
+              <div style="font-size:13px; font-weight:700; padding:6px 0; border-bottom:1px solid #F1F5F9;">🥩 12,4 kg Carnes Nobres</div>
+              <div style="font-size:13px; font-weight:700; padding:6px 0; border-bottom:1px solid #F1F5F9;">🥗 9,5 kg Ceia & Guarnições</div>
+              <div style="font-size:13px; font-weight:700; padding:6px 0;">🍺 48 Litros Bebidas Geladas</div>
+            </div>
+            <div style="background:linear-gradient(135deg, #062B1D, #0F4A34); color:#FFF; border-radius:20px; padding:16px; text-align:center; border:1px solid rgba(16,185,129,0.3);">
+              <p style="font-size:11px; color:#A7F3D0; font-weight:600;">Cota por Adulto (Crianças Não Pagam)</p>
+              <p style="font-family:'Outfit'; font-size:34px; font-weight:900; color:#FBBF24; line-height:1.1; margin:4px 0 10px;">R$ 51,40</p>
+              <button style="width:100%; padding:11px; border-radius:12px; background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-weight:800; font-size:13px; border:none; cursor:pointer;">📋 COPIAR PIX E CONFIRMAR</button>
+            </div>
+            <div class="card" style="flex:1;">
+              <div class="card-title"><span>Confirmados (10/14)</span><span style="color:#059669; font-weight:800;">71% Quitado</span></div>
+              <div style="font-size:12px; display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; justify-content:space-between;"><span>✅ Tio Roberto & Bia</span><strong style="color:#15803D;">Pago</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>✅ Casal Marcos & Ju</span><strong style="color:#15803D;">Pago</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>⏳ Primo Lucas</span><strong style="color:#B45309;">Aguardando</strong></div>
+              </div>
+            </div>
+            <button style="width:100%; padding:12px; border-radius:14px; background:#059669; color:#FFF; font-weight:800; font-size:12px; border:none; margin-top:auto;">🙋‍♂️ VOU LEVAR SOBREMESA</button>
+          </div>
+        `
+      },
+      5: {
+        tag: "Tela 5 • Receitas Econômicas Auto-Escaláveis",
+        html: `
+          <div class="phone-header">
+            <span class="badge-festive">🧑‍🍳 MÓDULO FRONT-END</span>
+            <h2 style="font-family:'Outfit'; font-size:19px; font-weight:800;">Receitas Econômicas</h2>
+            <p style="font-size:12px; color:#FEE2E2;">Porções ajustadas para 18 pessoas</p>
+          </div>
+          <div class="phone-body">
+            <div style="display:flex; gap:6px;">
+              <span style="background:#064E3B; color:#FFF; font-size:11px; font-weight:700; padding:6px 12px; border-radius:20px;">Todas (20)</span>
+              <span style="background:#E2E8F0; color:#475569; font-size:11px; font-weight:700; padding:6px 12px; border-radius:20px;">Ceia Clássica</span>
+            </div>
+            <div class="card" style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="background:#DCFCE7; color:#15803D; padding:3px 8px; border-radius:8px;">R$ 4,10 / pessoa</span>
+                <span style="color:#D97706;">⏱️ 25 min</span>
+              </div>
+              <h3 style="font-family:'Outfit'; font-size:14px; font-weight:800;">Pernil Desfiado na Manteiga</h3>
+              <p style="font-size:11px; color:#64748B;">Substitui o Peru caro com metade do custo e sem ressecar.</p>
+              <div style="display:flex; justify-content:space-between; font-size:11px; padding-top:8px; border-top:1px dashed #E2E8F0; margin-top:4px;">
+                <span style="color:#065F46; font-weight:700;">Para 18 pessoas: 4,2 kg</span>
+                <strong style="color:#B91C1C;">Ver Preparo →</strong>
+              </div>
+            </div>
+            <div class="card" style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="background:#DCFCE7; color:#15803D; padding:3px 8px; border-radius:8px;">R$ 3,40 / pessoa</span>
+                <span style="color:#D97706;">⏱️ 15 min</span>
+              </div>
+              <h3 style="font-family:'Outfit'; font-size:14px; font-weight:800;">Farofa Crocante de Bacon</h3>
+              <p style="font-size:11px; color:#64748B;">Pode ser feita 2 dias antes sem murchar.</p>
+              <div style="display:flex; justify-content:space-between; font-size:11px; padding-top:8px; border-top:1px dashed #E2E8F0; margin-top:4px;">
+                <span style="color:#065F46; font-weight:700;">Para 18 pessoas: 1,8 kg</span>
+                <strong style="color:#B91C1C;">Ver Preparo →</strong>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      6: {
+        tag: "Tela 6 • Cronograma Anti-Caos na Cozinha",
+        html: `
+          <div class="phone-header">
+            <span class="badge-festive">⚡ ORDER BUMP 2</span>
+            <h2 style="font-family:'Outfit'; font-size:19px; font-weight:800;">Checklist Anti-Caos</h2>
+            <div style="margin-top:8px; background:rgba(0,0,0,0.3); height:7px; border-radius:10px; overflow:hidden;">
+              <div style="width:65%; height:100%; background:linear-gradient(90deg, #F59E0B, #FDE047);"></div>
+            </div>
+            <p style="margin-top:6px; font-weight:700; color:#FEF08A; font-size:11px;">65% Concluído • Você no controle!</p>
+          </div>
+          <div class="phone-body">
+            <div style="display:flex; background:#E2E8F0; padding:3px; border-radius:12px; gap:4px; font-size:11px; font-weight:800;">
+              <button style="flex:1; padding:6px; border-radius:9px; border:none; background:#FFF; color:#0F172A;">Véspera (24/31)</button>
+              <button style="flex:1; padding:6px; border-radius:9px; border:none; background:transparent; color:#64748B;">2h Antes</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:9px;">
+              <div style="display:flex; gap:10px; padding:10px 12px; border-radius:14px; background:#F0FDF4; border:1px solid #BBF7D0;">
+                <span style="width:18px; height:18px; border-radius:6px; background:#16A34A; color:#FFF; display:flex; align-items:center; justify-content:center; font-size:11px;">✓</span>
+                <div><strong style="font-size:12px; text-decoration:line-through; color:#475569;">09:00 • Temperar Pernil e Cortes</strong><p style="font-size:11px; color:#64748B;">Deixar marinando na geladeira.</p></div>
+              </div>
+              <div style="display:flex; gap:10px; padding:10px 12px; border-radius:14px; background:#F0FDF4; border:1px solid #BBF7D0;">
+                <span style="width:18px; height:18px; border-radius:6px; background:#16A34A; color:#FFF; display:flex; align-items:center; justify-content:center; font-size:11px;">✓</span>
+                <div><strong style="font-size:12px; text-decoration:line-through; color:#475569;">11:30 • Montar Sobremesas & Salpicão</strong><p style="font-size:11px; color:#64748B;">Cobrir e gelar antecipado.</p></div>
+              </div>
+              <div style="display:flex; gap:10px; padding:10px 12px; border-radius:14px; background:#FFF; border:1px solid #E2E8F0;">
+                <span style="width:18px; height:18px; border-radius:6px; border:2px solid #CBD5E1;"></span>
+                <div><strong style="font-size:12px; color:#0F172A;">16:00 • Gelar Cooler com Sal Grosso</strong><p style="font-size:11px; color:#64748B;">Gelo + sal grosso + álcool.</p></div>
+              </div>
+              <div style="display:flex; gap:10px; padding:10px 12px; border-radius:14px; background:#FFF; border:1px solid #E2E8F0;">
+                <span style="width:18px; height:18px; border-radius:6px; border:2px solid #CBD5E1;"></span>
+                <div><strong style="font-size:12px; color:#0F172A;">18:30 • Acender Carvão & Tomar Banho</strong><p style="font-size:11px; color:#64748B;">Livre antes do primeiro convidado!</p></div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg, #FEF3C7, #FDE68A); border:1px solid #F59E0B; border-radius:14px; padding:10px 12px; font-size:11px; color:#78350F; font-weight:700; display:flex; gap:8px; margin-top:auto;">
+              <span style="font-size:20px;">🥂</span>
+              <div>Meta Zen: Estar pronto e com drink na mão na chegada da família!</div>
+            </div>
+          </div>
+        `
+      },
+      7: {
+        tag: "Tela 7 • Calculadora de Drinks em Jarra & Cooler",
+        html: `
+          <div class="phone-header">
+            <span class="badge-festive">⚡ ORDER BUMP 1</span>
+            <h2 style="font-family:'Outfit'; font-size:19px; font-weight:800;">Drinks de Fim de Ano</h2>
+            <p style="font-size:12px; color:#FEE2E2;">Modo Jarra & Cooler para Galera</p>
+          </div>
+          <div class="phone-body">
+            <div style="display:flex; justify-content:space-between; background:#FFF; border:1px solid #E2E8F0; padding:10px 14px; border-radius:14px; font-size:12px;">
+              <span style="font-weight:700; color:#475569;">Volume do Lote:</span>
+              <strong style="color:#92400E; background:#FEF3C7; padding:3px 10px; border-radius:8px;">Jarra 3 Litros (15 taças)</strong>
+            </div>
+            <div class="card" style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="background:#FEE2E2; color:#991B1B; padding:3px 8px; border-radius:6px;">🎄 Favorito da Ceia</span>
+                <span style="color:#059669;">R$ 3,80/taça</span>
+              </div>
+              <h3 style="font-family:'Outfit'; font-size:14px; font-weight:800;">Clericot Tropical de Espumante</h3>
+              <ul style="font-size:11px; color:#475569; list-style:none; line-height:1.4;">
+                <li>• 2 Garrafas de Espumante Brut ou Moscatel</li>
+                <li>• 300g Morango + 2 Pêssegos + Uvas Verdes</li>
+                <li>• 150ml Licor de Laranja (ou Suco)</li>
+              </ul>
+              <button style="width:100%; padding:9px; border-radius:10px; background:#064E3B; color:#FFF; font-size:11px; font-weight:800; border:none; margin-top:4px;">+ Somar Frutas na Lista de Compras</button>
+            </div>
+            <div class="card" style="margin-top:auto;">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="background:#DCFCE7; color:#15803D; padding:3px 8px; border-radius:6px;">🍹 Sem Álcool (Kids)</span>
+                <span style="color:#059669;">R$ 1,80/taça</span>
+              </div>
+              <h3 style="font-family:'Outfit'; font-size:13px; font-weight:800; margin-top:2px;">Soda Italiana de Frutas Vermelhas</h3>
+              <p style="font-size:11px; color:#64748B; margin-top:2px;">Visual de coquetel sofisticado para motoristas e família.</p>
+            </div>
+          </div>
+        `
+      },
+      8: {
+        tag: "Tela 8 • Amigo Secreto Roubado & Modo TV",
+        html: `
+          <div style="background: linear-gradient(180deg, #071E15 0%, #030F0A 100%); height:100%; display:flex; flex-direction:column; color:#FFF;">
+            <div style="padding:42px 18px 14px; text-align:center; border-bottom:1px solid rgba(16,185,129,0.2);">
+              <span style="font-size:10px; font-weight:800; color:#FBBF24; text-transform:uppercase; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); padding:3px 12px; border-radius:12px;">📺 MODO TV / SALA DE ESTAR</span>
+              <h2 style="font-family:'Outfit'; font-size:20px; font-weight:900; margin-top:4px;">Amigo Secreto Roubado 🎁</h2>
+              <p style="font-size:11px; color:#A7F3D0; margin-top:2px;">Espelhe no celular ou na TV da sala</p>
+            </div>
+            <div style="flex:1; padding:16px; display:flex; flex-direction:column; justify-content:space-between; align-items:center; text-align:center;">
+              <div style="width:210px; height:210px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #DC2626 0%, #7F1D1D 70%, #450A0A 100%); border:5px solid #F59E0B; box-shadow:0 0 35px rgba(245,158,11,0.4); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; margin:auto;">
+                <span style="font-size:32px;">🔥</span>
+                <span style="font-size:10px; font-weight:900; color:#FDE047; text-transform:uppercase; margin-top:4px;">Sorteio da Vez:</span>
+                <p style="font-family:'Outfit'; font-size:13px; font-weight:900; color:#FFF; line-height:1.2; margin-top:4px;">ROUBE QUALQUER PRESENTE JÁ ABERTO NA SALA!</p>
+              </div>
+              <div style="width:100%; background:rgba(6,78,59,0.4); border:1px solid rgba(16,185,129,0.3); border-radius:16px; padding:12px 14px; text-align:left;">
+                <p style="font-size:10px; font-weight:800; color:#FBBF24; text-transform:uppercase;">Jogos Inclusos na Noite:</p>
+                <div style="font-size:12px; font-weight:700; color:#E2E8F0; margin-top:3px;">🎯 Quiz Retrospectiva da Família</div>
+                <div style="font-size:12px; font-weight:700; color:#E2E8F0;">🔎 Caça ao Tesouro das Crianças</div>
+                <div style="font-size:12px; font-weight:700; color:#E2E8F0;">🥂 Bingo da Virada de Ano</div>
+              </div>
+              <button style="width:100%; padding:14px; border-radius:16px; background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-family:'Outfit'; font-size:13px; font-weight:900; border:none; cursor:pointer; box-shadow:0 6px 20px rgba(217,119,6,0.45);">🎲 GIRAR ROLETA PARA O PRÓXIMO</button>
+            </div>
+          </div>
+        `
+      },
+      9: {
+        tag: "Tela 9 • Hub Principal c/ Vitrine de Cadeados",
+        html: `
+          <div class="phone-header">
+            <span class="badge-festive">⭐ PAINEL MESTRE</span>
+            <h2 style="font-family:'Outfit'; font-size:19px; font-weight:800;">Olá, Organizador! 👋</h2>
+            <p style="font-size:12px; color:#FEE2E2;">Churrasco da Família • 18 Pessoas</p>
+          </div>
+          <div class="phone-body">
+            <div style="background:#FFF; border-radius:16px; padding:12px 14px; box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; justify-content:space-between; align-items:center; border-left:5px solid #059669;">
+              <div><h4 style="font-size:13px; font-weight:800;">🥩 Calculadora & Lista Exata</h4><p style="font-size:10px; font-weight:700; color:#059669;">✅ Acesso Liberado</p></div>
+              <span style="font-size:12px; font-weight:800; color:#64748B;">Abrir →</span>
+            </div>
+            <div style="background:#FFF; border-radius:16px; padding:12px 14px; box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; justify-content:space-between; align-items:center; border-left:5px solid #059669;">
+              <div><h4 style="font-size:13px; font-weight:800;">💸 Gerador de Rateio & Pix</h4><p style="font-size:10px; font-weight:700; color:#059669;">✅ Acesso Liberado</p></div>
+              <span style="font-size:12px; font-weight:800; color:#64748B;">Abrir →</span>
+            </div>
+            <div style="font-size:10px; font-weight:900; letter-spacing:1px; color:#64748B; text-transform:uppercase; margin-top:4px;">EXTRAS OPCIONAIS (1 CLIQUE):</div>
+            <div style="background:#FFFBEB; border:1.5px solid #FCD34D; border-radius:16px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div><h4 style="font-size:12px; font-weight:800; color:#1E293B;">🔒 Calculadora de Drinks</h4><p style="font-size:10px; color:#92400E;">15 Receitas de Jarra & Cooler</p></div>
+              <button style="background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-weight:900; font-size:11px; padding:7px 12px; border-radius:10px; border:none;">+ R$ 9,90</button>
+            </div>
+            <div style="background:#FFFBEB; border:1.5px solid #FCD34D; border-radius:16px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div><h4 style="font-size:12px; font-weight:800; color:#1E293B;">🔒 Cronograma Anti-Caos</h4><p style="font-size:10px; color:#92400E;">Checklist horário para o anfitrião</p></div>
+              <button style="background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-weight:900; font-size:11px; padding:7px 12px; border-radius:10px; border:none;">+ R$ 12,90</button>
+            </div>
+            <div style="background:linear-gradient(135deg, #450A0A, #7F1D1D); border-radius:16px; padding:12px 14px; color:#FFF; display:flex; justify-content:space-between; align-items:center; border:1px solid #DC2626; margin-top:auto;">
+              <div><h4 style="font-size:12px; font-weight:800; color:#FDE047;">⚡ KIT VIP COMPLETO</h4><p style="font-size:10px; color:#FECACA;">Todos os módulos + Modo TV</p></div>
+              <button style="background:#F59E0B; color:#000; font-weight:900; font-size:11px; padding:8px 12px; border-radius:10px; border:none;">LIBERAR COM 40% OFF</button>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const screenNum = parseInt(urlParams.get('screen') || '4');
+    const screenData = screens[screenNum] || screens[4];
+
+    document.getElementById('screen-tag').innerText = screenData.tag;
+    document.getElementById('phone-screen-container').innerHTML = screenData.html;
+  </script>
+</body>
+</html>

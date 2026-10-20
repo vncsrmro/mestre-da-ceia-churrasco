@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=2560, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Ecossistema Telas 4 a 9</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      width: 2560px;
+      height: 1440px;
+      background: #061811;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 70px 42px;
+    }
+
+    .bg-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 50% 40%, rgba(16, 75, 52, 0.95) 0%, rgba(7, 34, 23, 0.98) 60%, rgba(3, 16, 11, 1) 100%);
+      z-index: 0;
+    }
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(54px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .bokeh-1 { width: 450px; height: 450px; top: -60px; left: 300px; background: #D97706; opacity: 0.22; }
+    .bokeh-2 { width: 550px; height: 550px; bottom: -100px; right: 250px; background: #991B1B; opacity: 0.25; }
+    .bokeh-3 { width: 600px; height: 600px; top: 25%; left: 45%; background: #059669; opacity: 0.16; }
+
+    .star {
+      position: absolute;
+      color: #FDE047;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    .brand-text p {
+      font-size: 17px;
+      font-weight: 600;
+      color: #FBBF24;
+      margin-top: 4px;
+    }
+    .proto-badge {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .proto-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Main Grid */
+    .phones-row {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 28px;
+      margin: auto 0;
+    }
+
+    .phone-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+    }
+    .screen-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 16px;
+      background: rgba(217, 119, 6, 0.18);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE047;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .phone-device {
+      width: 370px;
+      height: 770px;
+      border-radius: 48px;
+      background: #09090B;
+      border: 9px solid #1E293B;
+      box-shadow: 
+        0 30px 80px -15px rgba(0, 0, 0, 0.9),
+        0 0 0 2px rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 22px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+    }
+
+    .screen-viewport {
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #0F172A;
+      position: relative;
+    }
+
+    .phone-header {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 60%, #B91C1C 100%);
+      color: #FFFFFF;
+      padding: 42px 16px 14px;
+      text-align: center;
+      position: relative;
+    }
+    .phone-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #D97706, #FBBF24, #D97706);
+    }
+    .badge-festive {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(254, 240, 138, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      color: #FEF08A;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .phone-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .phone-header p {
+      font-size: 11px;
+      color: rgba(254, 226, 226, 0.9);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .phone-body {
+      flex: 1;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: hidden;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .card-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748B;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Common Components inside screens */
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+    .pix-box {
+      background: linear-gradient(135deg, #062B1D 0%, #0F4A34 100%);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .pix-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #FBBF24;
+      line-height: 1.1;
+      margin: 2px 0 8px;
+    }
+    .pix-btn {
+      width: 100%;
+      padding: 9px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Screen 5 */
+    .f-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 16px;
+    }
+    .f-pill.active { background: #064E3B; color: #FFFFFF; }
+    .f-pill.inactive { background: #E2E8F0; color: #475569; }
+    .recipe-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    /* Screen 6 */
+    .time-tabs {
+      display: flex;
+      background: #E2E8F0;
+      padding: 3px;
+      border-radius: 10px;
+      gap: 3px;
+    }
+    .time-tab {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 5px;
+      border-radius: 8px;
+      border: none;
+    }
+    .time-tab.active { background: #FFFFFF; color: #0F172A; }
+    .time-tab.inactive { background: transparent; color: #64748B; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      font-size: 11px;
+    }
+    .check-item.done { background: #F0FDF4; border-color: #BBF7D0; }
+    .custom-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+    .check-item.done .custom-check { background: #16A34A; color: #FFFFFF; }
+    .check-item:not(.done) .custom-check { border: 2px solid #CBD5E1; }
+
+    /* Screen 7 */
+    .drink-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    /* Screen 8 (TV mode) */
+    .screen-tv-mode {
+      background: linear-gradient(180deg, #071E15 0%, #030F0A 100%);
+      color: #FFFFFF;
+    }
+    .tv-header {
+      padding: 38px 16px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .wheel-card {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #DC2626 0%, #7F1D1D 70%, #450A0A 100%);
+      border: 5px solid #F59E0B;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+      margin: auto;
+    }
+
+    /* Screen 9 */
+    .module-item {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .module-item.unlocked { border-left: 4px solid #059669; }
+    .locked-card {
+      background: #FFFBEB;
+      border: 1.5px solid #FCD34D;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      padding-top: 14px;
+      font-size: 14px;
+      color: #A7F3D0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-canvas"></div>
+  <div class="bokeh bokeh-1"></div>
+  <div class="bokeh bokeh-2"></div>
+  <div class="bokeh bokeh-3"></div>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="brand-block">
+      <div style="width: 58px; height: 58px;">
+        <svg viewBox="0 0 100 100" width="58" height="58">
+          <line x1="25" y1="75" x2="75" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <line x1="25" y1="25" x2="75" y2="75" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <path d="M30,34 Q50,5 75,32 Q70,40 30,34 Z" fill="#DC2626"/>
+          <ellipse cx="50" cy="36" rx="26" ry="6" fill="#FFFFFF"/>
+          <circle cx="78" cy="34" r="7" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Mestre da Ceia & Churrasco</h1>
+        <p>Ecossistema Completo de Telas • Visão do Convidado + Order Bumps + Upsell</p>
+      </div>
+    </div>
+    <div class="proto-badge">
+      <span class="proto-tag" style="background:#7F1D1D; color:#FECACA;">🎄 Front-End</span>
+      <span class="proto-tag" style="background:#B45309; color:#FEF3C7;">⚡ Order Bumps 1 & 2</span>
+      <span class="proto-tag" style="background:#064E3B; color:#A7F3D0;">🚀 Upsell Modo TV</span>
+    </div>
+  </header>
+
+  <!-- 6 Phones Row -->
+  <main class="phones-row">
+
+    <!-- TELA 4 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 4 • Link Público Família</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport">
+          <div class="phone-header">
+            <span class="badge-festive">⏳ FALTAM 11 DIAS</span>
+            <h2>Churrasco da Família</h2>
+            <p>Confirmado • 14 Adultos e 4 Crianças</p>
+          </div>
+          <div class="phone-body">
+            <div class="card">
+              <div class="card-title">Cardápio Incluso</div>
+              <div class="menu-item"><span>🥩</span> 12,4 kg Carnes Nobres</div>
+              <div class="menu-item"><span>🥗</span> 9,5 kg Ceia & Guarnições</div>
+              <div class="menu-item"><span>🍺</span> 48 L Bebidas Geladas</div>
+            </div>
+            <div class="pix-box">
+              <p style="font-size:10px; color:#A7F3D0;">Cota por Adulto</p>
+              <p class="pix-val">R$ 51,40</p>
+              <button class="pix-btn">📋 COPIAR PIX E CONFIRMAR</button>
+            </div>
+            <div class="card" style="flex:1;">
+              <div class="card-title">Confirmados (10/14)</div>
+              <div style="font-size:11px; display:flex; flex-direction:column; gap:5px;">
+                <div style="display:flex; justify-content:space-between;"><span>✅ Roberto & Bia</span><strong style="color:#15803D;">Pago</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>✅ Marcos & Ju</span><strong style="color:#15803D;">Pago</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>⏳ Primo Lucas</span><strong style="color:#B45309;">Pendente</strong></div>
+              </div>
+            </div>
+            <button style="width:100%; padding:10px; border-radius:12px; background:#059669; color:#FFF; font-weight:800; font-size:11px; border:none; cursor:pointer;">
+              🙋‍♂️ VOU LEVAR SOBREMESA
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 5 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 5 • Receitas Escaláveis</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport">
+          <div class="phone-header">
+            <span class="badge-festive">🧑‍🍳 MÓDULO FRONT-END</span>
+            <h2>Receitas Econômicas</h2>
+            <p>Ajustadas para 18 pessoas</p>
+          </div>
+          <div class="phone-body">
+            <div style="display:flex; gap:5px;">
+              <span class="f-pill active">Todas (20)</span>
+              <span class="f-pill inactive">Ceia</span>
+              <span class="f-pill inactive">Churrasco</span>
+            </div>
+            <div class="recipe-card">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="color:#15803D; background:#DCFCE7; padding:2px 6px; border-radius:6px;">R$ 4,10 / pessoa</span>
+                <span style="color:#D97706;">⏱️ 25 min</span>
+              </div>
+              <h3 style="font-size:13px; font-weight:800; margin-top:2px;">Pernil Desfiado na Manteiga</h3>
+              <p style="font-size:10px; color:#64748B;">Substitui o Peru caro com metade do custo.</p>
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:700; margin-top:4px; padding-top:4px; border-top:1px dashed #E2E8F0;">
+                <span style="color:#065F46;">Para 18 pessoas: 4,2 kg</span>
+                <span style="color:#B91C1C;">Ver Preparo →</span>
+              </div>
+            </div>
+            <div class="recipe-card">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="color:#15803D; background:#DCFCE7; padding:2px 6px; border-radius:6px;">R$ 3,40 / pessoa</span>
+                <span style="color:#D97706;">⏱️ 15 min</span>
+              </div>
+              <h3 style="font-size:13px; font-weight:800; margin-top:2px;">Farofa Crocante de Bacon</h3>
+              <p style="font-size:10px; color:#64748B;">Pode ser feita 2 dias antes sem murchar.</p>
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:700; margin-top:4px; padding-top:4px; border-top:1px dashed #E2E8F0;">
+                <span style="color:#065F46;">Para 18 pessoas: 1,8 kg</span>
+                <span style="color:#B91C1C;">Ver Preparo →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 6 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 6 • Anti-Caos (Bump 2)</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport">
+          <div class="phone-header">
+            <span class="badge-festive">⚡ ORDER BUMP 2</span>
+            <h2>Checklist Anti-Caos</h2>
+            <div style="margin-top:6px; background:rgba(0,0,0,0.3); height:6px; border-radius:10px; overflow:hidden;">
+              <div style="width:65%; height:100%; background:linear-gradient(90deg, #F59E0B, #FDE047);"></div>
+            </div>
+            <p style="margin-top:4px; font-weight:700; color:#FEF08A; font-size:10px;">65% Concluído • Sob Controle</p>
+          </div>
+          <div class="phone-body">
+            <div class="time-tabs">
+              <button class="time-tab inactive">48h Antes</button>
+              <button class="time-tab active">Véspera</button>
+              <button class="time-tab inactive">2h Antes</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="check-item done">
+                <div class="custom-check">✓</div>
+                <div><strong>09:00 • Temperar Cortes</strong><p style="font-size:10px; color:#64748B;">Deixar marinando na geladeira.</p></div>
+              </div>
+              <div class="check-item done">
+                <div class="custom-check">✓</div>
+                <div><strong>11:30 • Montar Sobremesas</strong><p style="font-size:10px; color:#64748B;">Cobrir e gelar antecipado.</p></div>
+              </div>
+              <div class="check-item">
+                <div class="custom-check"></div>
+                <div><strong>16:00 • Gelar Cooler c/ Sal</strong><p style="font-size:10px; color:#64748B;">Gelo + sal grosso + álcool.</p></div>
+              </div>
+              <div class="check-item">
+                <div class="custom-check"></div>
+                <div><strong>18:30 • Tomar Banho & Relaxar</strong><p style="font-size:10px; color:#64748B;">Livre antes do 1º convidado!</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 7 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 7 • Guia Drinks (Bump 1)</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport">
+          <div class="phone-header">
+            <span class="badge-festive">⚡ ORDER BUMP 1</span>
+            <h2>Drinks de Fim de Ano</h2>
+            <p>Jarra & Cooler para Galera</p>
+          </div>
+          <div class="phone-body">
+            <div style="display:flex; justify-content:space-between; background:#FFF; border:1px solid #E2E8F0; padding:8px 12px; border-radius:12px; font-size:11px;">
+              <span style="font-weight:700; color:#475569;">Volume:</span>
+              <strong style="color:#92400E; background:#FEF3C7; padding:2px 8px; border-radius:6px;">Jarra 3 Litros (15 taças)</strong>
+            </div>
+            <div class="drink-card">
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800;">
+                <span style="background:#FEE2E2; color:#991B1B; padding:2px 6px; border-radius:4px;">🎄 Favorito Natal</span>
+                <span style="color:#059669;">R$ 3,80/taça</span>
+              </div>
+              <h3 style="font-size:13px; font-weight:800; margin-top:2px;">Clericot de Espumante</h3>
+              <p style="font-size:10px; color:#475569;">2 Garrafas Espumante + Frutas Frescas + Licor de Laranja.</p>
+              <button style="width:100%; padding:7px; border-radius:8px; background:#064E3B; color:#FFF; font-size:10px; font-weight:800; border:none; cursor:pointer; margin-top:4px;">
+                + Somar Frutas na Lista
+              </button>
+            </div>
+            <div class="drink-card">
+              <span style="font-size:10px; font-weight:800; background:#DCFCE7; color:#15803D; padding:2px 6px; border-radius:4px; align-self:flex-start;">🍹 Sem Álcool</span>
+              <h3 style="font-size:12px; font-weight:800; margin-top:2px;">Soda Italiana de Frutas</h3>
+              <p style="font-size:10px; color:#64748B;">Refrescante, lindo na taça e baixo custo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 8 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 8 • Jogos na TV (Upsell)</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport screen-tv-mode">
+          <div class="tv-header">
+            <span style="font-size:9px; font-weight:800; color:#FBBF24; text-transform:uppercase; background:rgba(245,158,11,0.2); padding:2px 8px; border-radius:10px;">📺 MODO TV</span>
+            <h2 style="font-size:16px; font-weight:900; margin-top:2px;">Amigo Secreto Roubado 🎁</h2>
+          </div>
+          <div class="phone-body" style="padding-top:8px;">
+            <div class="wheel-card">
+              <span style="font-size:28px;">🔥</span>
+              <span style="font-size:9px; font-weight:900; color:#FDE047;">SORTEIO DA VEZ:</span>
+              <p style="font-size:11px; font-weight:900; color:#FFF; line-height:1.2; margin-top:3px;">ROUBE QUALQUER PRESENTE JÁ ABERTO!</p>
+            </div>
+            <div style="background:rgba(6,78,59,0.4); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:10px; font-size:11px;">
+              <strong style="color:#FBBF24; font-size:10px;">JOGOS INCLUSOS:</strong>
+              <div style="margin-top:3px; color:#E2E8F0;">🎯 Quiz Retrospectiva da Família</div>
+              <div style="color:#E2E8F0;">🥂 Bingo da Virada de Ano</div>
+            </div>
+            <button style="width:100%; padding:11px; border-radius:12px; background:linear-gradient(135deg, #D97706, #B45309); color:#FFF; font-weight:900; font-size:12px; border:none; cursor:pointer;">
+              🎲 GIRAR ROLETA
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 9 -->
+    <div class="phone-column">
+      <div class="screen-tag">Tela 9 • Hub Vitrine Cadeados</div>
+      <div class="phone-device">
+        <div class="dynamic-island"><div class="camera-lens"></div></div>
+        <div class="screen-viewport">
+          <div class="phone-header">
+            <span class="badge-festive">⭐ PAINEL MESTRE</span>
+            <h2>Olá, Organizador! 👋</h2>
+            <p>18 Pessoas Confirmadas</p>
+          </div>
+          <div class="phone-body">
+            <div class="module-item unlocked">
+              <div>
+                <p>🥩 Calculadora de Carnes</p>
+                <small style="color:#059669; font-size:9px;">✅ Liberado</small>
+              </div>
+              <span>Abrir →</span>
+            </div>
+            <div class="module-item unlocked">
+              <div>
+                <p>💸 Rateio & Pix WhatsApp</p>
+                <small style="color:#059669; font-size:9px;">✅ Liberado</small>
+              </div>
+              <span>Abrir →</span>
+            </div>
+            <small style="font-size:9px; font-weight:800; color:#64748B;">EXTRAS (1 CLIQUE):</small>
+            <div class="locked-card">
+              <div>
+                <strong>🔒 Guia de Drinks</strong>
+                <p style="font-size:9px; color:#92400E;">15 Receitas de Jarra</p>
+              </div>
+              <button style="background:#D97706; color:#FFF; font-weight:800; font-size:10px; padding:4px 8px; border-radius:6px; border:none;">+ R$ 9,90</button>
+            </div>
+            <div class="locked-card">
+              <div>
+                <strong>🔒 Cronograma Anti-Caos</strong>
+                <p style="font-size:9px; color:#92400E;">Checklist horário</p>
+              </div>
+              <button style="background:#D97706; color:#FFF; font-weight:800; font-size:10px; padding:4px 8px; border-radius:6px; border:none;">+ R$ 12,90</button>
+            </div>
+            <div style="background:#7F1D1D; color:#FFF; padding:10px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
+              <div>
+                <strong style="color:#FDE047; font-size:11px;">⚡ KIT VIP</strong>
+                <p style="font-size:9px; color:#FECACA;">Tudo com 40% OFF</p>
+              </div>
+              <button style="background:#F59E0B; color:#000; font-weight:900; font-size:10px; padding:6px 10px; border-radius:6px; border:none;">LIBERAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="color:#FBBF24;">✨</span>
+      <span>Ecossistema Mestre da Ceia & Churrasco • Telas 4 a 9 Prontas para Validação do MVP e Criativos</span>
+    </div>
+    <div style="display:flex; gap:12px;">
+      <span style="background:rgba(255,255,255,0.08); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700;">Alta Resolução Retina (2560x1440)</span>
+      <span style="background:rgba(245,158,11,0.2); color:#FDE047; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:800;">Validação MVP 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>

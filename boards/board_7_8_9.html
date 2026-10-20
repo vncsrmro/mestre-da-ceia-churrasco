@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>Mestre da Ceia & Churrasco - Telas 7, 8 e 9</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      width: 1920px;
+      height: 1080px;
+      background: #061811;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 80px 42px;
+    }
+
+    /* Ambient Festive Background */
+    .bg-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 50% 40%, rgba(16, 75, 52, 0.95) 0%, rgba(7, 34, 23, 0.98) 60%, rgba(3, 16, 11, 1) 100%);
+      z-index: 0;
+    }
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(48px);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .bokeh-gold-1 { width: 360px; height: 360px; top: -50px; right: 200px; background: #D97706; opacity: 0.22; }
+    .bokeh-red-1 { width: 440px; height: 440px; bottom: -80px; left: 160px; background: #991B1B; opacity: 0.26; }
+    .bokeh-green-1 { width: 500px; height: 500px; top: 30%; right: 40%; background: #059669; opacity: 0.16; }
+
+    /* Stars / Sparkles */
+    .star {
+      position: absolute;
+      color: #FDE047;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    /* Garland & Berries */
+    .holly {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-badge {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    .brand-text p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FBBF24;
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
+    .proto-badge {
+      text-align: right;
+    }
+    .proto-badge h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .proto-badge p {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #F59E0B;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Main Showcase Content */
+    .content-area {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 840px;
+    }
+
+    /* Left Decorative Column */
+    .left-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 90px;
+    }
+    .swatch-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .swatch-circle-row {
+      display: flex;
+      gap: 8px;
+    }
+    .swatch-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .swatch-pill {
+      width: 82px;
+      height: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .typography-badge {
+      display: flex;
+      gap: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-top: 6px;
+    }
+    .mini-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    /* Center Phones Area */
+    .phones-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+    }
+
+    /* Phone Device Mockup */
+    .phone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .screen-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(217, 119, 6, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE047;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .phone-device {
+      width: 375px;
+      height: 760px;
+      border-radius: 50px;
+      background: #09090B;
+      border: 10px solid #1E293B;
+      box-shadow: 
+        0 30px 80px -15px rgba(0, 0, 0, 0.85),
+        0 0 0 2px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 2px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+    }
+
+    /* Phone Screen Internal Viewports */
+    .screen-viewport {
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #0F172A;
+      position: relative;
+    }
+
+    /* Common Phone Screen Styles */
+    .phone-header {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 60%, #B91C1C 100%);
+      color: #FFFFFF;
+      padding: 44px 18px 16px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(127, 29, 29, 0.35);
+    }
+    .phone-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #D97706, #FBBF24, #D97706);
+    }
+    .phone-header .badge-festive {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(254, 240, 138, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      color: #FEF08A;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .phone-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .phone-header p {
+      font-size: 12px;
+      color: rgba(254, 226, 226, 0.9);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+    .phone-body {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: hidden;
+    }
+
+    /* Card System */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* SCREEN 7 SPECIFICS */
+    .toggle-control {
+      display: flex;
+      background: #E2E8F0;
+      padding: 3px;
+      border-radius: 12px;
+      gap: 4px;
+    }
+    .toggle-btn {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 7px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+    }
+    .toggle-btn.active {
+      background: #064E3B;
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .toggle-btn.inactive {
+      background: transparent;
+      color: #64748B;
+    }
+    .size-selector-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 12px;
+    }
+    .size-tag {
+      font-weight: 800;
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .drink-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .drink-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .drink-tag-festive {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    .drink-yield {
+      font-size: 10px;
+      font-weight: 700;
+      color: #059669;
+    }
+    .drink-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .drink-ingredients {
+      list-style: none;
+      font-size: 11px;
+      color: #475569;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .btn-add-list {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 10px;
+      background: #064E3B;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* SCREEN 8 SPECIFICS (DARK LUXURY TV MODE) */
+    .screen-tv-mode {
+      background: linear-gradient(180deg, #071E15 0%, #030F0A 100%);
+      color: #FFFFFF;
+    }
+    .tv-header {
+      padding: 40px 18px 14px;
+      text-align: center;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .tv-mode-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #FBBF24;
+      text-transform: uppercase;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 3px 12px;
+      border-radius: 12px;
+      margin-bottom: 4px;
+    }
+    .tv-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+    .tv-wheel-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      gap: 14px;
+    }
+    .wheel-card {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #DC2626 0%, #7F1D1D 70%, #450A0A 100%);
+      border: 6px solid #F59E0B;
+      box-shadow: 
+        0 0 35px rgba(245, 158, 11, 0.4),
+        inset 0 0 25px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+    }
+    .wheel-card .icon-fire {
+      font-size: 34px;
+      animation: pulse 2s infinite;
+    }
+    .wheel-card .action-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #FDE047;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .wheel-card .action-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-top: 4px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    .tv-games-box {
+      width: 100%;
+      background: rgba(6, 78, 59, 0.4);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    .tv-games-box .box-title {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #FBBF24;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tv-game-item {
+      font-size: 12px;
+      font-weight: 700;
+      color: #E2E8F0;
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-spin-wheel {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #D97706 0%, #B45309 60%, #92400E 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+      cursor: pointer;
+    }
+
+    /* SCREEN 9 SPECIFICS (VITRINE DE CADEADOS) */
+    .module-item {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .module-item.unlocked {
+      border-left: 5px solid #059669;
+    }
+    .module-item .info h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .module-item .info p {
+      font-size: 10px;
+      font-weight: 700;
+      color: #059669;
+      margin-top: 2px;
+    }
+    .locked-card {
+      background: #FFFBEB;
+      border: 1.5px solid #FCD34D;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+    }
+    .locked-card .info h4 {
+      font-size: 12px;
+      font-weight: 800;
+      color: #1E293B;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .locked-card .info p {
+      font-size: 10px;
+      color: #92400E;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+    .btn-unlock-bump {
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 7px 12px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 3px 8px rgba(180, 83, 9, 0.35);
+      white-space: nowrap;
+    }
+    .vip-bundle-card {
+      background: linear-gradient(135deg, #450A0A 0%, #7F1D1D 100%);
+      border-radius: 16px;
+      padding: 12px 14px;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #DC2626;
+      box-shadow: 0 4px 14px rgba(127, 29, 29, 0.4);
+      margin-top: auto;
+    }
+    .vip-bundle-card .info h4 {
+      font-size: 12px;
+      font-weight: 800;
+      color: #FDE047;
+    }
+    .vip-bundle-card .info p {
+      font-size: 10px;
+      color: #FECACA;
+      margin-top: 1px;
+    }
+    .btn-unlock-vip {
+      background: #F59E0B;
+      color: #000000;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+    }
+
+    /* Right Decorative Column */
+    .right-decor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 90px;
+    }
+    .icon-art {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .app-icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+      border: 2px solid #F59E0B;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-top: 20px;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-top: 1px solid rgba(245, 158, 11, 0.25);
+      padding-top: 14px;
+      font-size: 13px;
+      color: #A7F3D0;
+    }
+    .footer-pill-group {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-pill {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient festive background & lights -->
+  <div class="bg-canvas"></div>
+  <div class="bokeh bokeh-gold-1"></div>
+  <div class="bokeh bokeh-red-1"></div>
+  <div class="bokeh bokeh-green-1"></div>
+
+  <!-- Festive Star Sparkles -->
+  <svg class="star" style="top: 80px; left: 320px; width: 24px; height: 24px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="top: 150px; right: 260px; width: 28px; height: 28px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="bottom: 90px; left: 240px; width: 20px; height: 20px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+  <svg class="star" style="bottom: 120px; right: 380px; width: 22px; height: 22px;" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+
+  <!-- Holly Berries in Top Corners -->
+  <div class="holly" style="top: 20px; left: 30px;">
+    <svg width="60" height="60" viewBox="0 0 100 100">
+      <path d="M30,50 Q10,25 35,20 Q45,5 60,25 Q80,20 70,45 Q90,65 65,65 Q55,85 40,65 Q15,75 30,50 Z" fill="#0D5C3A" opacity="0.85"/>
+      <circle cx="48" cy="45" r="9" fill="#DC2626"/>
+      <circle cx="45" cy="42" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="62" cy="50" r="9" fill="#B91C1C"/>
+      <circle cx="59" cy="47" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="53" cy="60" r="9" fill="#EF4444"/>
+      <circle cx="50" cy="57" r="3" fill="#FFFFFF" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="holly" style="top: 20px; right: 40px; transform: scaleX(-1);">
+    <svg width="60" height="60" viewBox="0 0 100 100">
+      <path d="M30,50 Q10,25 35,20 Q45,5 60,25 Q80,20 70,45 Q90,65 65,65 Q55,85 40,65 Q15,75 30,50 Z" fill="#0D5C3A" opacity="0.85"/>
+      <circle cx="48" cy="45" r="9" fill="#DC2626"/>
+      <circle cx="45" cy="42" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="62" cy="50" r="9" fill="#B91C1C"/>
+      <circle cx="59" cy="47" r="3" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="53" cy="60" r="9" fill="#EF4444"/>
+      <circle cx="50" cy="57" r="3" fill="#FFFFFF" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="brand-block">
+      <div class="logo-badge">
+        <svg viewBox="0 0 100 100" width="64" height="64">
+          <line x1="25" y1="75" x2="75" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <line x1="25" y1="25" x2="75" y2="75" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <path d="M30,34 Q50,5 75,32 Q70,40 30,34 Z" fill="#DC2626"/>
+          <ellipse cx="50" cy="36" rx="26" ry="6" fill="#FFFFFF"/>
+          <circle cx="78" cy="34" r="7" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Mestre da Ceia & Churrasco</h1>
+        <p>Seu Fim de Ano sem Aperto! • Máquina de Monetização</p>
+      </div>
+    </div>
+    <div class="proto-badge">
+      <h2>PROTÓTIPO</h2>
+      <p>TELAS 7, 8 & 9 • MONETIZAÇÃO & UPSELL</p>
+    </div>
+  </header>
+
+  <!-- Main Showcase Content -->
+  <main class="content-area">
+
+    <!-- Left Decorative Column -->
+    <div class="left-decor">
+      <div class="swatch-group">
+        <div class="swatch-circle-row">
+          <div class="swatch-circle" style="background: #991B1B;"></div>
+          <div class="swatch-circle" style="background: #D97706;"></div>
+          <div class="swatch-circle" style="background: #EA580C;"></div>
+        </div>
+        <div class="swatch-pill" style="background: linear-gradient(135deg, #E2BA6F, #C28B38);"></div>
+        <div class="swatch-pill" style="background: #0F4A34;"></div>
+        <div class="swatch-pill" style="background: #DD6B20;"></div>
+      </div>
+      <div class="typography-badge">
+        <span>A</span>
+        <span>T</span>
+      </div>
+      <div class="mini-icon-box">🍸</div>
+      <div class="mini-icon-box">🎁</div>
+    </div>
+
+    <!-- Center 3 Smartphone Mockups -->
+    <div class="phones-wrapper">
+
+      <!-- ================= TELA 7 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 7 • Guia de Drinks (Bump 1)</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <div class="phone-header">
+              <span class="badge-festive">⚡ ORDER BUMP 1</span>
+              <h2>Drinks de Fim de Ano</h2>
+              <p>Modo Jarra & Cooler para Galera</p>
+            </div>
+            <div class="phone-body">
+              <!-- Switch Alcohol / Mocktail -->
+              <div class="toggle-control">
+                <button class="toggle-btn active">🍸 Com Álcool</button>
+                <button class="toggle-btn inactive">🍹 Sem Álcool (Kids)</button>
+              </div>
+
+              <!-- Batch Size Selector -->
+              <div class="size-selector-bar">
+                <span style="font-weight:700; color:#475569;">Volume do Lote:</span>
+                <span class="size-tag">Jarra 3 Litros (15 taças) ▾</span>
+              </div>
+
+              <!-- Drink 1 -->
+              <div class="drink-card">
+                <div class="drink-badge-row">
+                  <span class="drink-tag-festive">🎄 Favorito da Ceia</span>
+                  <span class="drink-yield">Custo: R$ 3,80/taça</span>
+                </div>
+                <h3 class="drink-title">Clericot Tropical de Espumante</h3>
+                <ul class="drink-ingredients">
+                  <li>• 2 Garrafas de Espumante Brut ou Moscatel</li>
+                  <li>• 300g Morangos + 2 Pêssegos + Uvas Verdes</li>
+                  <li>• 150ml Licor de Laranja (ou Suco Natural)</li>
+                </ul>
+                <button class="btn-add-list">
+                  <span>+</span> Somar Frutas na Lista de Compras
+                </button>
+              </div>
+
+              <!-- Drink 2 -->
+              <div class="drink-card" style="margin-top:auto;">
+                <div class="drink-badge-row">
+                  <span style="font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px; background:#DCFCE7; color:#15803D;">🍹 Família & Crianças</span>
+                  <span class="drink-yield">R$ 1,80/taça</span>
+                </div>
+                <h3 class="drink-title">Soda Italiana de Frutas Vermelhas</h3>
+                <p style="font-size:11px; color:#64748B; margin-top:2px;">Visual de coquetel sofisticado com água gasosa e xarope artesanal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TELA 8 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 8 • Jogos na TV & Sala (Upsell)</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport screen-tv-mode">
+            <div class="tv-header">
+              <span class="tv-mode-badge">📺 MODO TV / SALA DE ESTAR</span>
+              <h2>Amigo Secreto Roubado 🎁</h2>
+              <p style="font-size:11px; color:#A7F3D0; margin-top:2px;">Espelhe no celular ou na TV da sala</p>
+            </div>
+            <div class="phone-body" style="padding-top:10px;">
+              <!-- Central Wheel -->
+              <div class="tv-wheel-area">
+                <div class="wheel-card">
+                  <span class="icon-fire">🔥</span>
+                  <span class="action-label">Sorteio da Vez:</span>
+                  <p class="action-text">ROUBE QUALQUER PRESENTE JÁ ABERTO NA SALA!</p>
+                </div>
+              </div>
+
+              <!-- Suite Games Hub -->
+              <div class="tv-games-box">
+                <p class="box-title">Jogos Inclusos na Noite:</p>
+                <div class="tv-game-item"><span>🎯</span> Quiz Retrospectiva da Família</div>
+                <div class="tv-game-item"><span>🔎</span> Caça ao Tesouro das Crianças</div>
+                <div class="tv-game-item"><span>🥂</span> Bingo da Virada de Ano</div>
+              </div>
+
+              <!-- Action Spin -->
+              <button class="btn-spin-wheel">
+                🎲 GIRAR ROLETA PARA O PRÓXIMO
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TELA 9 ================= -->
+      <div class="phone-container">
+        <div class="screen-tag">Tela 9 • Hub c/ Vitrine de Cadeados</div>
+        <div class="phone-device">
+          <div class="dynamic-island"><div class="camera-lens"></div></div>
+          <div class="screen-viewport">
+            <div class="phone-header">
+              <span class="badge-festive">⭐ PAINEL MESTRE</span>
+              <h2>Olá, Organizador! 👋</h2>
+              <p>Churrasco da Família • 18 Pessoas</p>
+            </div>
+            <div class="phone-body">
+              <!-- Módulo Liberado 1 -->
+              <div class="module-item unlocked">
+                <div class="info">
+                  <h4>🥩 Calculadora & Lista Exata</h4>
+                  <p>✅ Acesso Liberado</p>
+                </div>
+                <span style="font-size:12px; font-weight:800; color:#64748B;">Abrir →</span>
+              </div>
+
+              <!-- Módulo Liberado 2 -->
+              <div class="module-item unlocked">
+                <div class="info">
+                  <h4>💸 Gerador de Rateio & Pix</h4>
+                  <p>✅ Acesso Liberado</p>
+                </div>
+                <span style="font-size:12px; font-weight:800; color:#64748B;">Abrir →</span>
+              </div>
+
+              <!-- Vitrine de Cadeados / Upsell In-App -->
+              <div style="font-size:10px; font-weight:900; letter-spacing:1px; color:#64748B; text-transform:uppercase; margin-top:4px;">
+                EXTRAS OPCIONAIS (1 CLIQUE):
+              </div>
+
+              <!-- Locked Item 1 -->
+              <div class="locked-card">
+                <div class="info">
+                  <h4>🔒 Calculadora de Drinks</h4>
+                  <p>15 Receitas de Jarra & Cooler</p>
+                </div>
+                <button class="btn-unlock-bump">+ R$ 9,90</button>
+              </div>
+
+              <!-- Locked Item 2 -->
+              <div class="locked-card">
+                <div class="info">
+                  <h4>🔒 Cronograma Anti-Caos</h4>
+                  <p>Checklist para não ficar no fogão</p>
+                </div>
+                <button class="btn-unlock-bump">+ R$ 12,90</button>
+              </div>
+
+              <!-- VIP Bundle -->
+              <div class="vip-bundle-card">
+                <div class="info">
+                  <h4>⚡ KIT VIP COMPLETO</h4>
+                  <p>Todos os módulos + Modo TV</p>
+                </div>
+                <button class="btn-unlock-vip">LIBERAR COM 40% OFF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Decorative Column -->
+    <div class="right-decor">
+      <div class="icon-art">🍹</div>
+      <div class="icon-art">🎯</div>
+      <div class="icon-art">🔒</div>
+      <div class="app-icon-badge">🎅</div>
+    </div>
+
+  </main>
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="color:#FBBF24;">✨</span>
+      <span>Máquina de Monetização Interna • Converte +20% dos Compradores Dentro do Próprio App</span>
+    </div>
+    <div class="footer-pill-group">
+      <span class="footer-pill" style="background:#7F1D1D; color:#FECACA;">🍹 Order Bump Drinks</span>
+      <span class="footer-pill" style="background:#064E3B; color:#A7F3D0;">📺 Upsell Sala de TV</span>
+      <span class="footer-pill" style="background:#B45309; color:#FEF3C7;">🔒 Trava de Cadeados</span>
+    </div>
+  </footer>
+
+</body>
+</html>
