@@ -7,3 +7,4 @@ videos/ugc_preview/
 videos/qa/
 *.mp4
 test_voice.mp3
+dist/
