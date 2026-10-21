@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Preview Perfil TikTok - Mestre da Ceia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1400px;
+      height: 1000px;
+      background: radial-gradient(circle at 50% 20%, #0F3426 0%, #061811 40%, #020906 80%, #000000 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #FFFFFF;
+    }
+
+    .phone-mockup {
+      width: 440px;
+      height: 900px;
+      background: #121212;
+      border-radius: 48px;
+      border: 6px solid #27272A;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 50px rgba(16, 185, 129, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .tiktok-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 3px solid #FEF08A;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+      object-fit: cover;
+    }
+
+    .video-card {
+      position: relative;
+      width: 100%;
+      height: 185px;
+      background: #18181B;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pin-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: #EF4444;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .views-counter {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Side details container */
+    .details-panel {
+      width: 820px;
+      margin-left: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card-info {
+      background: rgba(15, 52, 38, 0.6);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TikTok Smartphone Mockup -->
+  <div class="phone-mockup">
+    <!-- Top Bar -->
+    <div class="pt-6 px-6 pb-2 flex items-center justify-between text-zinc-300">
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+      <span class="font-bold text-sm tracking-wide">mestredaceiaoficial</span>
+      <div class="flex items-center gap-4">
+        <i class="fa-solid fa-bell text-lg"></i>
+        <i class="fa-solid fa-ellipsis text-lg"></i>
+      </div>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="px-6 pt-3 flex flex-col items-center text-center">
+      <!-- Avatar with Live/Plus Ring -->
+      <div class="relative">
+        <img src="../images/avatar-mascote-3d-pinca.png" class="tiktok-avatar" alt="Avatar TikTok" />
+        <div class="absolute bottom-0 right-0 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center border-2 border-[#121212]">
+          <i class="fa-solid fa-plus text-[10px] text-white"></i>
+        </div>
+      </div>
+
+      <!-- Handle & Name -->
+      <div class="mt-2.5">
+        <h2 class="font-extrabold text-base text-white flex items-center justify-center gap-1.5">
+          Mestre da Ceia & Churrasco 🥩
+          <span class="text-blue-400 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+        </h2>
+        <p class="text-zinc-400 text-xs font-medium">@mestredaceiaoficial</p>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="flex items-center justify-center gap-8 mt-4 text-center">
+        <div>
+          <div class="font-black text-sm text-white">38</div>
+          <div class="text-[11px] text-zinc-400">Seguindo</div>
+        </div>
+        <div class="w-[1px] h-6 bg-zinc-800"></div>
+        <div>
+          <div class="font-black text-sm text-white">42.8K</div>
+          <div class="text-[11px] text-zinc-400">Seguidores</div>
+        </div>
+        <div class="w-[1px] h-6 bg-zinc-800"></div>
+        <div>
+          <div class="font-black text-sm text-white">592.4K</div>
+          <div class="text-[11px] text-zinc-400">Curtidas</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 mt-4 w-full">
+        <button class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2.5 rounded-md shadow-md">
+          Seguir
+        </div>
+        <button class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs py-2.5 rounded-md">
+          Mensagem
+        </div>
+        <div class="w-9 h-9 bg-zinc-800 rounded-md flex items-center justify-center text-zinc-300">
+          <i class="fa-brands fa-instagram text-sm"></i>
+        </div>
+      </div>
+
+      <!-- Killer Bio (<80 Chars strictly respected!) -->
+      <div class="mt-4 text-left w-full px-1">
+        <p class="text-xs text-zinc-200 leading-snug font-medium">
+          Calculadora da Ceia sem calote 🥩🎄<br>
+          Lista de compras + Pix no Whats 👇
+        </p>
+        <a href="#" class="mt-2 text-xs font-bold text-gold-400 flex items-center gap-1.5 hover:underline">
+          <i class="fa-solid fa-link text-[10px]"></i>
+          <span>mestredaceia.com.br/natal</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Feed Tabs -->
+    <div class="flex items-center justify-around border-b border-zinc-800 mt-4 text-zinc-400 text-sm">
+      <div class="pb-2.5 text-white border-b-2 border-white w-1/3 flex justify-center">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+      <div class="pb-2.5 w-1/3 flex justify-center">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="pb-2.5 w-1/3 flex justify-center">
+        <i class="fa-regular fa-bookmark"></i>
+      </div>
+    </div>
+
+    <!-- UGC Video Grid (3 Pinned Creatives) -->
+    <div class="p-2 grid grid-cols-3 gap-1.5 overflow-hidden">
+      <!-- Video 1 -->
+      <div class="video-card">
+        <img src="../videos/mestre-da-ceia-ugc1-calote-familia-capa.jpg" alt="UGC 1" />
+        <div class="pin-badge"><i class="fa-solid fa-thumbtack text-[8px]"></i> Fixado</div>
+        <div class="views-counter"><i class="fa-solid fa-play text-[9px]"></i> 148.2K</div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-card">
+        <img src="../videos/mestre-da-ceia-ugc2-erro-acougue-capa.jpg" alt="UGC 2" />
+        <div class="pin-badge"><i class="fa-solid fa-thumbtack text-[8px]"></i> Fixado</div>
+        <div class="views-counter"><i class="fa-solid fa-play text-[9px]"></i> 94.6K</div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-card">
+        <img src="../videos/mestre-da-ceia-ugc3-anfitriao-relaxado-capa.jpg" alt="UGC 3" />
+        <div class="pin-badge"><i class="fa-solid fa-thumbtack text-[8px]"></i> Fixado</div>
+        <div class="views-counter"><i class="fa-solid fa-play text-[9px]"></i> 215.8K</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side Details Panel -->
+  <div class="details-panel">
+    <div class="card-info">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-3xl">🚀</span>
+        <div>
+          <h1 class="text-2xl font-black text-white font-heading">KIT COMPLETO DE LANÇAMENTO TIKTOK</h1>
+          <p class="text-emerald-300 text-sm font-semibold">Mestre da Ceia & Churrasco · Perfil Otimizado para Conversão</p>
+        </div>
+      </div>
+      <p class="text-zinc-300 text-sm leading-relaxed">
+        O TikTok possui a regra rígida de <strong>80 caracteres no campo de biografia</strong>. Preparamos o avatar oficial em PNG em alta definição (1024x1024), safe-zone circular e 4 opções de biografias apelativas formuladas para gerar cliques diretos no link da bio.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <!-- Box Avatars -->
+      <div class="bg-black/50 border border-emerald-500/30 rounded-2xl p-5">
+        <h3 class="text-gold-400 font-extrabold text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+          <span>🖼️</span> Avatares em PNG (1024x1024)
+        </h3>
+        <ul class="text-xs text-zinc-300 space-y-2">
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">1.</span>
+            <span><strong>Mascote 3D com Pinça:</strong> Expressão confiante, chapéu de Papai Noel e avental de pitmaster.</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">2.</span>
+            <span><strong>Mascote 3D Joinha:</strong> Conexão instantânea e simpatia para criador de conteúdo.</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">3.</span>
+            <span><strong>App Icon Oficial:</strong> Emblema dourado 3D com corte nobre, fogo e badge verificado.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Box Bio Rules -->
+      <div class="bg-black/50 border border-emerald-500/30 rounded-2xl p-5">
+        <h3 class="text-gold-400 font-extrabold text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+          <span>🎯</span> Estratégia de Bio & Fixados
+        </h3>
+        <ul class="text-xs text-zinc-300 space-y-2">
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span>
+            <span><strong>Limite Rigoroso:</strong> Menos de 80 caracteres para caber sem cortes no app.</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span>
+            <span><strong>Linha 1:</strong> Promessa imediata / Proposta Única de Valor.</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span>
+            <span><strong>Linha 2 + Seta:</strong> Chamada para ação apontando exatamente para o link.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mestre da Ceia & Churrasco - Web App Completo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -90,7 +92,12 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex flex-wrap items-center gap-3">
+        <div id="user-status-bar" class="hidden items-center gap-2 bg-black/50 px-3.5 py-2 rounded-xl border border-emerald-500/40 text-xs shadow-md">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="user-email-display" class="text-zinc-200 font-semibold font-mono">membro@email.com</span>
+          <button onclick="logoutMestre()" class="text-zinc-400 hover:text-red-400 ml-2 font-bold underline text-[11px] transition">Sair</button>
+        </div>
         <button onclick="setViewMode('phone')" id="btn-mode-phone" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-zinc-950 shadow">
           📱 Simulador Mobile
         </button>
@@ -773,8 +780,191 @@
     }
 
     function unlockModule(name, price) {
-      showToast(`Desbloqueando ${name} (+ R$ ${price}) no Checkout! 🔓`);
+      if (name.includes('Drink') || name.includes('15') || price == 9.9) {
+        window.open('https://buy.stripe.com/28E9AVcpu9fpcP99y31Jm04', '_blank');
+      } else if (name.includes('Anti-Caos') || name.includes('Horário') || price == 12.9) {
+        window.open('https://buy.stripe.com/eVqfZj616fDNcP94dJ1Jm05', '_blank');
+      } else {
+        window.open('https://buy.stripe.com/5kQ8wRblqajt5mHeSn1Jm03', '_blank');
+      }
     }
+
+    // =========================================================
+    // SISTEMA DE AUTENTICAÇÃO & PROTEÇÃO: SUPABASE + STRIPE
+    // =========================================================
+    const SUPABASE_URL = 'https://iurqyexfdlulmzsliyfg.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1cnF5ZXhmZGx1bG16c2xpeWZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDk3NjksImV4cCI6MjEwODE4NTc2OX0.sgN5qVZ0x8nOrpr_nTpzNkykgi47QpsIC8jrDeRnPcc';
+    
+    let supabaseClient = null;
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    async function initMestreAuth() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+
+      // 1. Se veio direto do Checkout do Stripe com session_id
+      if (sessionId) {
+        showAuthMessage('Validando sua compra no Stripe...', 'info');
+        try {
+          const resp = await fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+          const data = await resp.json();
+          if (data.success && data.user) {
+            localStorage.setItem('mestre_user', JSON.stringify({ email: data.user.email, name: data.user.name }));
+            grantAccess(data.user.email);
+            showToast('Pagamento confirmado! Bem-vindo ao Mestre da Ceia 🎅');
+            // Limpar query param da URL sem reload
+            window.history.replaceState({}, document.title, window.location.pathname);
+            return;
+          }
+        } catch (e) {
+          console.error('Erro na validação via session_id:', e);
+        }
+      }
+
+      // 2. Verificar se já há sessão salva localmente
+      const savedUser = localStorage.getItem('mestre_user');
+      if (savedUser) {
+        try {
+          const parsed = JSON.parse(savedUser);
+          if (parsed && parsed.email) {
+            grantAccess(parsed.email);
+            return;
+          }
+        } catch (e) {}
+      }
+
+      // 3. Se não autenticado, exibir modal de login
+      showLoginModal();
+    }
+
+    function showLoginModal() {
+      const modal = document.getElementById('auth-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function grantAccess(email) {
+      const modal = document.getElementById('auth-modal');
+      if (modal) modal.classList.add('hidden');
+
+      const statusBar = document.getElementById('user-status-bar');
+      const emailDisplay = document.getElementById('user-email-display');
+      if (statusBar && emailDisplay) {
+        emailDisplay.innerText = email;
+        statusBar.classList.remove('hidden');
+        statusBar.classList.add('flex');
+      }
+    }
+
+    function logoutMestre() {
+      localStorage.removeItem('mestre_user');
+      if (supabaseClient) {
+        supabaseClient.auth.signOut().catch(() => {});
+      }
+      location.reload();
+    }
+
+    function showAuthMessage(msg, type) {
+      const el = document.getElementById('auth-msg');
+      if (!el) return;
+      el.classList.remove('hidden', 'text-red-400', 'text-emerald-400', 'text-amber-400');
+      if (type === 'error') el.classList.add('text-red-400');
+      else if (type === 'success') el.classList.add('text-emerald-400');
+      else el.classList.add('text-amber-400');
+      el.innerText = msg;
+    }
+
+    async function handleMestreLogin(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('auth-email');
+      const submitBtn = document.getElementById('auth-submit-btn');
+      if (!emailInput) return;
+
+      const email = emailInput.value.trim().toLowerCase();
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Verificando acesso...</span> ⏳';
+      showAuthMessage('Consultando cadastro no banco de compradores...', 'info');
+
+      try {
+        // Consultar tabela de compradores no Supabase
+        if (supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('usuarios_acesso')
+            .select('*')
+            .eq('email', email)
+            .maybeSingle();
+
+          if (data && data.has_access) {
+            localStorage.setItem('mestre_user', JSON.stringify({ email: data.email, nome: data.nome }));
+            grantAccess(data.email);
+            showToast('Acesso liberado com sucesso! 🚀');
+            return;
+          }
+        }
+
+        // Se a tabela ainda não foi criada no Supabase ou e-mail não encontrado
+        showAuthMessage('Nenhuma compra ativa encontrada para este e-mail. Se acabou de pagar, aguarde 1 minuto ou adquira abaixo.', 'error');
+      } catch (err) {
+        console.error('Erro de login:', err);
+        showAuthMessage('Erro ao verificar acesso. Tente novamente em instantes.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>ENTRAR NO WEB APP</span> 🚀';
+      }
+    }
+
+    // Inicializar verificação assim que carregar
+    window.addEventListener('DOMContentLoaded', initMestreAuth);
+  </script>
+
+  <!-- ========================================================= -->
+  <!-- MODAL DE LOGIN / PROTEÇÃO DE ACESSO (SUPABASE + STRIPE)   -->
+  <!-- ========================================================= -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-gradient-to-b from-[#0F3426] via-[#061811] to-[#020906] border-2 border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-center relative overflow-hidden">
+      <!-- Glow Decor -->
+      <div class="absolute -top-16 -right-16 w-40 h-40 bg-red-600/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -left-16 w-40 h-40 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Icon -->
+      <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 border-2 border-amber-400 flex items-center justify-center text-4xl shadow-xl">
+        🎅
+      </div>
+
+      <span class="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-[10px] uppercase tracking-widest mb-2 border border-amber-500/30">
+        ÁREA EXCLUSIVA DE MEMBROS
+      </span>
+      <h2 class="text-2xl font-black text-white font-heading">Acesse o Web App Oficial</h2>
+      <p class="text-xs text-zinc-300 mt-1 mb-6">
+        Digite o <strong>e-mail cadastrado na compra</strong> para liberar o seu acesso ilimitado.
+      </p>
+
+      <!-- Form -->
+      <form id="auth-form" onsubmit="handleMestreLogin(event)" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1.5">Seu E-mail da Compra:</label>
+          <input type="email" id="auth-email" required placeholder="exemplo@gmail.com" class="w-full bg-black/60 border border-white/20 focus:border-amber-400 focus:outline-none rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 transition">
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="w-full py-3.5 px-6 rounded-xl font-heading font-black text-sm uppercase tracking-wider bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-zinc-950 hover:brightness-110 transition shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+          <span>ENTRAR NO WEB APP</span> 🚀
+        </button>
+
+        <div id="auth-msg" class="text-xs text-center font-medium mt-2 hidden"></div>
+      </form>
+
+      <!-- Divider -->
+      <div class="mt-6 pt-5 border-t border-white/10 text-xs text-zinc-400">
+        <p>Ainda não comprou o Mestre da Ceia?</p>
+        <a href="https://buy.stripe.com/dRm6oJ1KQ4Z9eXhfWr1Jm00" target="_blank" class="inline-block mt-2 text-amber-400 font-bold hover:underline">
+          👉 Quero Adquirir Meu Acesso por R$ 19,90
+        </a>
+      </div>
+    </div>
+  </div>
   </script>
 </body>
 </html>

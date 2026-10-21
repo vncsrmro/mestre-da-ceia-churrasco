@@ -653,7 +653,7 @@
         </p>
 
         <!-- CTA Button -->
-        <a id="main-checkout-btn" href="https://pay.kiwify.com.br/EXEMPLO" data-checkout-link class="btn-cta-pulse mt-6 block w-full py-4 px-8 rounded-2xl font-heading font-black text-lg md:text-xl uppercase tracking-wider text-center shadow-2xl">
+        <a id="main-checkout-btn" href="https://buy.stripe.com/dRm6oJ1KQ4Z9eXhfWr1Jm00" data-checkout-link class="btn-cta-pulse mt-6 block w-full py-4 px-8 rounded-2xl font-heading font-black text-lg md:text-xl uppercase tracking-wider text-center shadow-2xl">
           QUERO MEU ACESSO IMEDIATO POR R$ <span class="price-btn-text">19,90</span> 🚀
         </a>
 
@@ -808,8 +808,8 @@
       <button onclick="toggleProducerPanel()" class="text-zinc-400 hover:text-white">&times;</button>
     </div>
     <div>
-      <label class="block text-zinc-400 mb-1">Link de Checkout Kiwify/Hotmart:</label>
-      <input type="text" id="producer-checkout-input" value="https://pay.kiwify.com.br/EXEMPLO" class="w-full bg-black p-2 rounded border border-white/20 text-white font-mono text-xs">
+      <label class="block text-zinc-400 mb-1">Link de Checkout Stripe:</label>
+      <input type="text" id="producer-checkout-input" value="https://buy.stripe.com/dRm6oJ1KQ4Z9eXhfWr1Jm00" class="w-full bg-black p-2 rounded border border-white/20 text-white font-mono text-xs">
     </div>
     <button onclick="applyProducerCheckout()" class="w-full py-2 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold">
       Salvar Link nos Botões
@@ -1019,6 +1019,26 @@
         el.innerText = basePrice.toFixed(2).replace('.', ',');
       });
       document.getElementById('sticky-price').innerText = basePrice.toFixed(2).replace('.', ',');
+
+      // Mapeamento dinâmico de links da Stripe com base nos Upsells / Order Bumps selecionados
+      const stripeLinks = {
+        base: 'https://buy.stripe.com/dRm6oJ1KQ4Z9eXhfWr1Jm00',
+        drinks: 'https://buy.stripe.com/dRm14pfBGgHRaH17pV1Jm01',
+        anticaos: 'https://buy.stripe.com/dRm6oJexCdvF16rbGb1Jm02',
+        vip: 'https://buy.stripe.com/5kQ8wRblqajt5mHeSn1Jm03'
+      };
+
+      let selectedLink = stripeLinks.base;
+      if (hasDrinks && hasAntiCaos) {
+        selectedLink = stripeLinks.vip;
+      } else if (hasDrinks) {
+        selectedLink = stripeLinks.drinks;
+      } else if (hasAntiCaos) {
+        selectedLink = stripeLinks.anticaos;
+      }
+
+      const mainBtn = document.getElementById('main-checkout-btn');
+      if (mainBtn) mainBtn.href = selectedLink;
     }
 
     // 6. Barra Fixa Inferior (Sticky Bar no Scroll)
