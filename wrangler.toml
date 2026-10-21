@@ -1,0 +1,11 @@
+name = "mestre-da-ceia"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "dist"
+
+[[kv_namespaces]]
+binding = "TIKTOK_TRACKING"
+id = "ebe3cbc84c154b378144961ac3de67fb"
+
+[[kv_namespaces]]
+binding = "STRIPE_EVENTS"
+id = "9646ad6612cb4eae94c84af4cdd8a922"

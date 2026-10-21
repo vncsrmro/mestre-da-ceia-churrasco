@@ -34,7 +34,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     var link = event.target instanceof Element ? event.target.closest('a[href]') : null;
     if (!link) return;
     var url = new URL(link.href, window.location.href);
-    if (url.origin !== 'https://buy.stripe.com' || url.pathname !== '/7sYaEZexC2R1cP96lR1Jm06') return;
+    if (url.origin !== 'https://buy.stripe.com') return;
     if (Date.now() - lastClick < 1500) return;
     lastClick = Date.now();
     ttq.track('InitiateCheckout', product);

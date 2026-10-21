@@ -197,22 +197,99 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 (function () {
   if (window.__mestreCeiaTikTokEvents || !window.ttq) return;
   window.__mestreCeiaTikTokEvents = true;
+
   var product = {
     contents: [{content_id: 'mestre-da-ceia', content_type: 'product', content_name: 'Mestre da Ceia & Churrasco'}],
     value: 19.90,
     currency: 'BRL'
   };
+
   ttq.track('ViewContent', product);
+
+  // 1. Capturar ou recuperar ttclid da URL
+  var urlParams = new URLSearchParams(window.location.search);
+  var ttclid = urlParams.get('ttclid');
+  if (ttclid) {
+    try { sessionStorage.setItem('ttclid', ttclid); } catch (e) {}
+  } else {
+    try { ttclid = sessionStorage.getItem('ttclid') || ''; } catch (e) {}
+  }
+
+  // 2. Capturar cookie _ttp gerado pelo Pixel do TikTok
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : '';
+  }
+
+  // 3. Obter ou gerar client_reference_id persistente na sessão do navegador
+  var refKey = '__mestre_ref_id';
+  var clientRef = '';
+  try { clientRef = sessionStorage.getItem(refKey); } catch (e) {}
+  if (!clientRef) {
+    clientRef = 'ref_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now().toString(36);
+    try { sessionStorage.setItem(refKey, clientRef); } catch (e) {}
+  }
+  window.__mestreClientRef = clientRef;
+
+  // 4. Salvar associação de atribuição no servidor (/api/track-session) para recuperação no Webhook
+  function syncTracking() {
+    var ttp = getCookie('_ttp');
+    var payload = { ref: clientRef, ttclid: ttclid || '', ttp: ttp || '' };
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/track-session', new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+    } else {
+      fetch('/api/track-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () {});
+    }
+  }
+
+  syncTracking();
+  setTimeout(syncTracking, 2000);
+
+  // 5. Função utilitária para acrescentar client_reference_id ao link do Stripe
+  function appendClientRef(urlStr) {
+    if (!urlStr) return urlStr;
+    try {
+      var u = new URL(urlStr, window.location.href);
+      if (u.origin === 'https://buy.stripe.com') {
+        u.searchParams.set('client_reference_id', clientRef);
+        return u.toString();
+      }
+    } catch (e) {}
+    return urlStr;
+  }
+  window.__appendClientRef = appendClientRef;
+
+  // Atualizar links da Stripe existentes no DOM
+  function updateAllCheckoutLinks() {
+    document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function (a) {
+      a.href = appendClientRef(a.href);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateAllCheckoutLinks);
+  } else {
+    updateAllCheckoutLinks();
+  }
+
+  // 6. Listener de clique com InitiateCheckout e garantia de client_reference_id
   var lastClick = 0;
   document.addEventListener('click', function (event) {
     var link = event.target instanceof Element ? event.target.closest('a[href]') : null;
     if (!link) return;
     var url = new URL(link.href, window.location.href);
-    if (url.origin !== 'https://buy.stripe.com' || url.pathname !== '/7sYaEZexC2R1cP96lR1Jm06') return;
+    if (url.origin !== 'https://buy.stripe.com') return;
+
+    link.href = appendClientRef(link.href);
+
     if (Date.now() - lastClick < 1500) return;
     lastClick = Date.now();
     ttq.track('InitiateCheckout', product);
-  });
+  }, true);
 })();
 </script>
 </head>
@@ -1061,10 +1138,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
       // Mapeamento dinâmico de links da Stripe com base nos Upsells / Order Bumps selecionados
       const stripeLinks = {
-        base: 'https://buy.stripe.com/7sYaEZexC2R1cP96lR1Jm06', // Checkout Unificado c/ Order Bumps nativos
-        drinks: 'https://buy.stripe.com/dRm14pfBGgHRaH17pV1Jm01',
-        anticaos: 'https://buy.stripe.com/dRm6oJexCdvF16rbGb1Jm02',
-        vip: 'https://buy.stripe.com/5kQ8wRblqajt5mHeSn1Jm03'
+        base: 'https://buy.stripe.com/7sYaEZexC2R1cP96lR1Jm06', // 100% Pix Unificado c/ Order Bumps nativos
+        drinks: 'https://buy.stripe.com/28E7sN6164Z9dTd9y31Jm08',
+        anticaos: 'https://buy.stripe.com/eVq5kFblqezJ5mH8tZ1Jm09',
+        vip: 'https://buy.stripe.com/28E9AVgFKezJ5mHaC71Jm0a'
       };
 
       let selectedLink = stripeLinks.base;
@@ -1077,7 +1154,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       }
 
       const mainBtn = document.getElementById('main-checkout-btn');
-      if (mainBtn) mainBtn.href = selectedLink;
+      if (mainBtn) mainBtn.href = window.__appendClientRef ? window.__appendClientRef(selectedLink) : selectedLink;
     }
 
     // 6. Barra Fixa Inferior (Sticky Bar no Scroll)
