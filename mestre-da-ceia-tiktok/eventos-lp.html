@@ -1,0 +1,23 @@
+<!-- Inserir depois do código base, apenas na LP do produto. Executar junto ao consentimento do pixel. -->
+<script>
+(function () {
+  if (window.__mestreCeiaTikTokEvents || !window.ttq) return;
+  window.__mestreCeiaTikTokEvents = true;
+  var product = {
+    contents: [{content_id: 'mestre-da-ceia', content_type: 'product', content_name: 'Mestre da Ceia & Churrasco'}],
+    value: 19.90,
+    currency: 'BRL'
+  };
+  ttq.track('ViewContent', product);
+  var lastClick = 0;
+  document.addEventListener('click', function (event) {
+    var link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+    if (!link) return;
+    var url = new URL(link.href, window.location.href);
+    if (url.origin !== 'https://buy.stripe.com' || url.pathname !== '/7sYaEZexC2R1cP96lR1Jm06') return;
+    if (Date.now() - lastClick < 1500) return;
+    lastClick = Date.now();
+    ttq.track('InitiateCheckout', product);
+  });
+})();
+</script>

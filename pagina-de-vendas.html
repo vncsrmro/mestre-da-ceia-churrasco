@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('DBCJB9BC77U4J2JQ94IG');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mestre da Ceia & Churrasco — Seu Fim de Ano sem Aperto! | Aplicativo Oficial</title>
@@ -1066,6 +1077,44 @@
         toggleProducerPanel();
       }
     }
+  </script>
+  <!-- TikTok Pixel: eventos da LP (ViewContent + InitiateCheckout) -->
+  <script>
+  (function () {
+    if (window.__mestreCeiaTikTokEvents || !window.ttq) return;
+    window.__mestreCeiaTikTokEvents = true;
+    var BASE = { id: 'mestre-da-ceia', name: 'Mestre da Ceia & Churrasco', price: 19.90 };
+    var BUMPS = [
+      { el: 'bump-drinks', id: 'guia-drinks', name: 'Guia de Drinks em Jarra & Cooler', price: 9.90 },
+      { el: 'bump-anti-caos', id: 'cronograma-anti-caos', name: 'Cronograma Horário Anti-Caos', price: 12.90 }
+    ];
+    function buildPayload(includeBumps) {
+      var contents = [{ content_id: BASE.id, content_type: 'product', content_name: BASE.name, price: BASE.price, quantity: 1 }];
+      var value = BASE.price;
+      if (includeBumps) {
+        BUMPS.forEach(function (b) {
+          var box = document.getElementById(b.el);
+          if (box && box.checked) {
+            contents.push({ content_id: b.id, content_type: 'product', content_name: b.name, price: b.price, quantity: 1 });
+            value += b.price;
+          }
+        });
+      }
+      return { contents: contents, value: Math.round(value * 100) / 100, currency: 'BRL' };
+    }
+    ttq.track('ViewContent', buildPayload(false));
+    var lastClick = 0;
+    document.addEventListener('click', function (event) {
+      var link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+      if (!link) return;
+      var url;
+      try { url = new URL(link.href, window.location.href); } catch (e) { return; }
+      if (url.origin !== 'https://buy.stripe.com') return;
+      if (Date.now() - lastClick < 1500) return;
+      lastClick = Date.now();
+      ttq.track('InitiateCheckout', buildPayload(true));
+    });
+  })();
   </script>
 </body>
 </html>

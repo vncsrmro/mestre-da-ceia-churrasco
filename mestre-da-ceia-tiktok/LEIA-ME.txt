@@ -1,0 +1,74 @@
+MESTRE DA CEIA — INSTALAÇÃO TIKTOK / STRIPE
+
+Conta de anúncios: Mestre da Ceia - Brasil | 7699238599585267713
+Central de Negócios: Mestre da Ceia | 7699239035205615668
+Pixel: Mestre da Ceia - Site e Stripe | DBCJB9BC77U4J2JQ94IG
+Site: https://mestredaceia.romei.ro/
+Checkout: https://buy.stripe.com/7sYaEZexC2R1cP96lR1Jm06
+Payment Link Stripe: plink_1UT6WlRefo3PGHeaqSdbzLLe
+
+ESTADO
+Conta e pixel criados. Código ainda NÃO instalado nem validado no site.
+Nenhuma campanha publicada. Pagamento dos anúncios não configurado.
+Não basta colar o pixel para medir compras pagas no checkout hospedado do Stripe.
+
+1. INSTALAÇÃO NA LP
+Inserir pixel-base.html uma vez no <head>, respeitando a gestão de consentimento do site.
+Adicionar eventos-lp.html depois do código base, somente na LP do produto.
+O segundo arquivo envia ViewContent e InitiateCheckout ao clicar no link atual do Stripe.
+Se o site usa botões com navegação via JavaScript em vez de links <a href>, chamar
+ttq.track('InitiateCheckout', {contents:[{content_id:'mestre-da-ceia',content_type:'product',content_name:'Mestre da Ceia & Churrasco'}],value:19.90,currency:'BRL'})
+no manipulador existente que realmente abre o checkout. Não manter os dois mecanismos no mesmo botão.
+Atualizar preço/link se a oferta mudar. Não colar modelos do TikTok que disparem todos os eventos ao carregar a página.
+
+2. COMPRA CONFIRMADA PELO STRIPE — IMPLEMENTAÇÃO NO SERVIDOR
+Criar endpoint HTTPS próprio e um destino de webhook específico para Mestre da Ceia.
+Não alterar os destinos de outros produtos existentes na conta Stripe.
+Receber checkout.session.completed e checkout.session.async_payment_succeeded.
+Verificar assinatura Stripe usando corpo bruto e segredo do webhook.
+Filtrar session.payment_link pelo Payment Link acima; ignorar outros produtos desta conta.
+Somente enviar Purchase quando session.payment_status === 'paid'.
+Usar amount_total / 100 e currency em maiúsculas para o valor real, incluindo adicionais/descontos.
+Usar line_items do Stripe para discriminar produtos quando necessário.
+Usar ID estável de evento (ex.: 'stripe_purchase_' + session.id) e persistência/idempotência
+para não duplicar compras em retries nem entre os dois tipos de webhook.
+Enviar para o pixel DBCJB9BC77U4J2JQ94IG pela TikTok Events API, evento Purchase.
+Gerar/configurar token da Events API exclusivamente no servidor; nunca colocar token,
+chave secreta Stripe ou segredo de webhook no HTML, JavaScript público ou repositório.
+O endpoint, o token e o código do servidor ainda dependem do desenvolvedor/hospedagem.
+
+ATRIBUIÇÃO
+Guardar ttclid e _ttp, quando disponíveis e consentidos, junto de uma referência opaca
+do visitante. Passar essa referência no client_reference_id do Payment Link e recuperar
+os dados correspondentes no webhook. Não colocar dados pessoais ou segredos na URL.
+Não usar IP/user-agent do webhook Stripe como se fossem do comprador.
+Só transmitir identificadores e dados de clientes conforme consentimento/base aplicável.
+Sem ligação entre visita e sessão paga, a medição de atribuição pode ficar incompleta.
+
+NÃO DISPARAR PURCHASE
+Ao abrir a LP, clicar em Comprar, gerar Pix não pago, abrir a página de obrigado,
+ou apenas acrescentar ?success=true. O webhook de pagamento confirmado é a fonte.
+Se houver Purchase também no navegador, usar o mesmo event_id para deduplicação.
+
+3. VALIDAÇÃO APÓS DEPLOY
+Abrir a LP com Pixel Helper e confirmar PageView/ViewContent uma vez.
+Clicar no CTA e confirmar InitiateCheckout uma vez.
+Usar ambiente de teste Stripe e Test Events do TikTok para validar a integração.
+Confirmar: pagamento pendente/falhado não envia Purchase; pago envia um; reenvio
+do webhook não duplica. Testes não são vendas reais nem garantem ativação para otimização.
+Depois conferir eventos reais e diagnóstico no Gerenciador de Eventos.
+
+PENDÊNCIAS OBSERVADAS
+Stripe mostrava Card, Apple Pay e Link; Pix não apareceu na lista examinada,
+embora a LP anuncie Pix. Conferir disponibilidade/configuração antes de anunciar.
+A conta TikTok recém-criada mostrou aviso de contrato ainda não ativo; revisar status
+e concluir faturamento antes da veiculação. Não houve publicação de campanha.
+
+DOCUMENTAÇÃO
+https://ads.tiktok.com/help/article/website-data-connection-setup-methods?lang=en
+https://ads.tiktok.com/help/article/event-deduplication?lang=en
+https://docs.stripe.com/payments/checkout/fulfill-orders
+https://docs.stripe.com/payment-links/url-parameters
+
+Este pacote contém código de navegador pronto para adaptar e instruções de servidor.
+Não é uma integração Stripe/Events API já implantada.

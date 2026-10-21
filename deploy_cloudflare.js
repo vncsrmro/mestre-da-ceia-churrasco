@@ -43,10 +43,11 @@ copyFolderSync(path.join(root, 'images'), path.join(dist, 'images'));
 copyFolderSync(path.join(root, 'boards'), path.join(dist, 'boards'));
 
 // Cloudflare Pages Redirects
+// Pages já serve /app e /pagina-de-vendas nativamente (URLs limpas).
+// Reescrever para *.html causa loop 308, então usamos apenas redirecionamentos de atalho.
 const redirectsContent = `
-/app /app.html 200
-/vendas /pagina-de-vendas.html 200
-/login /app.html 200
+/vendas /pagina-de-vendas 301
+/login /app 301
 `;
 fs.writeFileSync(path.join(dist, '_redirects'), redirectsContent.trim());
 console.log('✓ Criado _redirects');
