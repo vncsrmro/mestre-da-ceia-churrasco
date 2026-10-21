@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Capas de Produtos Stripe - Mestre da Ceia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    .cover-card {
+      width: 1200px;
+      height: 1200px;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 60px 70px 60px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+    }
+  </style>
+</head>
+<body style="background: #000; display: flex; flex-direction: column; gap: 40px; padding: 40px;">
+
+  <!-- ======================================================== -->
+  <!-- CAPA 1: MESTRE DA CEIA & CHURRASCO (APP OFICIAL)        -->
+  <!-- ======================================================== -->
+  <div id="cover-mestre" class="cover-card" style="background: radial-gradient(circle at 50% 35%, #104A34 0%, #061F15 45%, #020906 85%, #000 100%); border: 12px solid #F59E0B;">
+    <!-- Ambient Glow Orbs -->
+    <div style="position: absolute; top: 15%; left: 15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, transparent 70%); filter: blur(70px);"></div>
+    <div style="position: absolute; bottom: 15%; right: 15%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%); filter: blur(80px);"></div>
+    <div style="position: absolute; top: 5%; right: 10%; font-size: 80px; color: #FDE047; text-shadow: 0 0 30px #F59E0B;">★</div>
+    <div style="position: absolute; bottom: 8%; left: 10%; font-size: 60px; color: #34D399; text-shadow: 0 0 25px #059669;">✦</div>
+
+    <!-- Top Badge -->
+    <div style="position: relative; z-index: 10; background: linear-gradient(135deg, #EF4444 0%, #991B1B 100%); border: 3px solid #FEF08A; border-radius: 9999px; padding: 12px 42px; display: flex; align-items: center; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(239,68,68,0.6);">
+      <span style="font-size: 28px;">🎅</span>
+      <span style="color: #FFF; font-size: 24px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;">WEB APP OFICIAL • 100% INTELIGENTE</span>
+    </div>
+
+    <!-- Center 3D Mascot / Hero Elements -->
+    <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+      <div style="position: relative; width: 440px; height: 440px; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; width: 400px; height: 400px; border-radius: 50%; background: linear-gradient(145deg, #164E3A 0%, #030E09 100%); border: 8px solid #F59E0B; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 80px rgba(245, 158, 11, 0.4), inset 0 0 50px rgba(245, 158, 11, 0.2);"></div>
+        <img src="../images/avatar-mascote-3d-pinca.png" style="width: 380px; height: 380px; border-radius: 50%; object-fit: cover; z-index: 5; position: relative;" alt="Mascote 3D" />
+        <div style="position: absolute; bottom: -10px; right: -20px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🥩</div>
+        <div style="position: absolute; bottom: -10px; left: -20px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🍗</div>
+      </div>
+    </div>
+
+    <!-- Bottom Typography & Value Props -->
+    <div style="position: relative; z-index: 10; text-align: center; width: 100%;">
+      <h1 style="font-size: 82px; font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-transform: uppercase; background: linear-gradient(180deg, #FFFFFF 0%, #FEF08A 40%, #F59E0B 75%, #B45309 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));">
+        MESTRE DA CEIA
+      </h1>
+      <h2 style="font-size: 42px; font-weight: 900; letter-spacing: 8px; color: #FFFFFF; text-shadow: 0 5px 20px rgba(0,0,0,0.9), 0 0 30px rgba(16, 185, 129, 0.8); margin-top: 4px; text-transform: uppercase;">
+        & CHURRASCO
+      </h2>
+      <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; color: #D1FAE5; font-weight: 600; margin-top: 14px; text-shadow: 0 3px 10px rgba(0,0,0,0.8);">
+        Cálculo Exato por Grama • Rateio no WhatsApp • Zero Calote
+      </p>
+
+      <!-- Price Footer Pill -->
+      <div style="display: inline-flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.75); border: 2px solid #F59E0B; border-radius: 9999px; padding: 12px 40px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+        <span style="color: #FDE047; font-size: 24px; font-weight: 900; letter-spacing: 2px;">ACESSO VITALÍCIO</span>
+        <span style="color: #64748B; font-size: 24px;">•</span>
+        <span style="color: #FFFFFF; font-size: 32px; font-weight: 900;">R$ 19,90</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- CAPA 2: GUIA DE DRINKS EM JARRA & COOLER                 -->
+  <!-- ======================================================== -->
+  <div id="cover-drinks" class="cover-card" style="background: radial-gradient(circle at 50% 35%, #3B0713 0%, #1F040A 45%, #0B0104 85%, #000 100%); border: 12px solid #F43F5E;">
+    <div style="position: absolute; top: 15%; left: 15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(244, 63, 94, 0.4) 0%, transparent 70%); filter: blur(70px);"></div>
+    <div style="position: absolute; bottom: 15%; right: 15%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%); filter: blur(80px);"></div>
+    <div style="position: absolute; top: 5%; right: 10%; font-size: 80px; color: #FDA4AF; text-shadow: 0 0 30px #F43F5E;">✨</div>
+    <div style="position: absolute; bottom: 8%; left: 10%; font-size: 60px; color: #FDE047; text-shadow: 0 0 25px #D97706;">🍹</div>
+
+    <!-- Top Badge -->
+    <div style="position: relative; z-index: 10; background: linear-gradient(135deg, #F43F5E 0%, #9F1239 100%); border: 3px solid #FECDD3; border-radius: 9999px; padding: 12px 42px; display: flex; align-items: center; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(244,63,94,0.6);">
+      <span style="font-size: 28px;">🍹</span>
+      <span style="color: #FFF; font-size: 24px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;">UPSELL VIP • 15 RECEITAS FESTIVAS</span>
+    </div>
+
+    <!-- Center Drinks Hero Graphic -->
+    <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+      <div style="position: relative; width: 440px; height: 440px; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; width: 400px; height: 400px; border-radius: 50%; background: linear-gradient(145deg, #4C0519 0%, #1A0208 100%); border: 8px solid #FB7185; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 80px rgba(244, 63, 94, 0.4), inset 0 0 50px rgba(244, 63, 94, 0.3);"></div>
+        <div style="font-size: 240px; line-height: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); position: relative; z-index: 5;">
+          🍹
+        </div>
+        <div style="position: absolute; top: 10px; right: -10px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🍾</div>
+        <div style="position: absolute; bottom: 10px; left: -10px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🍓</div>
+        <div style="position: absolute; bottom: 20px; right: 10px; font-size: 90px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🧊</div>
+      </div>
+    </div>
+
+    <!-- Bottom Typography & Value Props -->
+    <div style="position: relative; z-index: 10; text-align: center; width: 100%;">
+      <h1 style="font-size: 72px; font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-transform: uppercase; background: linear-gradient(180deg, #FFFFFF 0%, #FFE4E6 40%, #FB7185 75%, #BE123C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));">
+        GUIA DE DRINKS
+      </h1>
+      <h2 style="font-size: 38px; font-weight: 900; letter-spacing: 6px; color: #FFFFFF; text-shadow: 0 5px 20px rgba(0,0,0,0.9), 0 0 30px rgba(244, 63, 94, 0.8); margin-top: 4px; text-transform: uppercase;">
+        EM JARRA & COOLER
+      </h2>
+      <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; color: #FECDD3; font-weight: 600; margin-top: 14px; text-shadow: 0 3px 10px rgba(0,0,0,0.8);">
+        Clericot com Espumante • Gin Tropical • R$ 1,80/Taça
+      </p>
+
+      <!-- Price Footer Pill -->
+      <div style="display: inline-flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.75); border: 2px solid #FB7185; border-radius: 9999px; padding: 12px 40px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+        <span style="color: #FECDD3; font-size: 24px; font-weight: 900; letter-spacing: 2px;">VALOR ESPECIAL</span>
+        <span style="color: #64748B; font-size: 24px;">•</span>
+        <span style="color: #FFFFFF; font-size: 32px; font-weight: 900;">+ R$ 9,90</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- CAPA 3: CRONOGRAMA HORÁRIO ANTI-CAOS                     -->
+  <!-- ======================================================== -->
+  <div id="cover-anticaos" class="cover-card" style="background: radial-gradient(circle at 50% 35%, #082F49 0%, #031826 45%, #010A10 85%, #000 100%); border: 12px solid #0EA5E9;">
+    <div style="position: absolute; top: 15%; left: 15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 70%); filter: blur(70px);"></div>
+    <div style="position: absolute; bottom: 15%; right: 15%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%); filter: blur(80px);"></div>
+    <div style="position: absolute; top: 5%; right: 10%; font-size: 80px; color: #BAE6FD; text-shadow: 0 0 30px #0EA5E9;">⏱️</div>
+    <div style="position: absolute; bottom: 8%; left: 10%; font-size: 60px; color: #38BDF8; text-shadow: 0 0 25px #0284C7;">✨</div>
+
+    <!-- Top Badge -->
+    <div style="position: relative; z-index: 10; background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%); border: 3px solid #BAE6FD; border-radius: 9999px; padding: 12px 42px; display: flex; align-items: center; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(14,165,233,0.6);">
+      <span style="font-size: 28px;">⏱️</span>
+      <span style="color: #FFF; font-size: 24px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;">MÉTODO DO ANFITRIÃO RELAXADO</span>
+    </div>
+
+    <!-- Center Hero Graphic -->
+    <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+      <div style="position: relative; width: 440px; height: 440px; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; width: 400px; height: 400px; border-radius: 50%; background: linear-gradient(145deg, #0C4A6E 0%, #031B2B 100%); border: 8px solid #38BDF8; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 80px rgba(14, 165, 233, 0.4), inset 0 0 50px rgba(14, 165, 233, 0.3);"></div>
+        <div style="font-size: 220px; line-height: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); position: relative; z-index: 5;">
+          ⏱️
+        </div>
+        <div style="position: absolute; top: 10px; right: -15px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🍷</div>
+        <div style="position: absolute; bottom: 10px; left: -15px; font-size: 110px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">📋</div>
+        <div style="position: absolute; bottom: 15px; right: -5px; font-size: 95px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9)); z-index: 15;">🧼</div>
+      </div>
+    </div>
+
+    <!-- Bottom Typography & Value Props -->
+    <div style="position: relative; z-index: 10; text-align: center; width: 100%;">
+      <h1 style="font-size: 72px; font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-transform: uppercase; background: linear-gradient(180deg, #FFFFFF 0%, #E0F2FE 40%, #38BDF8 75%, #0284C7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));">
+        CRONOGRAMA
+      </h1>
+      <h2 style="font-size: 38px; font-weight: 900; letter-spacing: 6px; color: #FFFFFF; text-shadow: 0 5px 20px rgba(0,0,0,0.9), 0 0 30px rgba(14, 165, 233, 0.8); margin-top: 4px; text-transform: uppercase;">
+        HORÁRIO ANTI-CAOS
+      </h2>
+      <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; color: #BAE6FD; font-weight: 600; margin-top: 14px; text-shadow: 0 3px 10px rgba(0,0,0,0.8);">
+        Checklist 48h, 24h e 2h Antes • Banho Tomado às 20h30
+      </p>
+
+      <!-- Price Footer Pill -->
+      <div style="display: inline-flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.75); border: 2px solid #38BDF8; border-radius: 9999px; padding: 12px 40px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+        <span style="color: #BAE6FD; font-size: 24px; font-weight: 900; letter-spacing: 2px;">VALOR ESPECIAL</span>
+        <span style="color: #64748B; font-size: 24px;">•</span>
+        <span style="color: #FFFFFF; font-size: 32px; font-weight: 900;">+ R$ 12,90</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- CAPA 4: PACOTE VIP COMPLETO                              -->
+  <!-- ======================================================== -->
+  <div id="cover-vip" class="cover-card" style="background: radial-gradient(circle at 50% 35%, #291B00 0%, #170F00 45%, #050300 85%, #000 100%); border: 12px solid #F59E0B;">
+    <div style="position: absolute; top: 15%; left: 15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%); filter: blur(70px);"></div>
+    <div style="position: absolute; bottom: 15%; right: 15%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%); filter: blur(80px);"></div>
+    <div style="position: absolute; top: 5%; right: 10%; font-size: 80px; color: #FDE047; text-shadow: 0 0 30px #F59E0B;">👑</div>
+    <div style="position: absolute; bottom: 8%; left: 10%; font-size: 60px; color: #F59E0B; text-shadow: 0 0 25px #D97706;">★</div>
+
+    <!-- Top Badge -->
+    <div style="position: relative; z-index: 10; background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%); border: 3px solid #FEF08A; border-radius: 9999px; padding: 12px 42px; display: flex; align-items: center; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(245,158,11,0.6);">
+      <span style="font-size: 28px;">👑</span>
+      <span style="color: #000; font-size: 24px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;">O PACOTE COMPLETO • ECONOMIA MÁXIMA</span>
+    </div>
+
+    <!-- Center Combo Hero Graphic -->
+    <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+      <div style="position: relative; width: 440px; height: 440px; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; width: 400px; height: 400px; border-radius: 50%; background: linear-gradient(145deg, #3D2600 0%, #140C00 100%); border: 8px solid #FDE047; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 80px rgba(245, 158, 11, 0.5), inset 0 0 50px rgba(245, 158, 11, 0.3);"></div>
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 5;">
+          <span style="font-size: 150px; line-height: 1; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.9));">👑</span>
+          <div style="display: flex; gap: 16px; margin-top: -10px;">
+            <span style="font-size: 80px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.9));">🥩</span>
+            <span style="font-size: 80px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.9));">🍹</span>
+            <span style="font-size: 80px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.9));">⏱️</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Typography & Value Props -->
+    <div style="position: relative; z-index: 10; text-align: center; width: 100%;">
+      <h1 style="font-size: 72px; font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-transform: uppercase; background: linear-gradient(180deg, #FFFFFF 0%, #FEF08A 40%, #F59E0B 75%, #B45309 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));">
+        COMBO VIP COMPLETO
+      </h1>
+      <h2 style="font-size: 38px; font-weight: 900; letter-spacing: 6px; color: #FFFFFF; text-shadow: 0 5px 20px rgba(0,0,0,0.9), 0 0 30px rgba(245, 158, 11, 0.8); margin-top: 4px; text-transform: uppercase;">
+        FIM DE ANO SEM APERTO
+      </h2>
+      <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; color: #FEF08A; font-weight: 600; margin-top: 14px; text-shadow: 0 3px 10px rgba(0,0,0,0.8);">
+        App Mestre da Ceia + Guia de Drinks + Cronograma Horário
+      </p>
+
+      <!-- Price Footer Pill -->
+      <div style="display: inline-flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.75); border: 2px solid #FDE047; border-radius: 9999px; padding: 12px 40px; margin-top: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+        <span style="color: #FDE047; font-size: 24px; font-weight: 900; letter-spacing: 2px;">OFERTA COMPLETA</span>
+        <span style="color: #64748B; font-size: 24px;">•</span>
+        <span style="color: #FFFFFF; font-size: 32px; font-weight: 900;">R$ 42,70</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
