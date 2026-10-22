@@ -118,11 +118,19 @@ async function saveBuyerAccess(session, env) {
 }
 
 // Helper: Enviar evento Purchase para a TikTok Events API v1.3
-async function sendTikTokPurchaseEvent(session, trackingInfo, lineItems, env) {
+async function sendTikTokPurchaseEvent(session, trackingInfo, lineItems, env, isLive) {
   const token = env.TIKTOK_ACCESS_TOKEN;
   if (!token) {
     console.warn('TIKTOK_ACCESS_TOKEN não configurado no servidor. O evento Purchase não pôde ser enviado ao TikTok.');
     return { skipped: true, reason: 'missing_token' };
+  }
+
+  // Regra estrita: Eventos de teste sem código de teste NUNCA devem virar conversões reais
+  if (!isLive) {
+    if (!env.TIKTOK_TEST_EVENT_CODE) {
+      console.log('Evento de teste ignorado no envio ao TikTok pois TIKTOK_TEST_EVENT_CODE não está configurado.');
+      return { skipped: true, reason: 'test_event_without_test_code' };
+    }
   }
 
   const rawEmail = session.customer_details?.email;
@@ -175,7 +183,9 @@ async function sendTikTokPurchaseEvent(session, trackingInfo, lineItems, env) {
     data: [eventData]
   };
 
-  if (env.TIKTOK_TEST_EVENT_CODE) {
+  // Regra estrita: Compras reais (livemode: true) NUNCA recebem test_event_code.
+  // Apenas eventos de teste utilizam o código para serem direcionados à aba Test Events.
+  if (!isLive && env.TIKTOK_TEST_EVENT_CODE) {
     payload.test_event_code = env.TIKTOK_TEST_EVENT_CODE;
   }
 
@@ -302,7 +312,8 @@ export async function onRequestPost(context) {
 
   // 8. Enviar evento Purchase para TikTok Events API
   try {
-    await sendTikTokPurchaseEvent(session, trackingInfo, lineItems, env);
+    const tiktokResult = await sendTikTokPurchaseEvent(session, trackingInfo, lineItems, env, isLive);
+    console.log('Resultado do envio ao TikTok:', JSON.stringify(tiktokResult));
   } catch (err) {
     console.error('Erro no envio para TikTok Events API:', err);
     // Retorna 500 para o Stripe efetuar retentativa automática conforme instrução
