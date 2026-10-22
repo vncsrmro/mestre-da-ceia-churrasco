@@ -90,6 +90,7 @@ async function saveBuyerAccess(session, env) {
   const customerId = session.customer || '';
   if (!email) return;
 
+  const isLive = session.livemode === true;
   const body = {
     email: email.toLowerCase().trim(),
     nome: name,
@@ -97,7 +98,7 @@ async function saveBuyerAccess(session, env) {
     stripe_session_id: session.id,
     has_access: true,
     valor_pago: (session.amount_total || 1990) / 100,
-    plano: 'vitalicio'
+    plano: isLive ? 'vitalicio' : 'teste_sandbox'
   };
 
   try {
@@ -208,16 +209,20 @@ export async function onRequestPost(context) {
   const signatureHeader = request.headers.get('stripe-signature');
   const rawBody = await request.text();
 
-  // 1. Verificação da Assinatura do Stripe
+  // 1. Verificação da Assinatura do Stripe (aceita produção ou segredo de teste)
+  let isValid = false;
   if (env.STRIPE_WEBHOOK_SECRET) {
-    const isValid = await verifyStripeSignature(rawBody, signatureHeader, env.STRIPE_WEBHOOK_SECRET);
-    if (!isValid) {
-      console.error('Assinatura Stripe inválida!');
-      return new Response(JSON.stringify({ error: 'Assinatura Stripe inválida' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
+    isValid = await verifyStripeSignature(rawBody, signatureHeader, env.STRIPE_WEBHOOK_SECRET);
+  }
+  if (!isValid && env.STRIPE_TEST_WEBHOOK_SECRET) {
+    isValid = await verifyStripeSignature(rawBody, signatureHeader, env.STRIPE_TEST_WEBHOOK_SECRET);
+  }
+  if (env.STRIPE_WEBHOOK_SECRET && !isValid) {
+    console.error('Assinatura Stripe inválida!');
+    return new Response(JSON.stringify({ error: 'Assinatura Stripe inválida' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   let event;
@@ -242,13 +247,22 @@ export async function onRequestPost(context) {
     return new Response(JSON.stringify({ error: 'Objeto de sessão ausente' }), { status: 400 });
   }
 
+  const isLive = event.livemode === true || session.livemode === true;
+  console.log(`Modo da transação: ${isLive ? 'PRODUÇÃO (Real)' : 'TESTE / SANDBOX'}`);
+
   // 3. Processar SOMENTE sessões do Payment Link indicado (ignora outros produtos da conta)
-  if (!session.payment_link || !ALLOWED_PAYMENT_LINKS.has(session.payment_link)) {
-    console.log(`Sessão ignorada (Payment link ${session.payment_link} não pertence ao Mestre da Ceia)`);
-    return new Response(JSON.stringify({ received: true, ignored: true, reason: 'other_product' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+  // Em modo real (Livemode), a checagem é restrita aos links oficiais do Mestre da Ceia.
+  // Em modo de teste (Stripe Workbench / CLI / Sandbox), permite prosseguir para validação dos Test Events.
+  if (isLive) {
+    if (!session.payment_link || !ALLOWED_PAYMENT_LINKS.has(session.payment_link)) {
+      console.log(`Sessão ignorada (Payment link ${session.payment_link} não pertence ao Mestre da Ceia)`);
+      return new Response(JSON.stringify({ received: true, ignored: true, reason: 'other_product' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  } else {
+    console.log(`Sessão de teste detectada (${session.id}). Prosseguindo para validação no TikTok Test Events.`);
   }
 
   // 4. Processar compra apenas quando payment_status for 'paid'
